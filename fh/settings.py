@@ -41,7 +41,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'debug_toolbar',
     'django_extensions',
-    'users'
+    'users',
+    'finances',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,6 +54,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'fh.middleware.WhodidMiddleware'
 )
 
 ROOT_URLCONF = 'fh.urls'
