@@ -8,5 +8,11 @@ class Payment(CommonInfo):
     """ Payment model """
 
     amount = models.DecimalField(max_digits=20, decimal_places=2,
-                                 validators=[MinValueValidator(0)])
-    is_incoming = models.BooleanField(default=False)
+                                 validators=[MinValueValidator(0.01)])
+    is_incoming = models.BooleanField(default=False, verbose_name='Is incoming?')
+
+    def __unicode__(self):
+        return u'#%s' % self.id
+
+
+
