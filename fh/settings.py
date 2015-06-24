@@ -23,9 +23,6 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(to8no0)b+!28*#(!j^db!yvy43s)zukk*$8dew6hkfw2&r*q@'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

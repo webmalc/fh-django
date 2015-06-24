@@ -19,4 +19,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^polls/', include('users.urls', namespace="users")),
+    url(r'^finances/', include('finances.urls', namespace="users")),
 ]
