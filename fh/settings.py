@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -110,6 +111,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Django suit
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'FamilyHelper',
+    'MENU': (
+        {'app': 'auth', 'label': 'Authorization', 'icon':'icon-user'},
+        {'app': 'finances', 'icon':'icon-briefcase'},
+    ),
+    'LIST_PER_PAGE': 30
+}
 
 # Local settings
 

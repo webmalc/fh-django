@@ -1,3 +1,10 @@
-from django import forms
+from django.contrib.auth.forms import UserChangeForm
+from suit.widgets import SuitSplitDateTimeWidget
 
-# place form definition here
+
+class UserAdminChangeForm(UserChangeForm):
+    class Meta:
+        widgets = {
+            'date_joined': SuitSplitDateTimeWidget,
+            'last_login': SuitSplitDateTimeWidget,
+        }
