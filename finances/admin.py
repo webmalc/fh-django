@@ -1,15 +1,15 @@
 from django.contrib import admin
-from finances import models, forms
+from fh.admin import FhAdmin
+from finances import models
 
-class PaymentAdmin(admin.ModelAdmin):
-    form = forms.PaymentAdminForm
-    list_display = ('id', 'amount', 'date', 'is_incoming', 'created_at', 'created_by', 'modified_at', 'modified_by')
-    list_display_links = ('id', 'amount')
+class PaymentAdmin(FhAdmin):
+    list_display = ('amount', 'date', 'is_incoming', 'created_at', 'created_by', 'modified_at', 'modified_by')
+    list_display_links = ('amount',)
     list_filter = ['is_incoming', 'created_by', 'date', 'created_at']
     fieldsets = [
         (None, {
             'classes': ('suit-tab', 'suit-tab-general'),
-            'fields': ['amount', 'is_incoming'],
+            'fields': ['tags', 'amount', 'is_incoming'],
         }),
         ('Date & user', {
             'classes': ('suit-tab', 'suit-tab-add'),

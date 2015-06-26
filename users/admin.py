@@ -1,12 +1,12 @@
 from django.contrib.auth.admin import admin, UserAdmin
 from django.contrib.auth.models import User
-from .forms import UserAdminChangeForm
 from django.utils.translation import ugettext_lazy as _
+from fh.admin import FhAdmin
 
 
-class MyUserAdmin(UserAdmin):
-    form = UserAdminChangeForm
-
+class MyUserAdmin(UserAdmin, FhAdmin):
+    list_display = UserAdmin.list_display + ('last_login',)
+    list_filter = UserAdmin.list_filter + ('last_login',)
     fieldsets = (
         (None, {
             'classes': ('suit-tab', 'suit-tab-general'),
