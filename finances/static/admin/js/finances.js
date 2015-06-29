@@ -2,13 +2,7 @@
 $(document).ready(function () {
     'use strict';
 
-    // Tags input
-    $('#id_tags').tagsinput({
-      itemText: function(item) {
-        return item.toLowerCase();
-      }
-    });
-    $('#id_tags').change(function() {
+    $('#id_tags').on('change, keydown, focus, blur', function () {
         $(this).val($(this).val().toLowerCase());
     });
 })

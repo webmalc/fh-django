@@ -2,11 +2,14 @@ from django.contrib import admin
 from fh.admin import FhAdmin
 from fh.filters import TaggitListFilter
 from finances import models
+from finances import forms
+
 
 class PaymentAdmin(FhAdmin):
     """ Payment admin class """
-
-    list_display = ('get_tags_as_string', 'amount', 'date', 'is_incoming', 'created_at', 'created_by', 'modified_at', 'modified_by')
+    form = forms.FinancesForm
+    list_display = (
+    'get_tags_as_string', 'amount', 'date', 'is_incoming', 'created_at', 'created_by', 'modified_at', 'modified_by')
     list_display_links = ('get_tags_as_string', 'amount',)
     list_filter = [TaggitListFilter, 'is_incoming', 'created_by', 'date', 'created_at', ]
     fieldsets = [
@@ -32,9 +35,9 @@ class PaymentAdmin(FhAdmin):
 
     class Media:
         css = {
-            'all': ('bootstrap-tagsinput/dist/bootstrap-tagsinput.css', 'admin/css/finances.css'),
+            'all': ('admin/css/finances.css',),
         }
-        js = ('bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js', 'admin/js/finances.js')
+        js = ('admin/js/finances.js',)
 
 
 admin.site.register(models.Payment, PaymentAdmin)

@@ -14,13 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url
-from django.contrib import admin
+from ratelimitbackend import admin
+
+admin.autodiscover()
 
 admin.site.site_header = 'FamilyHelper administration'
 
 urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
+    url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^polls/', include('users.urls', namespace="users")),
     url(r'^finances/', include('finances.urls', namespace="users")),
 ]

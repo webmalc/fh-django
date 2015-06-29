@@ -28,10 +28,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTHENTICATION_BACKENDS = (
+    'ratelimitbackend.backends.RateLimitModelBackend',
+)
 
 # Application definition
 
 INSTALLED_APPS = (
+    'autocomplete_light',
     'suit',
     'django.contrib.admin',
     'django.contrib.auth',
