@@ -1,0 +1,19 @@
+{
+  "name": "fh",
+  "version": "0.0.0",
+  "homepage": "https://github.com/webmalc/fh-django",
+  "authors": [
+    "webmalc <webmalc@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-tagsinput": "~0.5.0"
+  }
+}

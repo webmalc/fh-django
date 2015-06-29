@@ -1,17 +1,12 @@
-"""
-Demo local settings
-"""
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'name',
-        'USER': 'user',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'fh',
+        'USER': 'fh',
         'PASSWORD': 'password',
         'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'PORT': '5432'
     }
 }
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(to8no0)b+!28*#(!j^db!yvy43s)zukk*$8dew6hkfw2&r*q@'
+SECRET_KEY = 'my_super_secret_key'

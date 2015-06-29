@@ -34,7 +34,8 @@ class MyUserAdmin(UserAdmin, FhAdmin):
         ('dates', _('Important dates'))
     )
 
-    def suit_cell_attributes(self, obj, column):
+    @staticmethod
+    def suit_cell_attributes(obj, column):
         if column == 'is_staff':
             return {'class': 'text-center'}
 

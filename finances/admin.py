@@ -1,11 +1,14 @@
 from django.contrib import admin
 from fh.admin import FhAdmin
+from fh.filters import TaggitListFilter
 from finances import models
 
 class PaymentAdmin(FhAdmin):
-    list_display = ('amount', 'date', 'is_incoming', 'created_at', 'created_by', 'modified_at', 'modified_by')
-    list_display_links = ('amount',)
-    list_filter = ['is_incoming', 'created_by', 'date', 'created_at']
+    """ Payment admin class """
+
+    list_display = ('get_tags_as_string', 'amount', 'date', 'is_incoming', 'created_at', 'created_by', 'modified_at', 'modified_by')
+    list_display_links = ('get_tags_as_string', 'amount',)
+    list_filter = [TaggitListFilter, 'is_incoming', 'created_by', 'date', 'created_at', ]
     fieldsets = [
         (None, {
             'classes': ('suit-tab', 'suit-tab-general'),
@@ -20,7 +23,8 @@ class PaymentAdmin(FhAdmin):
     ordering = ['-date']
     search_fields = ['id']
 
-    def suit_cell_attributes(self, obj, column):
+    @staticmethod
+    def suit_cell_attributes(obj, column):
         if column == 'is_incoming':
             return {'class': 'text-center'}
         elif column == 'amount':
@@ -28,8 +32,9 @@ class PaymentAdmin(FhAdmin):
 
     class Media:
         css = {
-            'all': ('admin/css/finances.css',)
+            'all': ('bootstrap-tagsinput/dist/bootstrap-tagsinput.css', 'admin/css/finances.css'),
         }
+        js = ('bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js', 'admin/js/finances.js')
 
 
 admin.site.register(models.Payment, PaymentAdmin)

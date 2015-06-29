@@ -63,7 +63,7 @@ ROOT_URLCONF = 'fh.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -113,7 +113,11 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# Django suit
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'bower_components'),
+)
+
+# Django-bower
 SUIT_CONFIG = {
     'ADMIN_NAME': 'FamilyHelper',
     'MENU': (
@@ -124,7 +128,6 @@ SUIT_CONFIG = {
 }
 
 # Local settings
-
 try:
     from local_settings import *
 except ImportError:

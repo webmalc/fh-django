@@ -52,5 +52,8 @@ docs/_build/
 #IDE
 .idea
 
+#bower_components
+bower_components/
+
 #Project
 fh/local_settings.py
