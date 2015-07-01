@@ -4,3 +4,13 @@
 .amount-column {
     text-align: right  !important;
 }
+#payment-total {
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    padding: 8px 15px;
+    margin: 0px 0px 15px 0px;
+}
+#payment-total span {
+    display: inline-block;
+    margin-right: 10px;
+}

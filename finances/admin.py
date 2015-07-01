@@ -1,15 +1,46 @@
 from django.contrib import admin
+from django.contrib.admin.views.main import ChangeList
+from django.db.models import Sum
+
 from fh.admin import FhAdmin
 from fh.filters import TaggitListFilter
 from finances import models
 from finances import forms
 
 
+class PaymentChangeList(ChangeList):
+    """ Payment change list """
+
+    def __init__(self, request, model, list_display, list_display_links,
+                 list_filter, date_hierarchy, search_fields, list_select_related,
+                 list_per_page, list_max_show_all, list_editable, model_admin):
+        self.total_in = 0
+        self.total_out = 0
+        self.total_balance = 0
+
+        super(PaymentChangeList, self).__init__(request, model, list_display, list_display_links,
+                                                list_filter, date_hierarchy, search_fields, list_select_related,
+                                                list_per_page, list_max_show_all, list_editable, model_admin)
+
+    def get_results(self, *args, **kwargs):
+        super(PaymentChangeList, self).get_results(*args, **kwargs)
+
+        total_in = self.result_list.filter(is_incoming=True).aggregate(total=Sum('amount'))['total']
+        self.total_in = total_in if total_in else 0
+
+        total_out = self.result_list.filter(is_incoming=False).aggregate(total=Sum('amount'))['total']
+        self.total_out = total_out if total_out else 0
+
+        self.total_balance = self.total_in - self.total_out
+
 class PaymentAdmin(FhAdmin):
     """ Payment admin class """
+
     form = forms.FinancesForm
     list_display = (
-    'get_tags_as_string', 'amount', 'date', 'is_incoming', 'created_at', 'created_by', 'modified_at', 'modified_by')
+        'get_tags_as_string', 'amount', 'date', 'is_incoming',
+        'created_at', 'created_by', 'modified_at', 'modified_by'
+    )
     list_display_links = ('get_tags_as_string', 'amount',)
     list_filter = [TaggitListFilter, 'is_incoming', 'created_by', 'date', 'created_at', ]
     fieldsets = [
@@ -25,6 +56,14 @@ class PaymentAdmin(FhAdmin):
     suit_form_tabs = (('general', 'General'), ('add', 'Date & user'))
     ordering = ['-date']
     search_fields = ['id']
+
+    def get_changelist(self, request):
+        return PaymentChangeList
+
+    @staticmethod
+    def suit_row_attributes(obj, request):
+        if obj.is_incoming:
+            return {'class': 'success'}
 
     @staticmethod
     def suit_cell_attributes(obj, column):

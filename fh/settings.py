@@ -125,10 +125,10 @@ STATICFILES_DIRS = (
 SUIT_CONFIG = {
     'ADMIN_NAME': 'FamilyHelper',
     'MENU': (
-        {'app': 'auth', 'label': 'Authorization', 'icon':'icon-user'},
-        {'app': 'finances', 'icon':'icon-briefcase'},
+        {'app': 'auth', 'label': 'Authorization', 'icon': 'icon-user', 'models': ('auth.user', 'auth.group')},
+        {'app': 'finances', 'icon': 'icon-briefcase'},
     ),
-    'LIST_PER_PAGE': 30
+    'LIST_PER_PAGE': 20
 }
 
 # Local settings
