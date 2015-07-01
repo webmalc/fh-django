@@ -20,14 +20,6 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     "django.core.context_processors.request",
 )
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
 AUTHENTICATION_BACKENDS = (
     'ratelimitbackend.backends.RateLimitModelBackend',
 )
@@ -45,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'debug_toolbar',
     'django_extensions',
+    'bootstrap3',
     'taggit',
     'users',
     'finances',
@@ -118,6 +111,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'fh/static'),
     os.path.join(BASE_DIR, 'bower_components'),
 )
 

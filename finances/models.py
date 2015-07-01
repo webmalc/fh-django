@@ -3,6 +3,7 @@ from django.core.validators import MinValueValidator
 from fh.models import CommonInfo
 from django.utils import timezone
 from taggit.managers import TaggableManager
+from django.core.urlresolvers import reverse
 
 
 class Payment(CommonInfo):
@@ -22,6 +23,9 @@ class Payment(CommonInfo):
         return ', '.join([tag.name for tag in self.tags.all()])
 
     get_tags_as_string.short_description = 'Tags'
+
+    def get_absolute_url(self):
+        return reverse('finances:payment_update', kwargs={'pk': self.pk})
 
     def __unicode__(self):
         return u'#%s' % self.id

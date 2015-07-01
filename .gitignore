@@ -55,5 +55,8 @@ docs/_build/
 #bower_components
 bower_components/
 
+#static
+/static
+
 #Project
-fh/local_settings.py
+/fh/local_settings.py

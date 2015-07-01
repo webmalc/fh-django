@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from ratelimitbackend import admin
+from finances.views import PaymentCreate
 
 admin.autodiscover()
 
@@ -24,5 +25,6 @@ urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^finances/', include('finances.urls', namespace="users")),
+    url(r'^finances/', include('finances.urls', namespace="finances")),
+    url(r'^$', PaymentCreate.as_view(), name='index'),
 ]

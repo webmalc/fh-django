@@ -1,0 +1,14 @@
+body {
+    padding-top: 70px;
+    height: 100%
+}
+.container-fluid {
+  max-width: 1600px;
+}
+#fh-navbar-logo {
+    display: inline-block;
+    margin: 0px 2px 3px 0px;
+}
+.breadcrumb {
+    margin-bottom: 20px;
+}
