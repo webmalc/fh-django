@@ -16,10 +16,6 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-TEMPLATE_CONTEXT_PROCESSORS = TCP + (
-    "django.core.context_processors.request",
-)
-
 AUTHENTICATION_BACKENDS = (
     'ratelimitbackend.backends.RateLimitModelBackend',
 )
@@ -38,6 +34,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'django_extensions',
     'bootstrap3',
+    'sitetree',
     'taggit',
     'users',
     'finances',
@@ -121,6 +118,7 @@ SUIT_CONFIG = {
     'MENU': (
         {'app': 'auth', 'label': 'Authorization', 'icon': 'icon-user', 'models': ('auth.user', 'auth.group')},
         {'app': 'finances', 'icon': 'icon-briefcase'},
+        {'app': 'sitetree', 'label': 'Menu', 'icon': 'icon-list', 'url': '/support/'},
     ),
     'LIST_PER_PAGE': 20
 }

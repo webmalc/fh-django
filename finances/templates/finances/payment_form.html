@@ -1,12 +1,9 @@
 {% extends 'finances/layout.html' %}
 {% load bootstrap3 %}
 
-{% block title %}Payment entry | {% endblock %}
-
-{% block breadcrumb %}{{ block.super }}<li>Payment entry</li>{% endblock %}
-
 {% block content %}
-        <form action="" method="post" class="form">
+
+    <form action="" method="post" class="form">
             {% csrf_token %}
             {% bootstrap_form form %}
             {% buttons %}

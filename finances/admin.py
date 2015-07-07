@@ -25,11 +25,11 @@ class PaymentChangeList(ChangeList):
     def get_results(self, *args, **kwargs):
         super(PaymentChangeList, self).get_results(*args, **kwargs)
 
-        total_in = self.result_list.filter(is_incoming=True).aggregate(total=Sum('amount'))['total']
-        self.total_in = total_in if total_in else 0
-
-        total_out = self.result_list.filter(is_incoming=False).aggregate(total=Sum('amount'))['total']
-        self.total_out = total_out if total_out else 0
+        for payment in self.result_list:
+            if payment.is_incoming:
+                self.total_in += payment.amount
+            else:
+                self.total_out += payment.amount
 
         self.total_balance = self.total_in - self.total_out
 

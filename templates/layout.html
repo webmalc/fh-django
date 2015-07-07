@@ -2,6 +2,7 @@
 {% load i18n %}
 {% get_current_language as language %}
 {% load staticfiles %}
+{% load sitetree %}
 
 <!DOCTYPE html>
 <html lang="{{ language }}">
@@ -13,7 +14,7 @@
     <meta name="keywords" content="{% block keywords %}FamilyHelper{% endblock %}">
     <meta name="author" content="webmalc@gmail.com">
     <link rel="icon" href="{% static 'img/favicon_24x24.png' %}">
-    <title>{% block title %}{% endblock %}FamilyHelper</title>
+    <title>{% block title %}{% sitetree_page_title from "navbar" %} | {% endblock %}FamilyHelper</title>
 
     {% bootstrap_css %}
     {% block css %}
@@ -36,15 +37,9 @@
         {% include "partials/navbar.html" %}
     {% endblock %}
 
-    {% block breadcrumb_list %}
-        <ul class="breadcrumb" id="fh-breadcrumb">
-            <li>
-                <a href="{% url 'index' %}"><i class="fa fa-home"></i></a>
-            </li>
-            {% block breadcrumb %}{% endblock %}
-        </ul>
+    {% block breadcrumb %}
+        {% sitetree_breadcrumbs from 'navbar' template "sitetree/breadcrumbs_bootstrap3.html" %}
     {% endblock %}
-
 
     {% block messages %}
         <div id="fh-messages">
