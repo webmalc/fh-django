@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from ratelimitbackend import admin
-from finances.views import PaymentCreate
+from django.views.generic.base import RedirectView
 
 admin.autodiscover()
 
@@ -26,5 +26,5 @@ urlpatterns = [
     url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^finances/', include('finances.urls', namespace="finances")),
-    url(r'^$', PaymentCreate.as_view(), name='index'),
+    url(r'^$', RedirectView.as_view(pattern_name='finances:payments_list'), name='index'),
 ]

@@ -1,7 +1,5 @@
 from django.contrib import admin
 from django.contrib.admin.views.main import ChangeList
-from django.db.models import Sum
-
 from fh.admin import FhAdmin
 from fh.filters import TaggitListFilter
 from finances import models
@@ -32,6 +30,7 @@ class PaymentChangeList(ChangeList):
                 self.total_out += payment.amount
 
         self.total_balance = self.total_in - self.total_out
+
 
 class PaymentAdmin(FhAdmin):
     """ Payment admin class """

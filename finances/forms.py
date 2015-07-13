@@ -1,6 +1,6 @@
 from autocomplete_light.contrib.taggit_field import TaggitField, TaggitWidget
-from django import forms
+import autocomplete_light
 
 
-class FinancesForm(forms.ModelForm):
+class FinancesForm(autocomplete_light.ModelForm):
     tags = TaggitField(widget=TaggitWidget('TagAutocomplete'))

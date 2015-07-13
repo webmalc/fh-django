@@ -2,14 +2,29 @@
 {% load bootstrap3 %}
 
 {% block content %}
+    <div class="well">
 
-    <form action="" method="post" class="form">
+        <form action="" method="post" class="form">
             {% csrf_token %}
             {% bootstrap_form form %}
             {% buttons %}
-                <button type="submit" class="btn btn-primary">
-                    {% bootstrap_icon "star" %} Submit
+                <button type="submit" class="btn btn-success">
+                    {% bootstrap_icon "ok-circle" %} Save payment
                 </button>
+                <a href="{%  url 'finances:payments_list' %}" class="btn btn-default">
+                    {% bootstrap_icon "remove-circle" %} Cancel
+                </a>
+                {% if payment %}
+                    <a href="{%  url 'finances:payments_list' %}" class="btn btn-danger pull-right">
+                        {% bootstrap_icon "trash" %} Delete payment
+                    </a>
+                {% endif %}
             {% endbuttons %}
         </form>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+    {% include 'autocomplete_light/static.html' %}
 {% endblock %}
