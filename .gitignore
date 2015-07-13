@@ -53,7 +53,8 @@ docs/_build/
 .idea
 
 #bower_components
-bower_components/
+bower_components/*
+!bower_components/.gitkeep
 
 #static
 /static

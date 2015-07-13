@@ -22,7 +22,6 @@ admin.autodiscover()
 admin.site.site_header = 'FamilyHelper administration'
 
 urlpatterns = [
-    url(r'^grappelli/', include('grappelli.urls')),
     url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^finances/', include('finances.urls', namespace="finances")),
