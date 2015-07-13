@@ -112,6 +112,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'bower_components'),
 )
 
+FIXTURE_DIRS = (
+    os.path.join(BASE_DIR, 'fixtures'),
+)
+
 # Django-bower
 SUIT_CONFIG = {
     'ADMIN_NAME': 'FamilyHelper',

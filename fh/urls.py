@@ -26,5 +26,5 @@ urlpatterns = [
     url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^finances/', include('finances.urls', namespace="finances")),
-    url(r'^$', RedirectView.as_view(pattern_name='finances:payments_list'), name='index'),
+    url(r'^$', RedirectView.as_view(pattern_name='finances:payments_list', permanent=True), name='index'),
 ]
