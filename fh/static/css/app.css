@@ -9,6 +9,10 @@ body {
     display: inline-block;
     margin: 0px 2px 3px 0px;
 }
+#fh-navbar-avatar {
+    padding: 0px;
+    margin: 13px 0px 0px 0px;
+}
 .breadcrumb {
     margin-bottom: 20px;
 }

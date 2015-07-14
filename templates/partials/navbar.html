@@ -1,5 +1,7 @@
 {% load staticfiles %}
 {% load sitetree %}
+{% load gravatar %}
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -20,12 +22,16 @@
             {% sitetree_menu from 'navbar' include "trunk" template "sitetree/menu_bootstrap3.html" %}
 
             {% if user.is_authenticated %}
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                <li><p class="navbar-text">{{ user.email|default:user }}</p></li>
-                <li><a href="{%  url 'django.contrib.auth.views.logout' %}"><i class="fa fa-sign-out"></i> Log out</a></li>
-                </li>
-            </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden-xs">
+                        <img class="hidden-md" src="{% gravatar_url user.email 24 %}" id="fh-navbar-avatar">
+                    </li>
+                    <li>
+                        <p class="navbar-text ">{{ user.email|default:user }}</p>
+                    </li>
+                    <li><a href="{% url 'django.contrib.auth.views.logout' %}"><i class="fa fa-sign-out"></i> Log
+                        out</a></li>
+                </ul>
             {% endif %}
         </div>
     </div>

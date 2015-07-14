@@ -38,6 +38,9 @@ INSTALLED_APPS = (
     'sitetree',
     'widget_tweaks',
     'taggit',
+    'django_gravatar',
+
+    # Fh apps
     'users',
     'finances',
 )
