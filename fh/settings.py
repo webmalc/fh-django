@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'stronghold',
     'bootstrap3',
     'sitetree',
+    'widget_tweaks',
     'taggit',
     'users',
     'finances',

@@ -13,3 +13,4 @@ django-autocomplete-light==2.2.3
 django-bootstrap3==6.1.0
 django-sitetree==1.4.0
 django-stronghold==0.2.7
+django-widget-tweaks==1.4.1

@@ -1,13 +1,28 @@
 {% extends 'layout.html' %}
 {% load bootstrap3 %}
+{% load widget_tweaks %}
 
 {% block content %}
 
     <div class="well">
+
+        {% if form.errors %}
+            <div class="alert alert-danger">Your username and password didn't match. Please try again.</div>
+        {% endif %}
+
         <form action="{% url 'django.contrib.auth.views.login' %}" method="post" class="form">
             {% csrf_token %}
-            {% bootstrap_form form %}
+
+            <div class="input-group form-group">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                {{ form.username|add_class:"form-control" }}
+            </div>
+            <div class="input-group form-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                {{ form.password|add_class:"form-control" }}
+            </div>
             <input type="hidden" name="next" value="{{ next|default:"/" }}"/>
+
             {% buttons %}
                 <button type="submit" class="btn btn-success">
                     {% bootstrap_icon "log-in" %} Sign in
