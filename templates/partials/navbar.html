@@ -19,12 +19,14 @@
 
             {% sitetree_menu from 'navbar' include "trunk" template "sitetree/menu_bootstrap3.html" %}
 
+            {% if user.is_authenticated %}
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                <li><a href="#">webmalc@gmail.com</a></li>
-                <li><a href="#"><i class="fa fa-sign-out"></i> Log out</a></li>
+                <li><p class="navbar-text">{{ user.email|default:user }}</p></li>
+                <li><a href="{%  url 'django.contrib.auth.views.logout' %}"><i class="fa fa-sign-out"></i> Log out</a></li>
                 </li>
             </ul>
+            {% endif %}
         </div>
     </div>
 </nav>

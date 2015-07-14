@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url
+from django.contrib.auth import views as auth_views
 from ratelimitbackend import admin
 from django.views.generic.base import RedirectView
 
@@ -24,6 +25,8 @@ admin.site.site_header = 'FamilyHelper administration'
 urlpatterns = [
     url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/login/$', auth_views.login),
+    url('^accounts/logout', auth_views.logout, {'next_page': '/'}),
     url(r'^finances/', include('finances.urls', namespace="finances")),
     url(r'^$', RedirectView.as_view(pattern_name='finances:payments_list', permanent=True), name='index'),
 ]

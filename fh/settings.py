@@ -117,6 +117,14 @@ SUIT_CONFIG = {
 # Django stronghold
 STRONGHOLD_DEFAULTS = True
 
+STRONGHOLD_PUBLIC_URLS = (
+    r'^/admin.+$',
+)
+
+STRONGHOLD_PUBLIC_NAMED_URLS = (
+    'django.contrib.auth.views.login',
+)
+
 # Local settings
 try:
     from local_settings import *

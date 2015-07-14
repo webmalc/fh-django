@@ -37,7 +37,7 @@
 {
     "fields": {
         "parent": null,
-        "access_restricted": false,
+        "access_restricted": true,
         "access_permissions": [
             1,
             2,
@@ -59,7 +59,7 @@
         "inbreadcrumbs": true,
         "title": "Administration",
         "tree": 1,
-        "access_perm_type": 1,
+        "access_perm_type": 2,
         "alias": null,
         "sort_order": 2,
         "inmenu": true,
@@ -176,5 +176,29 @@
     },
     "model": "sitetree.treeitem",
     "pk": 6
+},
+{
+    "fields": {
+        "parent": null,
+        "access_restricted": false,
+        "access_permissions": [],
+        "description": "",
+        "insitetree": true,
+        "hint": "",
+        "url": "django.contrib.auth.views.login",
+        "inbreadcrumbs": true,
+        "title": "Sign in",
+        "tree": 1,
+        "access_perm_type": 1,
+        "alias": null,
+        "sort_order": 7,
+        "inmenu": false,
+        "access_loggedin": false,
+        "hidden": false,
+        "urlaspattern": true,
+        "access_guest": false
+    },
+    "model": "sitetree.treeitem",
+    "pk": 7
 }
 ]
