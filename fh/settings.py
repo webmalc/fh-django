@@ -33,6 +33,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'debug_toolbar',
     'django_extensions',
+    'stronghold',
     'bootstrap3',
     'sitetree',
     'taggit',
@@ -49,7 +50,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'fh.middleware.WhodidMiddleware'
+    'fh.middleware.WhodidMiddleware',
+    'stronghold.middleware.LoginRequiredMiddleware'
 )
 
 ROOT_URLCONF = 'fh.urls'
@@ -111,6 +113,9 @@ SUIT_CONFIG = {
     ),
     'LIST_PER_PAGE': 20
 }
+
+# Django stronghold
+STRONGHOLD_DEFAULTS = True
 
 # Local settings
 try:

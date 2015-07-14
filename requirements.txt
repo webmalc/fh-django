@@ -12,3 +12,4 @@ django-ratelimit-backend==0.6.4
 django-autocomplete-light==2.2.3
 django-bootstrap3==6.1.0
 django-sitetree==1.4.0
+django-stronghold==0.2.7
