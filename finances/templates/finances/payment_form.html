@@ -7,6 +7,13 @@
         <form action="" method="post" class="form">
             {% csrf_token %}
             {% bootstrap_form form %}
+
+            {% if payment %}
+                <div class="alert alert-warning">
+                    Created at {{ payment.created_at }} by {{ payment.created_by|default:"anonym" }}
+                </div>
+            {% endif %}
+
             {% buttons %}
                 <button type="submit" class="btn btn-success">
                     {% bootstrap_icon "ok-circle" %} Save payment

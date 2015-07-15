@@ -21,3 +21,10 @@ body {
 .bootstrap-tagsinput {
     display: block !important;
 }
+.checkbox label {
+    padding-left: 0px;
+}
+
+.bootstrap-switch-wrapper {
+    margin-right: 10px;
+}

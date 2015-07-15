@@ -19,6 +19,7 @@
     {% bootstrap_css %}
     {% block css %}
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{% static 'bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/app.css' %}">
     {% endblock %}
 
@@ -52,7 +53,8 @@
 
 {% bootstrap_javascript jquery=1 %}
 {% block scripts %}
-     <script src="{% static 'bootstrap3-typeahead/bootstrap3-typeahead.min.js' %}"></script>
+    <script src="{% static 'bootstrap3-typeahead/bootstrap3-typeahead.min.js' %}"></script>
+    <script src="{% static 'bootstrap-switch/dist/js/bootstrap-switch.min.js' %}"></script>
     <script src="{% static 'js/app.js' %}"></script>
 {% endblock %}
 </body>

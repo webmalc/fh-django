@@ -15,7 +15,8 @@
   ],
   "dependencies": {
     "bootstrap-tagsinput": "~0.5.0",
-    "bootstrap3-typeahead": "~3.1.1"
+    "bootstrap3-typeahead": "~3.1.1",
+    "bootstrap-switch": "~3.3.2"
   },
   "resolutions": {
     "jquery": "~2.1.1"
