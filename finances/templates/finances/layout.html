@@ -1,1 +1,13 @@
 {% extends 'layout.html' %}
+{% load staticfiles %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'bootstrap-tagsinput/src/bootstrap-tagsinput.css' %}">
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static 'bootstrap-tagsinput/src/bootstrap-tagsinput.js' %}"></script>
+    <script src="{% static 'finances/js/finances.js' %}"></script>
+{% endblock %}

@@ -3,10 +3,13 @@ try:
 except ImportError:  # django < 1.4
     from django.conf.urls.defaults import *
 
-from .views import PaymentCreate, PaymentUpdate
+import finances.views as views
 
 urlpatterns = [
-    url(r'payment/add/$', PaymentCreate.as_view(), name='payment_add'),
-    url(r'payment/add/$', PaymentCreate.as_view(), name='payments_list'),
-    url(r'payment/(?P<pk>[0-9]+)/$', PaymentUpdate.as_view(), name='payment_update'),
+    url(r'tags/$', views.tags, name='tags_all'),
+    url(r'tags/(?P<query>.+)/$', views.tags, name='tags_query'),
+    url(r'payment/add/$', views.PaymentCreate.as_view(), name='payment_add'),
+    url(r'payment/add/$', views.PaymentCreate.as_view(), name='payments_list'),
+    url(r'payment/(?P<pk>[0-9]+)/$', views.PaymentUpdate.as_view(), name='payment_update'),
+    url(r'payment/(?P<pk>[0-9]+)/$', views.PaymentUpdate.as_view(), name='payment_update'),
 ]

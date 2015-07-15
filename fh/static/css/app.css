@@ -16,3 +16,8 @@ body {
 .breadcrumb {
     margin-bottom: 20px;
 }
+
+/******************* FORMS ***********************/
+.bootstrap-tagsinput {
+    display: block !important;
+}

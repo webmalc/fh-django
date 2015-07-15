@@ -20,7 +20,8 @@
 		<td>
             {% for d in item.depth_range %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% endfor %}
             {% if item.parent %}|&#8212;{% endif %}
-            {% if item.is_dynamic %}{{ item.title }}{% else %}<a href="item_{{ item.id }}/">{{ item.title }}</a>{% endif %}
+            {% if item.is_dynamic %}{{ item.title }}{% else %}<a href="item_{{ item.id }}/" title="URL: {{ item.url }}">{{ item.title }}</a>{% endif %}
+
         </td>
 		<td>
 			&nbsp;&nbsp;

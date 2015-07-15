@@ -24,7 +24,7 @@
             {% if user.is_authenticated %}
                 <ul class="nav navbar-nav navbar-right">
                     <li class="hidden-xs">
-                        <img class="hidden-md" src="{% gravatar_url user.email 24 %}" id="fh-navbar-avatar">
+                        <img src="{% gravatar_url user 24 %}" id="fh-navbar-avatar">
                     </li>
                     <li>
                         <p class="navbar-text ">{{ user.email|default:user }}</p>

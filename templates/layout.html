@@ -51,7 +51,9 @@
 </div>
 
 {% bootstrap_javascript jquery=1 %}
-{% block javascript %}
+{% block scripts %}
+     <script src="{% static 'bootstrap3-typeahead/bootstrap3-typeahead.min.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
 {% endblock %}
 </body>
 </html>
