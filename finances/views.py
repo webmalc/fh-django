@@ -1,4 +1,5 @@
 from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic import ListView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import JsonResponse
 from .models import Payment
@@ -18,6 +19,10 @@ class PaymentUpdate(SuccessMessageMixin, UpdateView):
     form = FinancesForm
     fields = ['tags', 'amount', 'is_incoming']
     success_message = "Payment was updated successfully"
+
+
+class PaymentList(ListView):
+    model = Payment
 
 
 def tags(request, query=None):

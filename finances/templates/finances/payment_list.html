@@ -1,0 +1,52 @@
+{% extends 'finances/layout.html' %}
+{% load gravatar %}
+{% block content %}
+
+    <div class="well row">
+        <div class="col-md-10">todo: filters</div>
+        <div class="col-md-2 text-right">
+            <a href="{% url 'finances:payment_add' %}" class="btn btn-success">
+                <i class="fa fa-plus-circle"></i>
+                Add payment
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Tags</th>
+            <th class="td-sm text-right">Amount</th>
+            <th class="td-md">Date</th>
+            <th class="td-xs text-center">Is incoming?</th>
+            <th class="td-md text-center">User</th>
+            <th class="td-md text-right"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for payment in object_list %}
+            <tr class="{{ payment.is_incoming|yesno:"success," }}">
+                <td>{{ payment.get_tags_as_string }}</td>
+                <td class="text-right {{ payment.is_incoming|yesno:"text-success," }}">
+                    {{ payment.amount }}
+                </td>
+                <td>{{ payment.date }}</td>
+                <td class="text-center">
+                    {% if payment.is_incoming %}<i class="fa fa-check text-success"></i>{% endif %}
+                </td>
+                <td class="text-center">
+                    <img src="{% gravatar_url payment.created_by|default:'' 24 %}"
+                         title="{{ payment.created_by|default:"anonym" }}" data-toggle="tooltip" data-placement="left"
+                         class="img-circle">
+                </td>
+                <td class="text-right">
+                    <a href="{% url 'finances:payment_update' payment.id %}" title="Edit payment" data-toggle="tooltip" data-placement="top" class="btn btn-xs btn-success">
+                        <i class="fa fa-pencil-square-o"></i>
+                    </a>
+                    <a href="#" class="btn btn-xs btn-danger" title="Delete payment" data-toggle="tooltip" data-placement="top"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

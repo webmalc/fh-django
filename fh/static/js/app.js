@@ -9,4 +9,7 @@ $(document).ready(function () {
         onText: 'yes',
         offText: 'no'
     });
+
+    //tooltip
+    $('[data-toggle="tooltip"]').tooltip();
 });

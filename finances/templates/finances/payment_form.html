@@ -1,5 +1,6 @@
 {% extends 'finances/layout.html' %}
 {% load bootstrap3 %}
+{% load gravatar %}
 
 {% block content %}
     <div class="well">
@@ -10,7 +11,8 @@
 
             {% if payment %}
                 <div class="alert alert-warning">
-                    Created at {{ payment.created_at }} by {{ payment.created_by|default:"anonym" }}
+                   <img src="{% gravatar_url payment.created_by|default:'' 24 %}" class="img-circle"> &nbsp;
+                   Created at {{ payment.date }} by {{ payment.created_by|default:"anonym" }}
                 </div>
             {% endif %}
 
@@ -30,8 +32,4 @@
         </form>
     </div>
 
-{% endblock %}
-
-{% block javascript %}
-    {% include 'autocomplete_light/static.html' %}
 {% endblock %}
