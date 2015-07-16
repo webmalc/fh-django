@@ -34,6 +34,7 @@ class PaymentList(ListView):
     Payments list view
     """
     model = Payment
+    paginate_by = 30
 
 
 class PaymentDelete(DeleteView):

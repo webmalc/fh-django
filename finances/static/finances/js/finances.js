@@ -10,7 +10,7 @@ $(document).ready(function () {
         trimValue: true,
         freeInput: true,
         typeahead: {
-            minLength: 2,
+            minLength: 1    ,
             afterSelect: function () {
                 this.$element.val(null);
             },

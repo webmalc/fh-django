@@ -18,6 +18,7 @@ body {
 }
 
 /******************* FORMS ***********************/
+
 .bootstrap-tagsinput {
     display: block !important;
 }
@@ -27,4 +28,15 @@ body {
 
 .bootstrap-switch-wrapper {
     margin-right: 10px;
+}
+/******************* TABLES ***********************/
+
+.td-xs {
+    width: 50px;
+}
+.td-sm {
+    width: 100px;
+}
+.td-md {
+    width: 200px;
 }
