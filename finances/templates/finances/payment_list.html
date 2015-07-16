@@ -2,13 +2,15 @@
 {% load gravatar %}
 {% block content %}
 
-    <div class="well row">
-        <div class="col-md-10">todo: filters</div>
-        <div class="col-md-2 text-right">
-            <a href="{% url 'finances:payment_add' %}" class="btn btn-success">
-                <i class="fa fa-plus-circle"></i>
-                Add payment
-            </a>
+    <div class="well">
+        <div class="row">
+            <div class="col-md-10">todo: filters</div>
+            <div class="col-md-2 text-right">
+                <a href="{% url 'finances:payment_add' %}" class="btn btn-success">
+                    <i class="fa fa-plus-circle"></i>
+                    Add payment
+                </a>
+            </div>
         </div>
     </div>
 
@@ -43,7 +45,8 @@
                     <a href="{% url 'finances:payment_update' payment.id %}" title="Edit payment" data-toggle="tooltip" data-placement="top" class="btn btn-xs btn-success">
                         <i class="fa fa-pencil-square-o"></i>
                     </a>
-                    <a href="#" class="btn btn-xs btn-danger" title="Delete payment" data-toggle="tooltip" data-placement="top"><i class="fa fa-trash"></i></a>
+                    <a href="{% url 'finances:payment_delete' payment.id %}" class="btn btn-xs btn-danger"
+                       title="Delete payment" data-toggle="tooltip" data-placement="top"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
         {% endfor %}

@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="alert alert-danger">
+                <button type="submit" class="btn btn-danger">
+                    <i class="fa fa-trash"></i>
+                    Are you sure you want to delete {{ object }}?
+                </button>
+            </div>
+        </form>
+{% endblock %}
