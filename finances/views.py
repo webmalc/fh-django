@@ -33,8 +33,20 @@ class PaymentList(ListView):
     """
     Payments list view
     """
+    THEAD = (
+        {'title': 'Tags',  'class': ''},
+        {'title': 'Amount',  'class': 'td-sm text-right'},
+        {'title': 'Date', 'class': 'td-md'},
+        {'title': 'In', 'class': 'td-xs text-center'},
+        {'title': 'User', 'class': 'td-sm text-center'},
+    )
     model = Payment
     paginate_by = 30
+
+    def get_context_data(self, **kwargs):
+        context = super(PaymentList, self).get_context_data(**kwargs)
+        context['thead'] = self.THEAD
+        return context
 
 
 class PaymentDelete(DeleteView):
