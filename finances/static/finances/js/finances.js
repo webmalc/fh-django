@@ -9,6 +9,7 @@ $(document).ready(function () {
         maxChars: 20,
         trimValue: true,
         freeInput: true,
+        confirmKeys: [13, 188, 32],
         typeahead: {
             minLength: 1    ,
             afterSelect: function () {

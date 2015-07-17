@@ -17,6 +17,7 @@ class PaymentCreate(SuccessMessageMixin, CreateView):
     form = FinancesForm
     fields = ['tags', 'amount', 'is_incoming']
     success_message = "Payment was created successfully"
+    success_url = reverse_lazy('finances:payments_list')
 
 
 class PaymentUpdate(SuccessMessageMixin, UpdateView):
@@ -34,19 +35,22 @@ class PaymentList(ListView):
     Payments list view
     """
     THEAD = (
-        {'title': 'Tags',  'class': ''},
-        {'title': 'Amount',  'class': 'td-sm text-right'},
-        {'title': 'Date', 'class': 'td-md'},
-        {'title': 'In', 'class': 'td-xs text-center'},
-        {'title': 'User', 'class': 'td-sm text-center'},
+        {'title': 'tags'},
+        {'title': 'amount',  'class': 'td-sm text-right',  'sort': 'amount'},
+        {'title': 'date', 'class': 'td-md', 'sort': 'date'},
+        {'title': 'in', 'class': 'td-xs text-center', 'sort': 'is_incoming'},
+        {'title': 'user', 'class': 'td-sm text-center', 'sort': 'created_by'},
     )
     model = Payment
-    paginate_by = 30
+    paginate_by = 3
 
     def get_context_data(self, **kwargs):
         context = super(PaymentList, self).get_context_data(**kwargs)
         context['thead'] = self.THEAD
         return context
+
+    def get_queryset(self):
+        return Payment.objects.filtered(self.request.GET.get('sort'), self.request.GET.get('order'))
 
 
 class PaymentDelete(DeleteView):

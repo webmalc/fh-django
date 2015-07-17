@@ -1,7 +1,26 @@
+{% load urls %}
 <thead>
 <tr>
     {% for th in thead %}
-        <th class="{{ th.class }}">{{ th.title }}</th>
+        <th class="{{ th.class }}">
+            {% if th.sort %}
+                {% if request.GET.sort == th.sort %}
+                    <small><i class="fa fa-chevron-{% if request.GET.order == 'asc' %}down{% else %}up{% endif %}"></i>
+                    </small>
+                {% endif %}
+
+                {% if request.GET.order == 'asc' and request.GET.sort == th.sort %}
+                    <a href="{% add_params request.get_full_path sort=th.sort order='desc' %}">
+                {% else %}
+                    <a href="{% add_params request.get_full_path sort=th.sort order='asc' %}">
+                {% endif %}
+            {{ th.title|title }}
+            </a>
+
+            {% else %}
+                {{ th.title|title }}
+            {% endif %}
+        </th>
     {% endfor %}
     <th class="td-sm text-right"></th>
 </tr>

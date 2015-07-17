@@ -6,6 +6,19 @@ from taggit.managers import TaggableManager
 from django.core.urlresolvers import reverse
 
 
+class PaymentManager(models.Manager):
+    """ Payment model manager """
+
+    def filtered(self, sort='date', order='asc'):
+        q = self.all()
+        if sort in ('amount', 'created_by', 'is_incoming', 'date'):
+            q = q.order_by(sort)
+        if order == 'desc':
+            q = q.reverse()
+
+        return q
+
+
 class Payment(CommonInfo):
     """ Payment model """
 
@@ -14,6 +27,7 @@ class Payment(CommonInfo):
                                  validators=[MinValueValidator(0.01)])
     is_incoming = models.BooleanField(default=False, verbose_name='Is incoming?')
     date = models.DateTimeField(default=timezone.now)
+    objects = PaymentManager()
 
     def get_tags_as_string(self):
         """

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.contrib.admin.views.main import ChangeList
 from fh.admin import FhAdmin

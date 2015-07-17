@@ -23,7 +23,7 @@
                 <a href="{%  url 'finances:payments_list' %}" class="btn btn-default">
                     {% bootstrap_icon "remove-circle" %} Cancel
                 </a>
-                {% if payment %}
+                {% if payment  and perms.finances.delete_payment %}
                     <a href="{% url 'finances:payment_delete' payment.id %}" class="btn btn-danger pull-right">
                         {% bootstrap_icon "trash" %} Delete payment
                     </a>
