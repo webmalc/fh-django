@@ -1,4 +1,3 @@
-{% load urls %}
 <thead>
 <tr>
     {% for th in thead %}
@@ -10,9 +9,9 @@
                 {% endif %}
 
                 {% if request.GET.order == 'asc' and request.GET.sort == th.sort %}
-                    <a href="{% add_params request.get_full_path sort=th.sort order='desc' %}">
+                    <a href="?sort={{ th.sort }}&order=desc">
                 {% else %}
-                    <a href="{% add_params request.get_full_path sort=th.sort order='asc' %}">
+                    <a href="?sort={{ th.sort }}&order=asc">
                 {% endif %}
             {{ th.title|title }}
             </a>

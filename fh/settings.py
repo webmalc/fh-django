@@ -37,7 +37,6 @@ INSTALLED_APPS = (
     'bootstrap3',
     'sitetree',
     'widget_tweaks',
-    'url_tools',
     'taggit',
     'django_gravatar',
 
@@ -72,7 +71,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'url_tools.context_processors.current_url',
             ],
         },
     },
