@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django_gravatar',
 
     # Fh apps
+    'fh',
     'users',
     'finances',
 )

@@ -1,10 +1,11 @@
+{% load url_replace %}
 
 {% if is_paginated %}
     <nav class="text-center">
         <ul class="pagination">
             {% if page_obj.has_previous %}
                 <li>
-                    <a href="{{ page_obj.previous_page_number }}"
+                    <a href="{% url link %}?{% url_replace request page=page_obj.previous_page_number %}"
                        aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
@@ -12,11 +13,11 @@
             {% endif %}
             {% for page in page_obj.paginator.page_range %}
                 <li {% ifequal page page_obj.number %}class="active"{% endifequal %}><a
-                        href="{{ page }}">{{ page }}</a></li>
+                        href="{% url link %}?{% url_replace request page=page %}">{{ page }}</a></li>
             {% endfor %}
             {% if page_obj.has_next %}
                 <li>
-                    <a href="{{ page_obj.next_page_number }}"
+                    <a href="{% url link %}?{% url_replace request page=page_obj.next_page_number %}"
                        aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>

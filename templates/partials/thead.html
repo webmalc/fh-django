@@ -1,3 +1,5 @@
+{% load url_replace %}
+
 <thead>
 <tr>
     {% for th in thead %}
@@ -9,9 +11,9 @@
                 {% endif %}
 
                 {% if request.GET.order == 'asc' and request.GET.sort == th.sort %}
-                    <a href="?sort={{ th.sort }}&order=desc">
+                    <a href="{% url link %}?{% url_replace request sort=th.sort order='desc' %}">
                 {% else %}
-                    <a href="?sort={{ th.sort }}&order=asc">
+                    <a href="{% url link %}?{% url_replace request sort=th.sort order='asc' %}">
                 {% endif %}
             {{ th.title|title }}
             </a>
