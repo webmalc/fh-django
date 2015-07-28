@@ -36,7 +36,7 @@ class PaymentChangeList(ChangeList):
 class PaymentAdmin(FhAdmin):
     """ Payment admin class """
 
-    form = forms.FinancesForm
+    form = forms.PaymentForm
     list_display = (
         'get_tags_as_string', 'amount', 'date', 'is_incoming',
         'created_at', 'created_by', 'modified_at', 'modified_by'

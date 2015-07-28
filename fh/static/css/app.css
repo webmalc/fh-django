@@ -1,3 +1,5 @@
+/******************* MAIN ***********************/
+
 body {
     padding-top: 70px;
     height: 100%
@@ -17,6 +19,14 @@ body {
     margin-bottom: 20px;
 }
 
+.clickable{
+    cursor: pointer;
+}
+
+.panel-heading span {
+	margin-top: -20px;
+	font-size: 15px;
+}
 /******************* FORMS ***********************/
 
 .bootstrap-tagsinput {

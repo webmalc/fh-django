@@ -5,7 +5,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.http import JsonResponse
 from .models import Payment
-from .forms import FinancesForm
+from .forms import PaymentForm, PaymentsFilterForm
 from taggit.models import Tag
 
 
@@ -14,7 +14,7 @@ class PaymentCreate(SuccessMessageMixin, CreateView):
     Payment create view
     """
     model = Payment
-    form = FinancesForm
+    form = PaymentForm
     fields = ['tags', 'amount', 'is_incoming']
     success_message = "Payment was created successfully"
     success_url = reverse_lazy('finances:payments_list')
@@ -25,7 +25,7 @@ class PaymentUpdate(SuccessMessageMixin, UpdateView):
     Payment update view
     """
     model = Payment
-    form = FinancesForm
+    form = PaymentForm
     fields = ['tags', 'amount', 'is_incoming']
     success_message = "Payment was updated successfully"
 
@@ -42,11 +42,12 @@ class PaymentList(ListView):
         {'title': 'user', 'class': 'td-sm text-center', 'sort': 'created_by'},
     )
     model = Payment
-    paginate_by = 3
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super(PaymentList, self).get_context_data(**kwargs)
         context['thead'] = self.THEAD
+        context['form'] = PaymentsFilterForm
         return context
 
     def get_queryset(self):
@@ -66,19 +67,6 @@ class PaymentDelete(DeleteView):
         messages.success(self.request, self.success_message)
         return super(PaymentDelete, self).delete(request, *args, **kwargs)
 
-
-from django import template
-
-register = template.Library()
-
-@register.simple_tag
-def url_replace(request, field, value):
-
-    dict_ = request.GET.copy()
-
-    dict_[field] = value
-
-    return dict_.urlencode()
 
 def tags(request, query=None):
     """
