@@ -4,7 +4,7 @@ $(document).ready(function () {
     'use strict'
 
     //tagsinput
-    $('#id_tags').tagsinput({
+    $('input#id_tags').tagsinput({
         maxTags: 5,
         maxChars: 20,
         trimValue: true,

@@ -2,6 +2,8 @@ from autocomplete_light.contrib.taggit_field import TaggitField, TaggitWidget
 import autocomplete_light
 from django import forms
 from datetime import date
+from django.contrib.auth.models import User
+from taggit.models import Tag
 
 
 class PaymentForm(autocomplete_light.ModelForm):
@@ -33,16 +35,19 @@ class PaymentsFilterForm(forms.Form):
 
     begin = forms.DateField(
         label='From',
+        required=False,
         input_formats=('%d.%m.%Y',),
         widget=forms.TextInput(attrs={'placeholder': DATES['week'], 'class': 'datepicker'})
     )
     end = forms.DateField(
         label='To',
+        required=False,
         input_formats=('%d.%m.%Y',),
         widget=forms.TextInput(attrs={'placeholder': DATES['tomorrow'], 'class': 'datepicker'})
     )
     period = forms.ChoiceField(
         label='Period',
+        required=False,
         choices=(
             ('', '---------'),
             ('%s_%s' % (DATES['today'], DATES['tomorrow']), 'Today'),
@@ -52,4 +57,14 @@ class PaymentsFilterForm(forms.Form):
             ('%s_%s' % (DATES['year'], DATES['tomorrow']), 'Last year'),
         )
     )
+    tags = forms.ModelMultipleChoiceField(
+        required=False,
+        queryset=Tag.objects.all()
+    )
+    user = forms.ModelChoiceField(
+        required=False,
+        empty_label="---------",
+        queryset=User.objects.all()
+    )
+    is_incoming = forms.BooleanField(label="Is incoming?")
 

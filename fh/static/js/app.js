@@ -29,6 +29,9 @@ $(document).ready(function () {
         });
     }());
 
+    //Bootstrap select
+    $('select.form-control').selectpicker();
+
     //Datepickers & period select
     (function () {
         $('.datepicker').datepicker({
