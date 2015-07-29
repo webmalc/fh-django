@@ -1,7 +1,7 @@
 /*jslint browser: true*/
 /*global $*/
 $(document).ready(function () {
-    'use strict'
+    'use strict';
 
     //bootstrap switch
     $('input[type="checkbox"]').bootstrapSwitch({
@@ -27,5 +27,29 @@ $(document).ready(function () {
                 $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
             }
         });
+    }());
+
+    //Datepickers & period select
+    (function () {
+        $('.datepicker').datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        var period = $('select#id_period'),
+            select = function () {
+                var dates = $(this).val(),
+                    begin = $('input#id_begin'),
+                    end = $('input#id_end');
+
+                if (dates) {
+                    dates = dates.split("_");
+                    begin.val(dates[0]).trigger('change');
+                    end.val(dates[1]).trigger('change');
+                }
+            };
+        period.change(select);
+        select();
     }());
 });
