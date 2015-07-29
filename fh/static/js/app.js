@@ -45,8 +45,8 @@ $(document).ready(function () {
 
                 if (dates) {
                     dates = dates.split("_");
-                    begin.val(dates[0]).trigger('change');
-                    end.val(dates[1]).trigger('change');
+                    begin.datepicker('setDate', dates[0]);
+                    end.datepicker('setDate', dates[1]);
                 }
             };
         period.change(select);
