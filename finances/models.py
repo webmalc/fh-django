@@ -9,8 +9,35 @@ from django.core.urlresolvers import reverse
 class PaymentManager(models.Manager):
     """ Payment model manager """
 
-    def filtered(self, sort='date', order='asc'):
+    def filtered(self, begin=None, end=None, tags=None, user=None, is_incoming=None, sort='date', order='asc'):
+        """
+        Filtered payment query
+        :param begin:
+        :param end:
+        :param tags:
+        :param user:
+        :param is_incoming:
+        :param sort:
+        :param order:
+        :return: QuerySet
+        """
         q = self.all()
+
+        if begin is not None:
+            q = q.filter(date__gte=begin)
+
+        if end is not None:
+            q = q.filter(date__lte=end)
+
+        if tags is not None:
+            q = q.filter(tags__in=tags)
+
+        if is_incoming is not None:
+            q = q.filter(is_incoming=is_incoming)
+
+        if user is not None:
+            q = q.filter(created_by=user)
+
         if sort in ('amount', 'created_by', 'is_incoming', 'date'):
             q = q.order_by(sort)
         if order == 'desc':

@@ -42,6 +42,12 @@ body {
 .bootstrap-switch-wrapper {
     margin-right: 10px;
 }
+.has-success .bootstrap-select button {
+    border-color: #3c763d;
+}
+.has-error .bootstrap-select button {
+    border-color: #a94442;
+}
 /******************* TABLES ***********************/
 
 .td-xs {

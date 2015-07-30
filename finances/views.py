@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from .models import Payment
 from .forms import PaymentForm, PaymentsFilterForm
 from taggit.models import Tag
+from django.views.decorators.csrf import csrf_exempt
 
 
 class PaymentCreate(SuccessMessageMixin, CreateView):
@@ -47,11 +48,21 @@ class PaymentList(ListView):
     def get_context_data(self, **kwargs):
         context = super(PaymentList, self).get_context_data(**kwargs)
         context['thead'] = self.THEAD
-        context['form'] = PaymentsFilterForm
+        context['form'] = PaymentsFilterForm(self.request.GET if self.request.GET.get('filter', False) else None)
         return context
 
     def get_queryset(self):
-        return Payment.objects.filtered(self.request.GET.get('sort'), self.request.GET.get('order'))
+        form = PaymentsFilterForm(self.request.GET)
+        sort = self.request.GET.get('sort')
+        order = self.request.GET.get('order')
+        if form.is_valid():
+            data = form.cleaned_data
+            del data['period']
+            return Payment.objects.filtered(
+                sort=sort, order=order, **data
+            )
+
+        return Payment.objects.filtered(sort=sort, order=order)
 
 
 class PaymentDelete(DeleteView):

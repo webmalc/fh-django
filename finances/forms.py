@@ -36,13 +36,13 @@ class PaymentsFilterForm(forms.Form):
     begin = forms.DateField(
         label='From',
         required=False,
-        input_formats=('%d.%m.%Y',),
+        input_formats=('%Y-%m-%d',),
         widget=forms.TextInput(attrs={'placeholder': DATES['week'], 'class': 'datepicker'})
     )
     end = forms.DateField(
         label='To',
         required=False,
-        input_formats=('%d.%m.%Y',),
+        input_formats=('%Y-%m-%d',),
         widget=forms.TextInput(attrs={'placeholder': DATES['tomorrow'], 'class': 'datepicker'})
     )
     period = forms.ChoiceField(
@@ -66,5 +66,26 @@ class PaymentsFilterForm(forms.Form):
         empty_label="---------",
         queryset=User.objects.all()
     )
-    is_incoming = forms.BooleanField(label="Is incoming?")
+    is_incoming = forms.ChoiceField(
+        label='Is incoming',
+        required=False,
+        choices=(
+            ('', '---------'), (1, 'Yes'), (0, 'No')
+        )
+    )
+
+    def clean(self):
+        cleaned_data = super(PaymentsFilterForm, self).clean()
+        begin = cleaned_data.get("begin")
+        end = cleaned_data.get("end")
+        is_incoming = self.cleaned_data['is_incoming']
+        tags = cleaned_data.get("tags")
+        self.cleaned_data['is_incoming'] = bool(int(cleaned_data.get("is_incoming"))) if is_incoming else None
+        self.cleaned_data['tags'] = tags if tags else None
+
+        if begin and end:
+            if begin > end:
+                msg = "Period dates incorrect."
+                self.add_error('begin', msg)
+                self.add_error('end', msg)
 
