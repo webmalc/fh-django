@@ -1,6 +1,7 @@
 {% extends 'finances/layout.html' %}
 {% load gravatar %}
 {% load bootstrap3 %}
+{% load humanize %}
 
 {% block content %}
 
@@ -9,15 +10,15 @@
             <div class="col-md-10">
             <div class="btn-group" role="group" >
                 <a href="{% url 'finances:payments_list' %}?is_incoming=0&filter=1" class="btn btn-sm btn-warning">
-                    <i class="fa fa-minus"></i> Expense: {{ summary.out }}
+                    <i class="fa fa-minus"></i> Expense: {{ summary.out|intcomma }}
                 </a>
                 <a href="{% url 'finances:payments_list' %}?is_incoming=1&filter=1" class="btn btn-sm btn-info">
-                    <i class="fa fa-plus"></i> Incoming: {{ summary.in }}
+                    <i class="fa fa-plus"></i> Incoming: {{ summary.in|intcomma }}
                 </a>
                 <a href="{% url 'finances:payments_list' %}"
                    class="btn btn-sm btn-{% if summary.total < 0 %}danger{% else %}success{% endif %}">
                     <i class="fa fa-{% if summary.total < 0 %}exclamation{% else %}check{% endif %}"></i>
-                    Total: {{ summary.total }}
+                    Total: {{ summary.total|intcomma }}
                 </a>
             </div> </div>
             <div class="col-md-2 text-right">
@@ -73,9 +74,9 @@
                                 {% endfor %}
                             </td>
                             <td class="text-right {{ payment.is_incoming|yesno:"text-success," }}">
-                                {{ payment.amount }}
+                                {{ payment.amount|intcomma }}
                             </td>
-                            <td>{{ payment.date }}</td>
+                            <td>{{ payment.date|naturalday }} {{ payment.date|date:'H:i' }}</td>
                             <td class="text-center">
                                 {% if payment.is_incoming %}<i class="fa fa-check text-success"></i>{% endif %}
                             </td>
