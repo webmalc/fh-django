@@ -47,8 +47,13 @@ class PaymentList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(PaymentList, self).get_context_data(**kwargs)
+        form = PaymentsFilterForm(self.request.GET if self.request.GET.get('filter', False) else None)
+        data = form.cleaned_data if form.is_valid() else {}
+        data.pop("period", None)
+        context['summary'] = Payment.objects.summary(**data)
         context['thead'] = self.THEAD
-        context['form'] = PaymentsFilterForm(self.request.GET if self.request.GET.get('filter', False) else None)
+        context['form'] = form
+
         return context
 
     def get_queryset(self):
@@ -58,6 +63,7 @@ class PaymentList(ListView):
         if form.is_valid():
             data = form.cleaned_data
             del data['period']
+
             return Payment.objects.filtered(
                 sort=sort, order=order, **data
             )

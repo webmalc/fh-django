@@ -4,21 +4,50 @@ from fh.models import CommonInfo
 from django.utils import timezone
 from taggit.managers import TaggableManager
 from django.core.urlresolvers import reverse
+from django.db.models import Sum
+from decimal import Decimal
 
 
 class PaymentManager(models.Manager):
     """ Payment model manager """
 
+    def summary(self, begin=None, end=None, tags=None, user=None, is_incoming=None):
+        """
+        Payments total in/out
+        :param begin: datetime.date
+        :param end: datetime.date
+        :param tags: list
+        :param user: django.contrib.auth.models.User
+        :param is_incoming: boolean
+        :return: dict {'in': 1200.34, 'out': 500.45}
+        """
+        q = self.filtered(begin, end, tags, user)
+        result = {'in': Decimal(0), 'out': Decimal(0)}
+
+        if is_incoming is None:
+            result['out'] = q.filter(is_incoming=False).aggregate(total=Sum('amount'))['total']
+            result['in'] = q.filter(is_incoming=True).aggregate(total=Sum('amount'))['total']
+        elif is_incoming:
+            result['in'] = q.filter(is_incoming=True).aggregate(total=Sum('amount'))['total']
+        else:
+            result['out'] = q.filter(is_incoming=False).aggregate(total=Sum('amount'))['total']
+
+        result['in'] = result['in'] if result['in'] else Decimal(0)
+        result['out'] = result['out'] if result['out'] else Decimal(0)
+        result['total'] = result['in'] - result['out']
+
+        return result
+
     def filtered(self, begin=None, end=None, tags=None, user=None, is_incoming=None, sort='date', order='asc'):
         """
         Filtered payment query
-        :param begin:
-        :param end:
-        :param tags:
-        :param user:
-        :param is_incoming:
-        :param sort:
-        :param order:
+        :param begin: datetime.date
+        :param end: datetime.date
+        :param tags: list
+        :param user: django.contrib.auth.models.User
+        :param is_incoming: boolean
+        :param sort: string
+        :param order: string
         :return: QuerySet
         """
         q = self.all()

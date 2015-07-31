@@ -4,10 +4,28 @@
 
 {% block content %}
 
-    <div class="well well-sm text-right">
-        <a href="{% url 'finances:payment_add' %}" class="btn btn-success">
-            <i class="fa fa-plus-circle"></i> Add payment
-        </a>
+    <div class="well well-sm">
+        <div class="row">
+            <div class="col-md-10">
+            <div class="btn-group" role="group" >
+                <a href="{% url 'finances:payments_list' %}?is_incoming=0&filter=1" class="btn btn-sm btn-warning">
+                    <i class="fa fa-minus"></i> Expense: {{ summary.out }}
+                </a>
+                <a href="{% url 'finances:payments_list' %}?is_incoming=1&filter=1" class="btn btn-sm btn-info">
+                    <i class="fa fa-plus"></i> Incoming: {{ summary.in }}
+                </a>
+                <a href="{% url 'finances:payments_list' %}"
+                   class="btn btn-sm btn-{% if summary.total < 0 %}danger{% else %}success{% endif %}">
+                    <i class="fa fa-{% if summary.total < 0 %}exclamation{% else %}check{% endif %}"></i>
+                    Total: {{ summary.total }}
+                </a>
+            </div> </div>
+            <div class="col-md-2 text-right">
+                <a href="{% url 'finances:payment_add' %}" class="btn btn-success">
+                    <i class="fa fa-plus-circle"></i> Add payment
+                </a>
+            </div>
+        </div>
     </div>
 
     <div class="row">
@@ -51,7 +69,7 @@
                             <td>
                                 {% for tag in payment.tags.all %}
                                     <a href="{% url 'finances:payments_list' %}?tags={{ tag.id }}&filter=1"
-                                       class="btn btn-info btn-xs">{{ tag }}</a>&nbsp;
+                                       class="btn btn-info btn-xs tag-link">{{ tag }}</a>&nbsp;
                                 {% endfor %}
                             </td>
                             <td class="text-right {{ payment.is_incoming|yesno:"text-success," }}">
