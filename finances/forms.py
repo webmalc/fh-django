@@ -59,7 +59,7 @@ class PaymentsFilterForm(forms.Form):
     )
     tags = forms.ModelMultipleChoiceField(
         required=False,
-        queryset=Tag.objects.all(),
+        queryset=Tag.objects.all().order_by('name'),
         widget=forms.SelectMultiple(attrs={"data-live-search": "true", "data-size": 10})
     )
     user = forms.ModelChoiceField(
