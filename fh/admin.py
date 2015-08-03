@@ -3,6 +3,7 @@ from django.db import models as models
 from suit.widgets import SuitSplitDateTimeWidget
 from taggit.models import Tag
 
+
 class FhAdmin(admin.ModelAdmin):
     """
     Base Admin class
@@ -10,5 +11,3 @@ class FhAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.DateTimeField: {'widget': SuitSplitDateTimeWidget},
     }
-
-admin.site.unregister(Tag)

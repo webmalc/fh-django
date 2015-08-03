@@ -98,9 +98,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-STATICFILES_DIRS = (
+STATICFILES_DIRS = (		
     os.path.join(BASE_DIR, 'fh/static'),
     os.path.join(BASE_DIR, 'bower_components'),
 )
@@ -109,13 +109,13 @@ FIXTURE_DIRS = (
     os.path.join(BASE_DIR, 'fixtures'),
 )
 
-# Django-bower
+# Django-suit
 SUIT_CONFIG = {
     'ADMIN_NAME': 'FamilyHelper',
     'MENU': (
         {'app': 'auth', 'label': 'Authorization', 'icon': 'icon-user', 'models': ('auth.user', 'auth.group')},
         {'app': 'finances', 'icon': 'icon-briefcase'},
-        {'app': 'sitetree', 'label': 'Menu', 'icon': 'icon-list', 'url': '/support/'},
+        {'label': 'Navigation', 'icon': 'icon-list', 'models': ('sitetree.tree', 'taggit.tag')},
     ),
     'LIST_PER_PAGE': 20
 }
