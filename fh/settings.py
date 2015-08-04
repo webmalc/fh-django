@@ -58,7 +58,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'fh.middleware.WhodidMiddleware',
-    'stronghold.middleware.LoginRequiredMiddleware'
+    'stronghold.middleware.LoginRequiredMiddleware',
+    'htmlmin.middleware.HtmlMinifyMiddleware',
+    'htmlmin.middleware.MarkRequestMiddleware'
 )
 
 ROOT_URLCONF = 'fh.urls'
