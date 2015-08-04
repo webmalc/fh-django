@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'widget_tweaks',
     'taggit',
     'django_gravatar',
+    'compressor',
 
     # Fh apps
     'fh',
@@ -103,6 +104,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATICFILES_DIRS = (		
     os.path.join(BASE_DIR, 'fh/static'),
     os.path.join(BASE_DIR, 'bower_components'),
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 FIXTURE_DIRS = (

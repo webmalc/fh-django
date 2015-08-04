@@ -3,6 +3,7 @@
 {% get_current_language as language %}
 {% load staticfiles %}
 {% load sitetree %}
+{% load compress %}
 
 <!DOCTYPE html>
 <html lang="{{ language }}">
@@ -17,13 +18,19 @@
     <title>{% block title %}{% sitetree_page_title from "navbar" %} | {% endblock %}FamilyHelper</title>
 
     {% bootstrap_css %}
-    {% block css %}
+
+    {% block cdn_css %}
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="{% static 'bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css' %}">
-        <link rel="stylesheet" href="{% static 'bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css' %}">
-        <link rel="stylesheet" href="{% static 'bootstrap-select/dist/css/bootstrap-select.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/app.css' %}">
     {% endblock %}
+
+    {% compress css %}
+        {% block css %}
+            <link rel="stylesheet" href="{% static 'bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css' %}">
+            <link rel="stylesheet" href="{% static 'bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css' %}">
+            <link rel="stylesheet" href="{% static 'bootstrap-select/dist/css/bootstrap-select.min.css' %}">
+            <link rel="stylesheet" href="{% static 'css/app.css' %}">
+        {% endblock %}
+    {% endcompress %}
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -54,13 +61,15 @@
 </div>
 
 {% bootstrap_javascript jquery=1 %}
-{% block scripts %}
-    <script src="{% static 'bootstrap3-typeahead/bootstrap3-typeahead.min.js' %}"></script>
-    <script src="{% static 'bootstrap-switch/dist/js/bootstrap-switch.min.js' %}"></script>
-    <script src="{% static 'bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
-    <script src="{% static 'bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
-    <script src="{% static 'js-cookie/src/js.cookie.js' %}"></script>
-    <script src="{% static 'js/app.js' %}"></script>
-{% endblock %}
+{% compress js %}
+    {% block scripts %}
+        <script src="{% static 'bootstrap3-typeahead/bootstrap3-typeahead.min.js' %}"></script>
+        <script src="{% static 'bootstrap-switch/dist/js/bootstrap-switch.min.js' %}"></script>
+        <script src="{% static 'bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+        <script src="{% static 'bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
+        <script src="{% static 'js-cookie/src/js.cookie.js' %}"></script>
+        <script src="{% static 'js/app.js' %}"></script>
+    {% endblock %}
+{% endcompress %}
 </body>
 </html>
