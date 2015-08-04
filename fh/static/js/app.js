@@ -1,5 +1,5 @@
 /*jslint browser: true*/
-/*global $*/
+/*global $, Cookies*/
 $(document).ready(function () {
     'use strict';
 
@@ -15,16 +15,33 @@ $(document).ready(function () {
 
     //Collapsible Panel
     (function () {
-        $(document).on('click', '.panel-heading span.clickable', function () {
-            var $this = $(this);
-            if (!$this.hasClass('panel-collapsed')) {
-                $this.parents('.panel').find('.panel-body').slideUp();
-                $this.addClass('panel-collapsed');
-                $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+        var panel = $('.panel-collapsible'),
+            cookie = Cookies.get(panel.attr('id')),
+            hide = function (slide) {
+                if (slide) {
+                    panel.parents('.panel').find('.panel-body').slideUp();
+                } else {
+                    panel.parents('.panel').find('.panel-body').hide();
+                }
+
+                panel.addClass('panel-collapsed');
+                panel.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+                Cookies.set(panel.attr('id'), 'collapsed', { expires: 7, path: '' });
+            },
+            show = function () {
+                panel.parents('.panel').find('.panel-body').slideDown();
+                panel.removeClass('panel-collapsed');
+                panel.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+                Cookies.set(panel.attr('id'), 'open', { expires: 7, path: '' });
+            };
+        if (cookie === 'collapsed' || ($(window).width() <= 980 && cookie === undefined)) {
+            hide(false);
+        }
+        panel.click(function () {
+            if (panel.hasClass('panel-collapsed')) {
+                show();
             } else {
-                $this.parents('.panel').find('.panel-body').slideDown();
-                $this.removeClass('panel-collapsed');
-                $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+                hide(true);
             }
         });
     }());
