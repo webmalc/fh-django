@@ -7,7 +7,6 @@ from django.http import JsonResponse
 from .models import Payment
 from .forms import PaymentForm, PaymentsFilterForm
 from taggit.models import Tag
-from django.views.decorators.csrf import csrf_exempt
 
 
 class PaymentCreate(SuccessMessageMixin, CreateView):
@@ -97,6 +96,3 @@ def tags(request, query=None):
         items = items.filter(name__contains=query.strip())
     data = [tag.name for tag in items.order_by('name').all()]
     return JsonResponse(data, safe=False)
-
-
-
