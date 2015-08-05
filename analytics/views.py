@@ -11,5 +11,4 @@ class PaymentsPieChart(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(PaymentsPieChart, self).get_context_data(**kwargs)
-
         return context

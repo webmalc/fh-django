@@ -19,8 +19,7 @@
     "bootstrap-switch": "~3.3.2",
     "bootstrap-datepicker": "~1.4.0",
     "bootstrap-select": "~1.7.3",
-    "js-cookie": "~2.0.3",
-    "highcharts-release": "~4.1.7"
+    "js-cookie": "~2.0.3"
   },
   "resolutions": {
     "jquery": "~2.1.1"
