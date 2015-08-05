@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^accounts/login/$', auth_views.login),
     url('^accounts/logout', auth_views.logout, {'next_page': '/'}),
     url(r'^finances/', include('finances.urls', namespace="finances")),
+    url(r'^analytics/', include('analytics.urls', namespace="analytics")),
     url(r'^$', RedirectView.as_view(pattern_name='finances:payments_list', permanent=True), name='index'),
 ]
