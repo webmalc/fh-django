@@ -9,7 +9,8 @@
 
     function drawChart() {
         var data = google.visualization.arrayToDataTable({{ data|safe|escape }});
-
+        var formatter = new google.visualization.NumberFormat();
+        formatter.format(data, 1);
         var options = {
             title: "{{ title|default:''}}",
             is3D: true,

@@ -29,14 +29,12 @@
                     {% include 'analytics/chart.html' with id="tags" type='PieChart' data=tags_chart_data lib=True %}
                 </div>
                 <div role="tabpanel" class="tab-pane" id="chart-payment-tags">
-                    {% include 'analytics/chart.html' with id="payment-tags" type='PieChart' title="Payments by time" data=tags_chart_data %}
+                    {% include 'analytics/chart.html' with id="payment-tags" type='PieChart' data=payment_tags_chart_data %}
                 </div>
                 <div role="tabpanel" class="tab-pane" id="chart-payment-time">
-                    {% include 'analytics/chart.html' with id="payment-time" type='PieChart' title="Payments by time" data=tags_chart_data %}
+                    {% include 'analytics/chart.html' with id="payment-time" type='PieChart' data=tags_chart_data %}
                 </div>
             </div>
-
-
 
         </div>
     </div>
