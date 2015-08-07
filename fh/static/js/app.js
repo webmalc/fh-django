@@ -58,18 +58,24 @@ $(document).ready(function () {
         });
 
         var period = $('select#id_period'),
+            begin = $('input#id_begin'),
+            end = $('input#id_end'),
             select = function () {
-                var dates = $(this).val(),
-                    begin = $('input#id_begin'),
-                    end = $('input#id_end');
-
+                var dates = period.val();
                 if (dates) {
                     dates = dates.split("_");
                     begin.datepicker('setDate', dates[0]);
                     end.datepicker('setDate', dates[1]);
                 }
+            },
+            periodSet = function () {
+                var val = begin.val() + '_' + end.val();
+                period.val(val);
+                period.selectpicker('refresh');
             };
         period.change(select);
+        begin.change(periodSet);
+        end.change(periodSet);
         select();
     }());
 });

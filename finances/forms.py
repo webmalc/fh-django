@@ -4,6 +4,7 @@ from django import forms
 from datetime import date
 from django.contrib.auth.models import User
 from taggit.models import Tag
+from fh.forms import Form
 
 
 class PaymentForm(autocomplete_light.ModelForm):
@@ -13,7 +14,7 @@ class PaymentForm(autocomplete_light.ModelForm):
     tags = TaggitField(widget=TaggitWidget('TagAutocomplete'))
 
 
-class PaymentsFilterForm(forms.Form):
+class PaymentsFilterForm(Form):
     """
     Payments list filter form
     """
@@ -35,15 +36,17 @@ class PaymentsFilterForm(forms.Form):
 
     begin = forms.DateField(
         label='From',
-        required=False,
+        required=True,
         input_formats=('%Y-%m-%d',),
-        widget=forms.TextInput(attrs={'placeholder': DATES['week'], 'class': 'datepicker'})
+        widget=forms.TextInput(attrs={'placeholder': DATES['week'], 'class': 'datepicker'}),
+        initial=DATES['year']
     )
     end = forms.DateField(
         label='To',
-        required=False,
+        required=True,
         input_formats=('%Y-%m-%d',),
-        widget=forms.TextInput(attrs={'placeholder': DATES['tomorrow'], 'class': 'datepicker'})
+        widget=forms.TextInput(attrs={'placeholder': DATES['tomorrow'], 'class': 'datepicker'}),
+        initial=DATES['tomorrow']
     )
     period = forms.ChoiceField(
         label='Period',
@@ -55,7 +58,8 @@ class PaymentsFilterForm(forms.Form):
             ('%s_%s' % (DATES['week'], DATES['tomorrow']), 'Last week'),
             ('%s_%s' % (DATES['month'], DATES['tomorrow']), 'Last month'),
             ('%s_%s' % (DATES['year'], DATES['tomorrow']), 'Last year'),
-        )
+        ),
+        initial='%s_%s' % (DATES['year'], DATES['tomorrow'])
     )
     tags = forms.ModelMultipleChoiceField(
         required=False,
@@ -83,9 +87,10 @@ class PaymentsFilterForm(forms.Form):
         tags = cleaned_data.get("tags")
         self.cleaned_data['is_incoming'] = bool(int(cleaned_data.get("is_incoming"))) if is_incoming else None
         self.cleaned_data['tags'] = tags if tags else None
+        self.cleaned_data.pop("period", None)
 
         if begin and end:
-            if begin > end:
+            if begin > end or abs((end-begin).days) > 366*2:
                 msg = "Period dates incorrect."
                 self.add_error('begin', msg)
                 self.add_error('end', msg)

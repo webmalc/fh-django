@@ -11,6 +11,26 @@ from decimal import Decimal
 class PaymentManager(models.Manager):
     """ Payment model manager """
 
+    def tags_by_count(self, begin=None, end=None, tags=None, user=None, is_incoming=None, limit=15):
+        """
+        Payments tags sorted by count
+        :param begin: datetime.date
+        :param end: datetime.date
+        :param tags: list
+        :param user: django.contrib.auth.models.User
+        :param is_incoming: boolean
+        :param limit: int
+        :return: list [('tag_name', 'count'), (tag_name', 'count'), ...]
+        """
+
+        filtered_tags = []
+        for payment in self.filtered(begin, end, tags, user, is_incoming).order_by().distinct('tags'):
+            for tag in payment.tags.all():
+                if (tags and tag in tags) or not tags:
+                    filtered_tags.append(tag.id)
+
+        return [(tag.name, tag.num_times) for tag in Payment.tags.most_common()[:limit] if tag.id in filtered_tags]
+
     def summary(self, begin=None, end=None, tags=None, user=None, is_incoming=None):
         """
         Payments total in/out

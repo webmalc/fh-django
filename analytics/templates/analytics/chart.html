@@ -1,0 +1,24 @@
+{% if lib %}
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+{% endif %}
+<script type="text/javascript">
+    /*jslint browser: true*/
+    /*global google*/
+    google.load("visualization", "1", {packages: ["corechart"]});
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable({{ data|safe|escape }});
+
+        var options = {
+            title: "{{ title|default:''}}",
+            is3D: true,
+            width: 840,
+            height: 600
+        };
+
+        var chart = new google.visualization.{{ type }}(document.getElementById('analytics-chart-{{ id }}'));
+        chart.draw(data, options);
+    }
+</script>
+<div id="analytics-chart-{{ id }}"></div>

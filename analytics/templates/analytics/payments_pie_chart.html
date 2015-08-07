@@ -1,5 +1,45 @@
 {% extends 'analytics/layout.html' %}
 
 {% block content %}
+    {% include 'finances/payment_summary.html' with summary=summary add=False %}
+
+    <div class="row">
+        <div class="col-lg-3 col-lg-push-9">
+            <!------------------- FILTERS ------------------->
+            {% include 'finances/payment_filter.html' with form=form action='analytics:payment_pie_chart' cancel='analytics:payment_pie_chart' %}
+        </div>
+
+        <div class="col-lg-9 col-lg-pull-3">
+
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#chart-tags" aria-controls="home" role="tab" data-toggle="tab">Tags</a>
+                </li>
+                <li role="presentation">
+                    <a href="#chart-payment-tags" aria-controls="profile" role="tab" data-toggle="tab">Payments by tags</a>
+                </li>
+                <li role="presentation">
+                    <a href="#chart-payment-time" aria-controls="profile" role="tab" data-toggle="tab">Payments by time</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="chart-tags">
+                    {% include 'analytics/chart.html' with id="tags" type='PieChart' data=tags_chart_data lib=True %}
+                </div>
+                <div role="tabpanel" class="tab-pane" id="chart-payment-tags">
+                    {% include 'analytics/chart.html' with id="payment-tags" type='PieChart' title="Payments by time" data=tags_chart_data %}
+                </div>
+                <div role="tabpanel" class="tab-pane" id="chart-payment-time">
+                    {% include 'analytics/chart.html' with id="payment-time" type='PieChart' title="Payments by time" data=tags_chart_data %}
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
 
 {% endblock %}

@@ -1,58 +1,16 @@
 {% extends 'finances/layout.html' %}
 {% load gravatar %}
-{% load bootstrap3 %}
 {% load humanize %}
 
 {% block content %}
 
-    <div class="well well-sm">
-        <div class="row">
-            <div class="col-md-10">
-            <div class="btn-group" role="group" >
-                <a href="{% url 'finances:payments_list' %}?is_incoming=0&filter=1" class="btn btn-sm btn-warning">
-                    <i class="fa fa-minus"></i> Expense: {{ summary.out|intcomma }}
-                </a>
-                <a href="{% url 'finances:payments_list' %}?is_incoming=1&filter=1" class="btn btn-sm btn-info">
-                    <i class="fa fa-plus"></i> Incoming: {{ summary.in|intcomma }}
-                </a>
-                <a href="{% url 'finances:payments_list' %}"
-                   class="btn btn-sm btn-{% if summary.total < 0 %}danger{% else %}success{% endif %}">
-                    <i class="fa fa-{% if summary.total < 0 %}exclamation{% else %}check{% endif %}"></i>
-                    Total: {{ summary.total|intcomma }}
-                </a>
-            </div> </div>
-            <div class="col-md-2 text-right">
-                <a href="{% url 'finances:payment_add' %}" class="btn btn-success">
-                    <i class="fa fa-plus-circle"></i> Add payment
-                </a>
-            </div>
-        </div>
-    </div>
+    {% include 'finances/payment_summary.html' with summary=summary add=True %}
 
     <div class="row">
         <div class="col-md-3 col-md-push-9">
 
             <!------------------- FILTERS ------------------->
-            <div class="panel panel-default">
-                <div class="panel-heading clickable panel-collapsible" id="payment-filter">
-                    <h3 class="panel-title">Filters</h3>
-                    <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
-                </div>
-                <div class="panel-body">
-                    <form action="{% url 'finances:payments_list' %}" method="get">
-                        {% bootstrap_form form %}
-
-                        {% buttons %}
-                            <button type="submit" name="filter" value="1" class="btn btn-primary">
-                                {% bootstrap_icon "filter" %} Filter
-                            </button>
-                            <a href="{% url 'finances:payments_list' %}" class="btn btn-default">
-                                {% bootstrap_icon "remove-circle" %} Cancel
-                            </a>
-                        {% endbuttons %}
-                    </form>
-                </div>
-            </div>
+            {% include 'finances/payment_filter.html' with form=form action='finances:payments_list' cancel='finances:payments_list' %}
         </div>
 
         <!------------------- LIST ------------------->

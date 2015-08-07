@@ -61,6 +61,9 @@
 </div>
 
 {% bootstrap_javascript jquery=1 %}
+
+{% block cdn_scripts %}{% endblock %}
+
 {% compress js %}
     {% block scripts %}
         <script src="{% static 'bootstrap3-typeahead/bootstrap3-typeahead.min.js' %}"></script>
