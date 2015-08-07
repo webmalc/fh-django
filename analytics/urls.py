@@ -5,5 +5,5 @@ import analytics.views as views
 
 urlpatterns = [
     url(r'charts/payments/pie$', permission_required('finances.add_payment')(views.PaymentsChart.as_view()),
-        name='payment_pie_chart'),
+        name='payment_chart'),
 ]
