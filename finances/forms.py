@@ -2,6 +2,7 @@ from autocomplete_light.contrib.taggit_field import TaggitField, TaggitWidget
 import autocomplete_light
 from django import forms
 from datetime import date
+from django.utils import timezone
 from django.contrib.auth.models import User
 from taggit.models import Tag
 from fh.forms import Form
@@ -20,12 +21,12 @@ class PaymentsFilterForm(Form):
     """
 
     DATES = {
-        'tomorrow': date.fromordinal(date.today().toordinal() + 1),
+        'tomorrow': date.fromordinal(timezone.now().toordinal() + 1),
         'today': date.today(),
-        'yesterday': date.fromordinal(date.today().toordinal() - 1),
-        'week': date.fromordinal(date.today().toordinal() - 7),
-        'month': date.fromordinal(date.today().toordinal() - 31),
-        'year': date.fromordinal(date.today().toordinal() - 365),
+        'yesterday': date.fromordinal(timezone.now().toordinal() - 1),
+        'week': date.fromordinal(timezone.now().toordinal() - 7),
+        'month': date.fromordinal(timezone.now().toordinal() - 31),
+        'year': date.fromordinal(timezone.now().toordinal() - 365),
     }
     YEAR_IN_SCHOOL_CHOICES = (
         ('FR', 'Freshman'),
