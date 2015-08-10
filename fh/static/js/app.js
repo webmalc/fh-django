@@ -10,6 +10,17 @@ $(document).ready(function () {
         offText: 'no'
     });
 
+    //tabs remember
+    $(function () {
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function () {
+            localStorage.setItem('last_tab', $(this).attr('href'));
+        });
+        var lastTab = localStorage.getItem('last_tab');
+        if (lastTab) {
+            $('[href="' + lastTab + '"]').tab('show');
+        }
+    });
+
     //tooltip
     $('[data-toggle="tooltip"]').tooltip();
 
