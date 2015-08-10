@@ -12,23 +12,23 @@
 
             {% if payment %}
                 <div class="alert alert-warning">
-                   <img src="{% gravatar_url payment.created_by|default:'' 24 %}" class="img-circle"> &nbsp;
-                   Created at {{ payment.date|naturalday }} {{ payment.date|date:'H:i' }} by {{ payment.created_by|default:"anonym" }}
+                    <img src="{% gravatar_url payment.created_by|default:'' 24 %}" class="img-circle margin-right-sm">
+                    Created at {{ payment.date|naturalday }} {{ payment.date|date:'H:i' }} by {{ payment.created_by|default:"anonym" }}
                 </div>
             {% endif %}
 
             {% buttons %}
-                <button type="submit" class="btn btn-success">
-                    {% bootstrap_icon "ok-circle" %} Save payment
-                </button>
-                <a href="{%  url 'finances:payments_list' %}" class="btn btn-default">
-                    {% bootstrap_icon "remove-circle" %} Cancel
-                </a>
-                {% if payment  and perms.finances.delete_payment %}
-                    <a href="{% url 'finances:payment_delete' payment.id %}" class="btn btn-danger pull-right">
-                        {% bootstrap_icon "trash" %} Delete payment
+                    <button type="submit" class="btn btn-success margin-right-sm">
+                        {% bootstrap_icon "ok-circle" %} Save payment
+                    </button>
+                    <a href="{%  url 'finances:payments_list' %}" class="btn btn-default">
+                        {% bootstrap_icon "remove-circle" %} Cancel
                     </a>
-                {% endif %}
+                    {% if payment  and perms.finances.delete_payment %}
+                        <a href="{% url 'finances:payment_delete' payment.id %}" class="btn btn-danger pull-right">
+                            {% bootstrap_icon "trash" %} Delete payment
+                        </a>
+                    {% endif %}
             {% endbuttons %}
         </form>
     </div>

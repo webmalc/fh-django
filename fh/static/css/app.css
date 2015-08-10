@@ -30,6 +30,12 @@ body {
 .dropdown-menu {
     z-index: 99999 !important;
 }
+.margin-right-sm {
+    margin-right: 4px;
+}
+.margin-left-sm {
+    margin-left: 4px;
+}
 /******************* FORMS ***********************/
 
 .bootstrap-tagsinput {
