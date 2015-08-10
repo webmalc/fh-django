@@ -11,8 +11,7 @@ from decimal import Decimal
 class PaymentManager(models.Manager):
     """ Payment model manager """
 
-    def tags_by_amount(self, begin=None, end=None, tags=None, user=None, is_incoming=None, limit=15,
-                       filtered_tags=None):
+    def tags_by_amount(self, filtered_tags=None, **kwargs):
         """
         Payments tags sorted by payments amount
         :param begin: datetime.date
@@ -20,20 +19,20 @@ class PaymentManager(models.Manager):
         :param tags: list
         :param user: django.contrib.auth.models.User
         :param is_incoming: boolean
-        :param limit: int
         :param filtered_tags: dict
         :return: list [('tag_name', 'amount'), (tag_name', 'amount'), ...]
         """
-        filtered_tags = filtered_tags if filtered_tags else self.filtered_tags(begin, end, tags, user, is_incoming)
+        filtered_tags = filtered_tags if filtered_tags else self.filtered_tags(**kwargs)
         data = []
         for key, tag in filtered_tags.iteritems():
-            amount = self.filtered(begin=begin, end=end, user=user, is_incoming=is_incoming).filter(tags__in=(tag,))\
+            amount = self.filtered(begin=kwargs['begin'], end=kwargs['end'], user=kwargs['user'],
+                                   is_incoming=kwargs['is_incoming']).filter(tags__in=(tag,)) \
                 .aggregate(total=Sum('amount'))
             data.append((tag.name, amount['total']))
 
         return data
 
-    def tags_by_count(self, begin=None, end=None, tags=None, user=None, is_incoming=None, limit=15, filtered_tags=None):
+    def tags_by_count(self, limit=15, filtered_tags=None, **kwargs):
         """
         Payments tags sorted by count
         :param begin: datetime.date
@@ -45,40 +44,42 @@ class PaymentManager(models.Manager):
         :param filtered_tags: dict
         :return: list [('tag_name', 'count'), (tag_name', 'count'), ...]
         """
-        filtered_tags = filtered_tags if filtered_tags else self.filtered_tags(begin, end, tags, user, is_incoming)
+        filtered_tags = filtered_tags if filtered_tags else self.filtered_tags(**kwargs)
 
         return [(tag.name, tag.num_times) for tag in Payment.tags.most_common()[:limit] if
                 tag.id in filtered_tags.keys()]
 
-    def filtered_tags(self, begin=None, end=None, tags=None, user=None, is_incoming=None):
+    def filtered_tags(self, **kwargs):
         """
         Get filtered tags
         :param begin: datetime.date
         :param end: datetime.date
-        :param tags: list
+        :param include_tags: list
+        :param exclude_tags: list
         :param user: django.contrib.auth.models.User
         :param is_incoming: boolean
         :return: dict {'id': Tag, 'id': Tag}
         """
         filtered_tags = {}
-        for payment in self.filtered(begin, end, tags, user, is_incoming).order_by().distinct('tags'):
+        for payment in self.filtered(**kwargs).order_by().distinct('tags'):
             for tag in payment.tags.all():
-                if (tags and tag in tags) or not tags:
+                if (kwargs['include_tags'] and tag in kwargs['include_tags']) or not kwargs['include_tags']:
                     filtered_tags[tag.id] = tag
 
         return filtered_tags
 
-    def summary(self, begin=None, end=None, tags=None, user=None, is_incoming=None):
+    def summary(self, begin=None, end=None, include_tags=None, exclude_tags=None, user=None, is_incoming=None):
         """
         Payments total in/out
         :param begin: datetime.date
         :param end: datetime.date
-        :param tags: list
+        :param include_tags: list
+        :param exclude_tags: list
         :param user: django.contrib.auth.models.User
         :param is_incoming: boolean
         :return: dict {'in': 1200.34, 'out': 500.45}
         """
-        q = self.filtered(begin, end, tags, user)
+        q = self.filtered(begin=begin, end=end, include_tags=include_tags, exclude_tags=exclude_tags, user=user)
         result = {'in': Decimal(0), 'out': Decimal(0)}
 
         if is_incoming is None:
@@ -95,12 +96,14 @@ class PaymentManager(models.Manager):
 
         return result
 
-    def filtered(self, begin=None, end=None, tags=None, user=None, is_incoming=None, sort='date', order='asc'):
+    def filtered(self, begin=None, end=None, include_tags=None, exclude_tags=None, user=None, is_incoming=None,
+                 sort='date', order='asc'):
         """
         Filtered payment query
         :param begin: datetime.date
         :param end: datetime.date
-        :param tags: list
+        :param include_tags: list
+        :param exclude_tags: list
         :param user: django.contrib.auth.models.User
         :param is_incoming: boolean
         :param sort: string
@@ -115,8 +118,11 @@ class PaymentManager(models.Manager):
         if end is not None:
             q = q.filter(date__lte=end)
 
-        if tags is not None:
-            q = q.filter(tags__in=tags)
+        if include_tags is not None:
+            q = q.filter(tags__in=include_tags)
+
+        if exclude_tags is not None:
+            q = q.exclude(tags__in=exclude_tags)
 
         if is_incoming is not None:
             q = q.filter(is_incoming=is_incoming)

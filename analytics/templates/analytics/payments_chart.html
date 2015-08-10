@@ -19,7 +19,7 @@
                     <a href="#chart-payment-tags" aria-controls="profile" role="tab" data-toggle="tab">Payments by tags</a>
                 </li>
                 <li role="presentation">
-                    <a href="#chart-payment-time" aria-controls="profile" role="tab" data-toggle="tab">Payments by time</a>
+                    <a href="#chart-payment-date" aria-controls="profile" role="tab" data-toggle="tab">Payments by days</a>
                 </li>
             </ul>
 
@@ -31,8 +31,8 @@
                 <div role="tabpanel" class="tab-pane" id="chart-payment-tags">
                     {% include 'analytics/chart.html' with id="payment-tags" type='PieChart' data=payment_tags_chart_data %}
                 </div>
-                <div role="tabpanel" class="tab-pane" id="chart-payment-time">
-                    {% include 'analytics/chart.html' with id="payment-time" type='PieChart' data=tags_chart_data %}
+                <div role="tabpanel" class="tab-pane" id="chart-payment-date">
+                    {% include 'analytics/chart.html' with id="payment-time" type='LineChart' data=tags_chart_data %}
                 </div>
             </div>
 

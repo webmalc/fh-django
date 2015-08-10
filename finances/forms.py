@@ -35,6 +35,8 @@ class PaymentsFilterForm(Form):
         ('SR', 'Senior'),
     )
 
+    TAGS = Tag.objects.all().order_by('name')
+
     begin = forms.DateField(
         label='From',
         required=True,
@@ -62,9 +64,16 @@ class PaymentsFilterForm(Form):
         ),
         initial='%s_%s' % (DATES['year'], DATES['tomorrow'])
     )
-    tags = forms.ModelMultipleChoiceField(
+    include_tags = forms.ModelMultipleChoiceField(
+        label='Tags <small><i class="fa fa-plus-circle"></i></small>',
         required=False,
-        queryset=Tag.objects.all().order_by('name'),
+        queryset=TAGS,
+        widget=forms.SelectMultiple(attrs={"data-live-search": "true", "data-size": 10})
+    )
+    exclude_tags = forms.ModelMultipleChoiceField(
+        label='Tags  <small><i class="fa fa-minus-circle"></i></small>',
+        required=False,
+        queryset=TAGS,
         widget=forms.SelectMultiple(attrs={"data-live-search": "true", "data-size": 10})
     )
     user = forms.ModelChoiceField(
@@ -81,13 +90,12 @@ class PaymentsFilterForm(Form):
     )
 
     def clean(self):
-        cleaned_data = super(PaymentsFilterForm, self).clean()
-        begin = cleaned_data.get("begin")
-        end = cleaned_data.get("end")
+        data = super(PaymentsFilterForm, self).clean()
+        begin = data.get("begin")
+        end = data.get("end")
         is_incoming = self.cleaned_data['is_incoming']
-        tags = cleaned_data.get("tags")
-        self.cleaned_data['is_incoming'] = bool(int(cleaned_data.get("is_incoming"))) if is_incoming else None
-        self.cleaned_data['tags'] = tags if tags else None
+        self.cleaned_data['is_incoming'] = bool(int(data.get("is_incoming"))) if is_incoming else None
+        self.cleaned_data['include_tags'] = data.get("include_tags") if data.get("include_tags") else None
         self.cleaned_data.pop("period", None)
 
         if begin and end:
