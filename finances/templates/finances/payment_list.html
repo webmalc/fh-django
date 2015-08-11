@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    {% include 'finances/payment_summary.html' with summary=summary add=True %}
+    {% include 'finances/payment_summary.html' with summary=summary link='finances:payments_list' filter=filter add=True %}
 
     <div class="row">
         <div class="col-md-3 col-md-push-9">

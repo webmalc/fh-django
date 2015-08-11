@@ -25,4 +25,6 @@ class PaymentsChart(TemplateView):
         context['payment_tags_chart_data'] = fh.chart.get(Payment.objects.tags_by_amount(filtered_tags=tags, **data))
         context['summary'] = Payment.objects.summary(**data)
         context['form'] = form
+        context['filter'] = data
+        
         return context

@@ -51,6 +51,7 @@ class PaymentList(ListView):
         context['summary'] = Payment.objects.summary(**data)
         context['thead'] = self.THEAD
         context['form'] = form
+        context['filter'] = data
 
         return context
 
