@@ -4,8 +4,9 @@ from fh.models import CommonInfo
 from django.utils import timezone
 from taggit.managers import TaggableManager
 from django.core.urlresolvers import reverse
-from django.db.models import Sum
+from django.db.models import Sum, Count
 from decimal import Decimal
+from django.db import connection
 
 
 class PaymentManager(models.Manager):
@@ -67,6 +68,40 @@ class PaymentManager(models.Manager):
                     filtered_tags[tag.id] = tag
 
         return filtered_tags
+
+    def payments_by_days(self, begin=None, end=None, include_tags=None, exclude_tags=None, user=None, is_incoming=None):
+        """
+        Payments amount by days
+        :param begin: datetime.date
+        :param end: datetime.date
+        :param include_tags: list
+        :param exclude_tags: list
+        :param user: django.contrib.auth.models.User
+        :param is_incoming: boolean
+        :return: list [('day', 'amount'), ('day', 'amount'), ...]
+        """
+        q = self.filtered(begin=begin, end=end, include_tags=include_tags, exclude_tags=exclude_tags, user=user,
+                          is_incoming=is_incoming)
+        data = q.extra(select={'day': 'date(date)'}).values('day').annotate(total=Sum('amount')).order_by('day')
+
+        return [(entry['day'], entry['total']) for entry in data]
+
+    def payments_by_months(self, begin=None, end=None, include_tags=None, exclude_tags=None, user=None,
+                           is_incoming=None):
+        """
+        Payments amount by months
+        :param begin: datetime.date
+        :param end: datetime.date
+        :param include_tags: list
+        :param exclude_tags: list
+        :param user: django.contrib.auth.models.User
+        :param is_incoming: boolean
+        :return: list [{'day': datetime.date(), 'total': Decimal()}, ...]
+        """
+        q = self.filtered(begin=begin, end=end, include_tags=include_tags, exclude_tags=exclude_tags, user=user,
+                          is_incoming=is_incoming)
+        truncate_date = connection.ops.date_trunc_sql('month', 'date')
+        return q.extra(select={'month': truncate_date}).values('month').annotate(total=Sum('amount')).order_by('month')
 
     def summary(self, begin=None, end=None, include_tags=None, exclude_tags=None, user=None, is_incoming=None):
         """

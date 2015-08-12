@@ -1,11 +1,14 @@
 import json
 import decimal
+import datetime
 
 
 def decimal_default(obj):
     if isinstance(obj, decimal.Decimal):
         return float(obj)
-    raise TypeError
+    if isinstance(obj, datetime.date):
+        return obj.isoformat()
+    raise TypeError('Invalid json format.')
 
 
 def get(data, x='x', y='y'):

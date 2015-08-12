@@ -32,7 +32,7 @@
                     {% include 'analytics/chart.html' with id="payment-tags" type='PieChart' data=payment_tags_chart_data %}
                 </div>
                 <div role="tabpanel" class="tab-pane" id="chart-payment-date">
-                    {% include 'analytics/chart.html' with id="payment-time" type='LineChart' data=tags_chart_data %}
+                    {% include 'analytics/chart.html' with id="payment-time" type='LineChart' data=payment_days_chart_data %}
                 </div>
             </div>
 

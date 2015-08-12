@@ -7,6 +7,16 @@ from django.contrib.auth.models import User
 from taggit.models import Tag
 from fh.forms import Form
 
+DATES = {
+    'tomorrow': date.fromordinal(timezone.now().toordinal() + 1),
+    'today': date.today(),
+    'yesterday': date.fromordinal(timezone.now().toordinal() - 1),
+    'week': date.fromordinal(timezone.now().toordinal() - 7),
+    'month': date.fromordinal(timezone.now().toordinal() - 31),
+    'year': date.fromordinal(timezone.now().toordinal() - 365),
+}
+TAGS = Tag.objects.all().order_by('name')
+
 
 class PaymentForm(autocomplete_light.ModelForm):
     """
@@ -19,23 +29,6 @@ class PaymentsFilterForm(Form):
     """
     Payments list filter form
     """
-
-    DATES = {
-        'tomorrow': date.fromordinal(timezone.now().toordinal() + 1),
-        'today': date.today(),
-        'yesterday': date.fromordinal(timezone.now().toordinal() - 1),
-        'week': date.fromordinal(timezone.now().toordinal() - 7),
-        'month': date.fromordinal(timezone.now().toordinal() - 31),
-        'year': date.fromordinal(timezone.now().toordinal() - 365),
-    }
-    YEAR_IN_SCHOOL_CHOICES = (
-        ('FR', 'Freshman'),
-        ('SO', 'Sophomore'),
-        ('JR', 'Junior'),
-        ('SR', 'Senior'),
-    )
-
-    TAGS = Tag.objects.all().order_by('name')
 
     begin = forms.DateField(
         label='From',
@@ -99,8 +92,7 @@ class PaymentsFilterForm(Form):
         self.cleaned_data.pop("period", None)
 
         if begin and end:
-            if begin > end or abs((end-begin).days) > 366*2:
+            if begin > end or abs((end - begin).days) > 366 * 2:
                 msg = "Period dates incorrect."
                 self.add_error('begin', msg)
                 self.add_error('end', msg)
-
