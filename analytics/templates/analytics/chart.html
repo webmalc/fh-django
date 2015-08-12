@@ -15,7 +15,8 @@
             title: "{{ title|default:''}}",
             is3D: true,
             width: 840,
-            height: 600
+            height: 600,
+            legend: {position: 'bottom'}
         };
 
         var chart = new google.visualization.{{ type }}(document.getElementById('analytics-chart-{{ id }}'));

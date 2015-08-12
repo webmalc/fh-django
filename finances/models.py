@@ -4,7 +4,7 @@ from fh.models import CommonInfo
 from django.utils import timezone
 from taggit.managers import TaggableManager
 from django.core.urlresolvers import reverse
-from django.db.models import Sum, Count
+from django.db.models import Sum
 from decimal import Decimal
 from django.db import connection
 

@@ -27,7 +27,7 @@
                         <tr class="{{ payment.is_incoming|yesno:"success," }}">
                             <td>
                                 {% for tag in payment.tags.all %}
-                                    <a href="{% url 'finances:payments_list' %}?tags={{ tag.id }}&filter=1"
+                                    <a href="{% url 'finances:payments_list' %}?include_tags={{ tag.id }}&filter=1&begin={{ filter.begin|date:'Y-m-d' }}&end={{ filter.end|date:'Y-m-d' }}"
                                        class="btn btn-info btn-xs tag-link">{{ tag }}</a>&nbsp;
                                 {% endfor %}
                             </td>
@@ -47,7 +47,8 @@
                             <td class="text-right">
                                 {% if perms.finances.change_payment %}
                                     <a href="{% url 'finances:payment_update' payment.id %}" title="Edit payment"
-                                       data-toggle="tooltip" data-placement="top" class="btn btn-xs btn-success margin-right-sm">
+                                       data-toggle="tooltip" data-placement="top"
+                                       class="btn btn-xs btn-success margin-right-sm">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
                                 {% endif %}

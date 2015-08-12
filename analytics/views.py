@@ -2,7 +2,6 @@ from django.views.generic import TemplateView
 from finances.models import Payment
 from finances.forms import PaymentsFilterForm
 import fh.chart
-from django.db.models import Sum, Count
 
 
 class PaymentsChart(TemplateView):
