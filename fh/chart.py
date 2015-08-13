@@ -8,7 +8,7 @@ def get(data, x='x', y='y'):
 
     for entry in data:
         if isinstance(entry[0], datetime.date):
-            output += '[new Date(%s), %s],' % (entry[0].strftime('%Y, %m, %d'), entry[1])
+            output += '[new Date("%s"), %s],' % (entry[0].isoformat(), entry[1])
         elif isinstance(entry[1], (decimal.Decimal, int, float)):
             output += '["%s", %s],' % entry
         else:

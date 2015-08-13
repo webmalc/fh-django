@@ -13,13 +13,24 @@
 
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
-                    <a href="#chart-tags" aria-controls="home" role="tab" data-toggle="tab">Tags</a>
+                    <a href="#chart-tags" aria-controls="home" role="tab" data-toggle="tab">
+                        <i class="fa fa-tags margin-right-sm"></i>Tags sum
+                    </a>
                 </li>
                 <li role="presentation">
-                    <a href="#chart-payment-tags" aria-controls="profile" role="tab" data-toggle="tab">Payments by tags</a>
+                    <a href="#chart-payment-tags" aria-controls="profile" role="tab" data-toggle="tab">
+                        <i class="fa fa-dollar margin-right-sm"></i> Payments by tags
+                    </a>
                 </li>
                 <li role="presentation">
-                    <a href="#chart-payment-date" aria-controls="profile" role="tab" data-toggle="tab">Payments by days</a>
+                    <a href="#chart-payment-days" aria-controls="profile" role="tab" data-toggle="tab">
+                        <i class="fa fa-sun-o margin-right-sm"></i>Payments by days
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#chart-payment-months" aria-controls="profile" role="tab" data-toggle="tab">
+                        <i class="fa fa-moon-o margin-right-sm"></i>Payments by months
+                    </a>
                 </li>
             </ul>
 
@@ -31,8 +42,11 @@
                 <div role="tabpanel" class="tab-pane" id="chart-payment-tags">
                     {% include 'analytics/chart.html' with id="payment-tags" type='PieChart' data=payment_tags_chart_data %}
                 </div>
-                <div role="tabpanel" class="tab-pane" id="chart-payment-date">
-                    {% include 'analytics/chart.html' with id="payment-time" type='LineChart' data=payment_days_chart_data %}
+                <div role="tabpanel" class="tab-pane" id="chart-payment-days">
+                    {% include 'analytics/chart.html' with id="payment-days" type='AreaChart' data=payment_days_chart_data %}
+                </div>
+                <div role="tabpanel" class="tab-pane" id="chart-payment-months">
+                    {% include 'analytics/chart.html' with id="payment-months" type='ColumnChart' data=payment_months_chart_data %}
                 </div>
             </div>
 

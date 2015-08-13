@@ -96,12 +96,14 @@ class PaymentManager(models.Manager):
         :param exclude_tags: list
         :param user: django.contrib.auth.models.User
         :param is_incoming: boolean
-        :return: list [{'day': datetime.date(), 'total': Decimal()}, ...]
+        :return: list [('day', 'amount'), ('day', 'amount'), ...]
         """
         q = self.filtered(begin=begin, end=end, include_tags=include_tags, exclude_tags=exclude_tags, user=user,
                           is_incoming=is_incoming)
         truncate_date = connection.ops.date_trunc_sql('month', 'date')
-        return q.extra(select={'month': truncate_date}).values('month').annotate(total=Sum('amount')).order_by('month')
+        data = q.extra(select={'month': truncate_date}).values('month').annotate(total=Sum('amount')).order_by('month')
+
+        return [(entry['month'], entry['total']) for entry in data]
 
     def summary(self, begin=None, end=None, include_tags=None, exclude_tags=None, user=None, is_incoming=None):
         """

@@ -10,6 +10,8 @@
     function drawChart() {
         var data = google.visualization.arrayToDataTable({{ data|safe|escape }});
         var formatter = new google.visualization.NumberFormat();
+        var dateFormatter = new google.visualization.DateFormat({pattern: 'd MMMM, yyyy'});
+        dateFormatter.format(data, 0);
         formatter.format(data, 1);
         var options = {
             title: "{{ title|default:''}}",
