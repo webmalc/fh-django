@@ -7,16 +7,6 @@ from django.contrib.auth.models import User
 from taggit.models import Tag
 from fh.forms import Form
 
-DATES = {
-    'tomorrow': date.fromordinal(timezone.now().toordinal() + 1),
-    'today': date.today(),
-    'yesterday': date.fromordinal(timezone.now().toordinal() - 1),
-    'week': date.fromordinal(timezone.now().toordinal() - 7),
-    'month': date.fromordinal(timezone.now().toordinal() - 31),
-    'year': date.fromordinal(timezone.now().toordinal() - 365),
-}
-TAGS = Tag.objects.all().order_by('name')
-
 
 class PaymentForm(autocomplete_light.ModelForm):
     """
@@ -30,57 +20,71 @@ class PaymentsFilterForm(Form):
     Payments list filter form
     """
 
-    begin = forms.DateField(
-        label='From',
-        required=True,
-        input_formats=('%Y-%m-%d',),
-        widget=forms.TextInput(attrs={'placeholder': DATES['week'], 'class': 'datepicker'}),
-        initial=DATES['year']
-    )
-    end = forms.DateField(
-        label='To',
-        required=True,
-        input_formats=('%Y-%m-%d',),
-        widget=forms.TextInput(attrs={'placeholder': DATES['tomorrow'], 'class': 'datepicker'}),
-        initial=DATES['tomorrow']
-    )
-    period = forms.ChoiceField(
-        label='Period',
-        required=False,
-        choices=(
-            ('', '---------'),
-            ('%s_%s' % (DATES['today'], DATES['tomorrow']), 'Today'),
-            ('%s_%s' % (DATES['yesterday'], DATES['today']), 'Yesterday'),
-            ('%s_%s' % (DATES['week'], DATES['tomorrow']), 'Last week'),
-            ('%s_%s' % (DATES['month'], DATES['tomorrow']), 'Last month'),
-            ('%s_%s' % (DATES['year'], DATES['tomorrow']), 'Last year'),
-        ),
-        initial='%s_%s' % (DATES['year'], DATES['tomorrow'])
-    )
-    include_tags = forms.ModelMultipleChoiceField(
-        label='Tags <small><i class="fa fa-plus-circle"></i></small>',
-        required=False,
-        queryset=TAGS,
-        widget=forms.SelectMultiple(attrs={"data-live-search": "true", "data-size": 10})
-    )
-    exclude_tags = forms.ModelMultipleChoiceField(
-        label='Tags  <small><i class="fa fa-minus-circle"></i></small>',
-        required=False,
-        queryset=TAGS,
-        widget=forms.SelectMultiple(attrs={"data-live-search": "true", "data-size": 10})
-    )
-    user = forms.ModelChoiceField(
-        required=False,
-        empty_label="---------",
-        queryset=User.objects.all()
-    )
-    is_incoming = forms.ChoiceField(
-        label='Is incoming',
-        required=False,
-        choices=(
-            ('', '---------'), (1, 'Yes'), (0, 'No')
+    def __init__(self, *args, **kwargs):
+
+        super(PaymentsFilterForm, self).__init__(*args, **kwargs)
+
+        self.dates = {
+            'tomorrow': date.fromordinal(timezone.now().toordinal() + 1),
+            'today': date.today(),
+            'yesterday': date.fromordinal(timezone.now().toordinal() - 1),
+            'week': date.fromordinal(timezone.now().toordinal() - 7),
+            'month': date.fromordinal(timezone.now().toordinal() - 31),
+            'year': date.fromordinal(timezone.now().toordinal() - 365),
+        }
+        self.tags = Tag.objects.all().order_by('name')
+
+        self.fields['begin'] = forms.DateField(
+            label='From',
+            required=True,
+            input_formats=('%Y-%m-%d',),
+            widget=forms.TextInput(attrs={'placeholder': self.dates['week'], 'class': 'datepicker'}),
+            initial=self.dates['year']
         )
-    )
+        self.fields['end'] = forms.DateField(
+            label='To',
+            required=True,
+            input_formats=('%Y-%m-%d',),
+            widget=forms.TextInput(attrs={'placeholder': self.dates['tomorrow'], 'class': 'datepicker'}),
+            initial=self.dates['tomorrow']
+        )
+        self.fields['period'] = forms.ChoiceField(
+            label='Period',
+            required=False,
+            choices=(
+                ('', '---------'),
+                ('%s_%s' % (self.dates['today'], self.dates['tomorrow']), 'Today'),
+                ('%s_%s' % (self.dates['yesterday'], self.dates['today']), 'Yesterday'),
+                ('%s_%s' % (self.dates['week'], self.dates['tomorrow']), 'Last week'),
+                ('%s_%s' % (self.dates['month'], self.dates['tomorrow']), 'Last month'),
+                ('%s_%s' % (self.dates['year'], self.dates['tomorrow']), 'Last year'),
+            ),
+            initial='%s_%s' % (self.dates['year'], self.dates['tomorrow'])
+        )
+        self.fields['include_tags'] = forms.ModelMultipleChoiceField(
+            label='Tags <small><i class="fa fa-plus-circle"></i></small>',
+            required=False,
+            queryset=self.tags,
+            widget=forms.SelectMultiple(attrs={"data-live-search": "true", "data-size": 10})
+        )
+        self.fields['exclude_tags'] = forms.ModelMultipleChoiceField(
+            label='Tags  <small><i class="fa fa-minus-circle"></i></small>',
+            required=False,
+            queryset=self.tags,
+            widget=forms.SelectMultiple(attrs={"data-live-search": "true", "data-size": 10})
+        )
+        self.fields['user'] = forms.ModelChoiceField(
+            required=False,
+            empty_label="---------",
+            queryset=User.objects.all()
+        )
+        self.fields['is_incoming'] = forms.ChoiceField(
+            label='Is incoming',
+            required=False,
+            choices=(
+                ('', '---------'), (1, 'Yes'), (0, 'No')
+            )
+        )
 
     def clean(self):
         data = super(PaymentsFilterForm, self).clean()
@@ -93,6 +97,6 @@ class PaymentsFilterForm(Form):
 
         if begin and end:
             if begin > end or abs((end - begin).days) > 366 * 2:
-                msg = "Period dates incorrect."
+                msg = "Period self.dates incorrect."
                 self.add_error('begin', msg)
                 self.add_error('end', msg)
