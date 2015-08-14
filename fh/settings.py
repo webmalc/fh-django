@@ -125,7 +125,7 @@ SUIT_CONFIG = {
     'MENU': (
         {'app': 'auth', 'label': 'Authorization', 'icon': 'icon-user', 'models': ('auth.user', 'auth.group')},
         {'app': 'finances', 'icon': 'icon-briefcase'},
-        {'label': 'Navigation', 'icon': 'icon-list', 'models': ('sitetree.tree', 'taggit.tag')},
+        {'label': 'Navigation', 'icon': 'icon-list', 'models': ('fh.sitetreetree', 'taggit.tag')},
     ),
     'LIST_PER_PAGE': 20
 }
@@ -140,6 +140,10 @@ STRONGHOLD_PUBLIC_URLS = (
 STRONGHOLD_PUBLIC_NAMED_URLS = (
     'django.contrib.auth.views.login',
 )
+
+# Django sitetree
+SITETREE_MODEL_TREE_ITEM = 'fh.SiteTreeItem'
+SITETREE_MODEL_TREE = 'fh.SiteTreeTree'
 
 # Local settings
 try:

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from sitetree.models import TreeItemBase, TreeBase
 
 
 class CommonInfo(models.Model):
@@ -14,3 +15,14 @@ class CommonInfo(models.Model):
 
     class Meta:
         abstract = True
+
+
+class SiteTreeTree(TreeBase):
+    """ FH tree model."""
+    pass
+
+
+class SiteTreeItem(TreeItemBase):
+    """ FH tree item model."""
+
+    icon = models.CharField(max_length=50, null=True, help_text='FontAwesome icon. Example: fa-user.')
