@@ -37,8 +37,8 @@ class PaymentList(ListView):
     THEAD = (
         {'title': 'tags'},
         {'title': 'amount',  'class': 'td-sm text-right',  'sort': 'amount'},
-        {'title': 'date', 'class': 'td-md', 'sort': 'date'},
-        {'title': 'in', 'class': 'td-xs text-center', 'sort': 'is_incoming'},
+        {'title': 'date', 'class': 'td-md hidden-xs', 'sort': 'date'},
+        {'title': 'in', 'class': 'td-xs text-center hidden-xs', 'sort': 'is_incoming'},
         {'title': 'user', 'class': 'td-sm text-center', 'sort': 'created_by'},
     )
     model = Payment

@@ -14,7 +14,7 @@
             </button>
             <a class="navbar-brand" href="{% url 'index' %}">
                 <img id="fh-navbar-logo" src="{% static 'img/favicon_24x24.png' %}" height="24" width="24">
-                FamilyHelper
+                <span class="hidden-sm margin-left-md">FamilyHelper</span>
             </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -23,11 +23,12 @@
 
             {% if user.is_authenticated %}
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden-xs">
-                        <img src="{% gravatar_url user 24 %}" id="fh-navbar-avatar">
-                    </li>
                     <li>
-                        <p class="navbar-text ">{{ user.email|default:user }}</p>
+                        <a id="fh-navbar-avatar-link" href="https://secure.gravatar.com/" target="_blank"
+                           data-toggle="tooltip" title="Change avatar for {{ user.email }} at Gravatar.com" data-placement="bottom">
+                            <img src="{% gravatar_url user 24 %}" id="fh-navbar-avatar">
+                            <span class="hidden-sm margin-left-md">{{ user.email|default:user }}</span>
+                        </a>
                     </li>
                     <li><a href="{% url 'django.contrib.auth.views.logout' %}"><i class="fa fa-sign-out"></i> Log
                         out</a></li>

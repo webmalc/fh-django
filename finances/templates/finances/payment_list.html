@@ -34,8 +34,8 @@
                             <td class="text-right {{ payment.is_incoming|yesno:"text-success," }}">
                                 {{ payment.amount|intcomma }}
                             </td>
-                            <td>{{ payment.date|naturalday }} {{ payment.date|date:'H:i' }}</td>
-                            <td class="text-center">
+                            <td class="hidden-xs">{{ payment.date|naturalday }} {{ payment.date|date:'H:i' }}</td>
+                            <td class="text-center hidden-xs">
                                 {% if payment.is_incoming %}<i class="fa fa-check text-success"></i>{% endif %}
                             </td>
                             <td class="text-center">
@@ -45,20 +45,20 @@
                                      class="img-circle">
                             </td>
                             <td class="text-right">
-                                {% if perms.finances.change_payment %}
-                                    <a href="{% url 'finances:payment_update' payment.id %}" title="Edit payment"
-                                       data-toggle="tooltip" data-placement="top"
-                                       class="btn btn-xs btn-success margin-right-sm">
-                                        <i class="fa fa-pencil-square-o"></i>
-                                    </a>
-                                {% endif %}
-                                {% if perms.finances.delete_payment %}
-                                    <a href="{% url 'finances:payment_delete' payment.id %}"
-                                       class="btn btn-xs btn-danger"
-                                       title="Delete payment" data-toggle="tooltip" data-placement="top"><i
-                                            class="fa fa-trash"></i>
-                                    </a>
-                                {% endif %}
+                                <div class="btn-group" role="group">
+                                    {% if perms.finances.change_payment %}
+                                        <a href="{% url 'finances:payment_update' payment.id %}"
+                                           class="btn btn-xs btn-success">
+                                            <i class="fa fa-pencil-square-o"></i>
+                                        </a>
+                                    {% endif %}
+                                    {% if perms.finances.delete_payment %}
+                                        <a href="{% url 'finances:payment_delete' payment.id %}"
+                                           class="btn btn-xs btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
                             </td>
                         </tr>
                     {% endfor %}

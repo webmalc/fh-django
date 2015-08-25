@@ -11,9 +11,9 @@ body {
     display: inline-block;
     margin: 0px 4px 3px 0px;
 }
-#fh-navbar-avatar {
-    padding: 0px;
-    margin: 13px 0px 0px 0px;
+#fh-navbar-avatar-link {
+    padding-top: 13px;
+    padding-bottom: 13px;
 }
 .breadcrumb {
     margin-bottom: 20px;
@@ -32,9 +32,19 @@ body {
 }
 .margin-right-sm {
     margin-right: 4px;
+    display: inline-block;
 }
 .margin-left-sm {
     margin-left: 4px;
+    display: inline-block;
+}
+.margin-right-md {
+    margin-right: 10px;
+    display: inline-block;
+}
+.margin-left-md {
+    margin-left: 10px;
+    display: inline-block;
 }
 /******************* FORMS ***********************/
 
