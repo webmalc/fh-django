@@ -6,10 +6,10 @@
         <th class="{{ th.class }}">
             {% if th.sort %}
                 {% if request.GET.sort == th.sort %}
-                    <small><i class="fa fa-chevron-{% if request.GET.order == 'asc' %}down{% else %}up{% endif %}"></i>
+                    <small>
+                        <i class="fa fa-chevron-{% if request.GET.order == 'asc' %}down{% else %}up{% endif %} margin-right-sm"></i>
                     </small>
                 {% endif %}
-
                 {% if request.GET.order == 'asc' and request.GET.sort == th.sort %}
                     <a href="{% url link %}?{% url_replace request sort=th.sort order='desc' %}">
                 {% else %}

@@ -6,7 +6,7 @@ import fh.chart
 
 class PaymentsChart(TemplateView):
     """
-    Payment pie chart view
+    Charts view
     """
 
     template_name = 'analytics/payments_chart.html'
