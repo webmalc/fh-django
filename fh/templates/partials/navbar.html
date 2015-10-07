@@ -24,10 +24,10 @@
             {% if user.is_authenticated %}
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a id="fh-navbar-avatar-link" href="https://secure.gravatar.com/" target="_blank"
-                           data-toggle="tooltip" title="Change avatar for {{ user.email }} at Gravatar.com" data-placement="bottom">
+                        <a id="fh-navbar-avatar-link" href="{% url 'users:profile' %}"
+                           data-toggle="tooltip" title="Your profile page" data-placement="bottom">
                             <img src="{% gravatar_url user 24 %}" id="fh-navbar-avatar">
-                            <span class="hidden-sm margin-left-md">{{ user.email|default:user }}</span>
+                            <span class="hidden-sm margin-left-md">{{ user|default:user }}</span>
                         </a>
                     </li>
                     <li><a href="{% url 'django.contrib.auth.views.logout' %}"><i class="fa fa-sign-out"></i> Log

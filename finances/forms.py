@@ -3,7 +3,7 @@ import autocomplete_light
 from django import forms
 from datetime import date
 from django.utils import timezone
-from django.contrib.auth.models import User
+from users.models import User
 from taggit.models import Tag
 from fh.forms import Form
 

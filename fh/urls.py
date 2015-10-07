@@ -17,6 +17,8 @@ from django.conf.urls import include, url
 from django.contrib.auth import views as auth_views
 from ratelimitbackend import admin
 from django.views.generic.base import RedirectView
+from users.views import PasswordChangeRedirectView
+from users.forms import ValidatingPasswordChangeForm
 
 admin.autodiscover()
 
@@ -26,8 +28,13 @@ urlpatterns = [
     url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login/$', auth_views.login),
-    url('^accounts/logout', auth_views.logout, {'next_page': '/'}),
+    url(r'^accounts/logout', auth_views.logout, {'next_page': '/'}),
     url(r'^finances/', include('finances.urls', namespace="finances")),
     url(r'^analytics/', include('analytics.urls', namespace="analytics")),
+    url(r'users/profile/password$', auth_views.password_change, {
+        'template_name': 'users/password_change_form.html', 'password_change_form': ValidatingPasswordChangeForm},
+        name='password_change'),
+    url(r'users/profile/password/done$', PasswordChangeRedirectView.as_view(), name='password_change_done'),
+    url(r'^users/', include('users.urls', namespace="users")),
     url(r'^$', RedirectView.as_view(pattern_name='finances:payments_list', permanent=True), name='index'),
 ]

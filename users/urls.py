@@ -1,6 +1,8 @@
-try:
-    from django.conf.urls import *
-except ImportError:  # django < 1.4
-    from django.conf.urls.defaults import *
+from django.conf.urls import url
+import users.views as views
 
-# place app url patterns here
+
+urlpatterns = [
+    url(r'profile$', views.Profile.as_view(), name='profile'),
+    url(r'profile/edit$', views.UserUpdate.as_view(), name='profile_edit'),
+]

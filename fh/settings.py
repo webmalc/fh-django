@@ -59,6 +59,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'fh.middleware.WhodidMiddleware',
+    'fh.middleware.UserMiddleware',
     'stronghold.middleware.LoginRequiredMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'htmlmin.middleware.MarkRequestMiddleware'

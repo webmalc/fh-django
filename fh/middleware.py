@@ -1,5 +1,13 @@
 from django.db.models import signals
 from django.utils.functional import curry
+from users.models import User
+
+
+class UserMiddleware(object):
+
+    def process_request(self, request):
+        if hasattr(request, 'user') and request.user.is_authenticated():
+            request.user.__class__ = User
 
 
 class WhodidMiddleware(object):

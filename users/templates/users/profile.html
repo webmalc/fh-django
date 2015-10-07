@@ -1,0 +1,41 @@
+{% extends 'users/profile_layout.html' %}
+{% load gravatar %}
+{% load humanize %}
+
+{% block profile_content %}
+
+    <table class="table table-striped table-hover">
+        <tbody>
+        <tr>
+            <th class="td-sm-md"><strong>Last name:</strong></th>
+            <td>{{ user.last_name|default:'none' }}</td>
+        </tr>
+        <tr>
+            <th class="td-sm-md"><strong>First name:</strong></th>
+            <td>{{ user.first_name|default:'none' }}</td>
+        </tr>
+        <tr>
+            <th class="td-sm-md"><strong>E-mail:</strong></th>
+            <td>{{ user.email|default:'none' }}</td>
+        </tr>
+        <tr>
+            <th class="td-sm-md"><strong>Password:</strong></th>
+            <td>
+                <a href="{% url 'password_change' %}" class="btn btn-default btn-xs">change</a>
+            </td>
+        </tr>
+        <tr>
+            <th class="td-sm-md"><strong>Total payments:</strong></th>
+            <td>{{ payments_total|intcomma }}</td>
+        </tr>
+        <tr>
+            <th class="td-sm-md"><strong>Average payment:</strong></th>
+            <td>{{ average_payment|intcomma }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="{% url 'users:profile_edit' %}" class="btn btn-success pull-right">
+        <i class="fa fa fa-pencil-square-o margin-right-sm"></i>Edit profile
+    </a>
+{% endblock %}
+

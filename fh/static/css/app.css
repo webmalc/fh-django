@@ -72,6 +72,9 @@ body {
 .td-sm {
     width: 100px;
 }
+.td-sm-md {
+    width: 150px;
+}
 .td-md {
     width: 200px;
 }
