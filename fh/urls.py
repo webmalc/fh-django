@@ -14,6 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from ratelimitbackend import admin
 from django.views.generic.base import RedirectView
@@ -36,5 +38,6 @@ urlpatterns = [
         name='password_change'),
     url(r'users/profile/password/done$', PasswordChangeRedirectView.as_view(), name='password_change_done'),
     url(r'^users/', include('users.urls', namespace="users")),
+    url(r'^avatar/', include('avatar.urls')),
     url(r'^$', RedirectView.as_view(pattern_name='finances:payments_list', permanent=True), name='index'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

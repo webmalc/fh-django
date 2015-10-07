@@ -1,6 +1,6 @@
 {% extends 'finances/layout.html' %}
 {% load bootstrap3 %}
-{% load gravatar %}
+{% load avatar_tags %}
 {% load humanize %}
 
 {% block content %}
@@ -12,7 +12,7 @@
 
             {% if payment %}
                 <div class="alert alert-warning">
-                    <img src="{% gravatar_url payment.created_by|default:'' 24 %}" class="img-circle margin-right-sm">
+                    <img src="{% avatar_url payment.created_by|default:'' 24 %}" class="img-circle margin-right-sm">
                     Created at {{ payment.date|naturalday }} {{ payment.date|date:'H:i' }} by {{ payment.created_by|default:"anonym" }}
                 </div>
             {% endif %}

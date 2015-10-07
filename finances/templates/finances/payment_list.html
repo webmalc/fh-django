@@ -1,5 +1,5 @@
 {% extends 'finances/layout.html' %}
-{% load gravatar %}
+{% load avatar_tags %}
 {% load humanize %}
 
 {% block content %}
@@ -39,7 +39,7 @@
                                 {% if payment.is_incoming %}<i class="fa fa-check text-success"></i>{% endif %}
                             </td>
                             <td class="text-center">
-                                <img src="{% gravatar_url payment.created_by|default:'' 24 %}"
+                                <img src="{% avatar_url payment.created_by|default:'' 24 %}"
                                      title="{{ payment.created_by|default:"anonym" }}" data-toggle="tooltip"
                                      data-placement="left"
                                      class="img-circle">

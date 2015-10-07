@@ -1,0 +1,26 @@
+#avatar-choose-form ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px 0px 10px 0px;
+}
+ul#id_choice {
+    padding: 0px;
+    margin: 0px;
+}
+ul#id_choice li {
+    display: inline-block;
+    margin: 0px 10px 0px 0px;
+
+}
+ul#id_choice li img {
+    cursor: pointer;
+}
+#avatar-choose-form label {
+    display: none;
+}
+ul#id_choice label {
+    display: inline-block;
+}
+label[for="id_avatar"] {
+    display: none;
+}

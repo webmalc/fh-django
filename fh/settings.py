@@ -39,8 +39,8 @@ INSTALLED_APPS = (
     'sitetree',
     'widget_tweaks',
     'taggit',
-    'django_gravatar',
     'compressor',
+    'avatar',
 
     # Fh apps
     'fh',
@@ -102,8 +102,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
-
+MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 STATICFILES_DIRS = (		
     os.path.join(BASE_DIR, 'fh/static'),
@@ -145,6 +146,9 @@ STRONGHOLD_PUBLIC_NAMED_URLS = (
 # Django sitetree
 SITETREE_MODEL_TREE_ITEM = 'fh.SiteTreeItem'
 SITETREE_MODEL_TREE = 'fh.SiteTreeTree'
+
+# Django avatar
+AVATAR_GRAVATAR_DEFAULT = 'mm'
 
 # Local settings
 try:

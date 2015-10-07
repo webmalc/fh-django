@@ -356,5 +356,55 @@
     },
     "model": "fh.sitetreeitem",
     "pk": 16
+},
+{
+    "fields": {
+        "parent": 13,
+        "access_restricted": false,
+        "access_permissions": [],
+        "description": "",
+        "insitetree": true,
+        "hint": "",
+        "url": "avatar_change",
+        "inbreadcrumbs": true,
+        "title": "Avatar change",
+        "tree": 1,
+        "access_perm_type": 1,
+        "alias": null,
+        "sort_order": 17,
+        "inmenu": false,
+        "access_loggedin": true,
+        "icon": "fa-user",
+        "hidden": false,
+        "urlaspattern": true,
+        "access_guest": false
+    },
+    "model": "fh.sitetreeitem",
+    "pk": 17
+},
+{
+    "fields": {
+        "parent": 13,
+        "access_restricted": false,
+        "access_permissions": [],
+        "description": "",
+        "insitetree": true,
+        "hint": "",
+        "url": "avatar_add",
+        "inbreadcrumbs": true,
+        "title": "Avatar add",
+        "tree": 1,
+        "access_perm_type": 1,
+        "alias": null,
+        "sort_order": 18,
+        "inmenu": false,
+        "access_loggedin": true,
+        "icon": "fa-user",
+        "hidden": false,
+        "urlaspattern": true,
+        "access_guest": false
+    },
+    "model": "fh.sitetreeitem",
+    "pk": 18
 }
 ]
