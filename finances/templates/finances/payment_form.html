@@ -26,7 +26,7 @@
                     </a>
                     {% if payment  and perms.finances.delete_payment %}
                         <a href="{% url 'finances:payment_delete' payment.id %}" class="btn btn-danger pull-right">
-                            {% bootstrap_icon "trash" %} Delete payment
+                            {% bootstrap_icon "trash" %}<span class="hidden-xs margin-left-sm">Delete payment</span>
                         </a>
                     {% endif %}
             {% endbuttons %}

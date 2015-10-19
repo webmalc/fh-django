@@ -59,5 +59,8 @@ bower_components/*
 #static
 /static
 
+#media
+/media
+
 #Project
 /fh/local_settings.py
