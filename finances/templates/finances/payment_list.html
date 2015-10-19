@@ -75,7 +75,7 @@
                     </tbody>
                 </table>
 
-                {% include 'partials/pagination.html' with link="finances:payments_list" %}
+                {% if is_paginated %}{% load pager %}{% pager "finances:payments_list" %}{% endif %}
 
             {% else %}
                 <div class="alert alert-warning">

@@ -4,10 +4,12 @@ register = template.Library()
 
 
 @register.simple_tag
-def url_replace(request, **kwargs):
+def url_replace(request=None, params=None, **kwargs):
 
-    dict_ = request.GET.copy()
+    if not params and request:
+        params = request.GET.copy()
+
     for key in kwargs:
-        dict_[key] = kwargs[key]
+        params[key] = kwargs[key]
 
-    return dict_.urlencode()
+    return params.urlencode()

@@ -42,7 +42,7 @@ class PaymentList(ListView):
         {'title': 'user', 'class': 'td-sm text-center', 'sort': 'created_by'},
     )
     model = Payment
-    paginate_by = 20
+    paginate_by = 30
 
     def get_context_data(self, **kwargs):
         context = super(PaymentList, self).get_context_data(**kwargs)

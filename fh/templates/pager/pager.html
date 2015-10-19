@@ -1,0 +1,39 @@
+{% load url_replace %}
+
+<nav class="text-center">
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li>
+                <a href="{% url link %}?{% url_replace params=params page=page_obj.previous_page_number %}"
+                   aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
+
+        {% if show_first %}
+            <li><a href="{% url link %}?{% url_replace params=params page=1 %}">1</a></li>
+            <li class="disabled"><a href="#">...</a></li>
+        {% endif %}
+
+        {% for page in page_numbers %}
+            <li {% ifequal page page_obj.number %}class="active"{% endifequal %}><a
+                    href="{% url link %}?{% url_replace params=params page=page %}">{{ page }}</a></li>
+        {% endfor %}
+
+        {% if show_last %}
+            <li class="disabled"><a href="#">...</a></li>
+            <li><a href="{% url link %}?{% url_replace params=params page=paginator.num_pages %}">{{ paginator.num_pages }}</a></li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <li>
+                <a href="{% url link %}?{% url_replace params=params page=page_obj.next_page_number %}"
+                   aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        {% endif %}
+
+    </ul>
+</nav>
