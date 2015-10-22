@@ -22,7 +22,41 @@
         };
 
         var chart = new google.visualization.{{ type }}(document.getElementById('analytics-chart-{{ id }}'));
+
+        google.visualization.events.addListener(chart, 'onmouseover', function () {
+            $('.analytics-charts').css('cursor', 'pointer')
+        });
+        google.visualization.events.addListener(chart, 'onmouseout', function () {
+            $('.analytics-charts').css('cursor', 'default')
+        });
+        google.visualization.events.addListener(chart, 'select', function () {
+            var selection = chart.getSelection(),
+                excludeTags =   $('#id_exclude_tags');
+                str = null;
+            for (var i = 0; i < selection.length; i++) {
+                var item = selection[i];
+                if (item.row != null && item.column != null) {
+                    var str = data.getFormattedValue(item.row, item.column);
+                } else if (item.row != null) {
+                    var str = data.getFormattedValue(item.row, 0);
+                } else if (item.column != null) {
+                    var str = data.getFormattedValue(0, item.column);
+                }
+            }
+            //set tags
+            if (str) {
+                var values = excludeTags.selectpicker('val'),
+                    option = excludeTags.find('option:contains("' + str + '")')
+                    ;
+                if (!option.length) {
+                    return;
+                }
+                values = values ? values : [];
+                values.push(option.val());
+                excludeTags.selectpicker('val', values);
+            }
+        });
         chart.draw(data, options);
     }
 </script>
-<div id="analytics-chart-{{ id }}"></div>
+<div id="analytics-chart-{{ id }}" class="analytics-charts"></div>

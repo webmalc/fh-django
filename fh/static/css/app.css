@@ -99,3 +99,4 @@ overflow-y: hidden; /* no-overflow                */
 .pill-content > .active {
 height: auto;       /* let the content decide it  */
 } /* bootstrap hack end */
+

@@ -242,7 +242,7 @@
         "hint": "",
         "url": "analytics:payment_chart",
         "inbreadcrumbs": true,
-        "title": "Payments",
+        "title": "Payments analytics",
         "tree": 1,
         "access_perm_type": 1,
         "alias": null,
