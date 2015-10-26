@@ -17,14 +17,10 @@
     <link rel="icon" href="{% static 'img/favicon_24x24.png' %}">
     <title>{% block title %}{% sitetree_page_title from "navbar" %} | {% endblock %}FamilyHelper</title>
 
-    {% bootstrap_css %}
-
-    {% block cdn_css %}
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    {% endblock %}
-
     {% compress css %}
         {% block css %}
+            <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
+            <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
             <link rel="stylesheet" href="{% static 'bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css' %}">
             <link rel="stylesheet" href="{% static 'bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css' %}">
             <link rel="stylesheet" href="{% static 'bootstrap-select/dist/css/bootstrap-select.min.css' %}">
@@ -60,12 +56,11 @@
     {% block content %}{% endblock %}
 </div>
 
-{% bootstrap_javascript jquery=1 %}
-
-{% block cdn_scripts %}{% endblock %}
 
 {% compress js %}
     {% block scripts %}
+        <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+        <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'bootstrap3-typeahead/bootstrap3-typeahead.min.js' %}"></script>
         <script src="{% static 'bootstrap-switch/dist/js/bootstrap-switch.min.js' %}"></script>
         <script src="{% static 'bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
