@@ -7,6 +7,10 @@
         <tbody>
         <tr>
             <th class="td-sm-md"><strong>Last name:</strong></th>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <th class="td-sm-md"><strong>Last name:</strong></th>
             <td>{{ user.last_name|default:'none' }}</td>
         </tr>
         <tr>
@@ -18,12 +22,6 @@
             <td>{{ user.email|default:'none' }}</td>
         </tr>
         <tr>
-            <th class="td-sm-md"><strong>Password:</strong></th>
-            <td>
-                <a href="{% url 'password_change' %}" class="btn btn-default btn-xs">change</a>
-            </td>
-        </tr>
-        <tr>
             <th class="td-sm-md"><strong>Total payments:</strong></th>
             <td>{{ payments_total|intcomma }}</td>
         </tr>
@@ -33,7 +31,7 @@
         </tr>
         </tbody>
     </table>
-    <a href="{% url 'users:profile_edit' %}" class="btn btn-success pull-right">
+    <a href="{% url 'users:profile_edit' %}" class="btn btn-success">
         <i class="fa fa fa-pencil-square-o margin-right-sm"></i>Edit profile
     </a>
 {% endblock %}

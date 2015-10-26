@@ -51,7 +51,7 @@
                                         <i class="fa fa-cogs "></i>
                                         <span class="hidden-xs margin-left-sm">Actions <span class="caret"></span></span>
                                     </button>
-                                    <ul class="dropdown-menu">
+                                    <ul class="dropdown-menu pull-right">
                                         {% if perms.finances.change_payment %}
                                             <li class="text-success">
                                                 <a href="{% url 'finances:payment_update' payment.id %}">

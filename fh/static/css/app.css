@@ -46,6 +46,12 @@ body {
     margin-left: 10px;
     display: inline-block;
 }
+.margin-top-md-lg {
+    margin-top: 15px;
+}
+.padding-bottom-md {
+    padding-bottom: 10px !important;
+}
 /******************* FORMS ***********************/
 
 .bootstrap-tagsinput {

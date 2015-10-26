@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="{% static 'css/avatar.css' %}">
 {% endblock %}
 
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static 'js/avatar.js' %}"></script>
+{% endblock %}
+
+{% block tabs %}
+  {% with 'avatars' as tab %}{{block.super}}{% endwith %}
+{% endblock tabs %}
+
 {% block profile_content %}
 
     {% if not avatars %}

@@ -24,3 +24,10 @@ ul#id_choice label {
 label[for="id_avatar"] {
     display: none;
 }
+#avatar-choose-form input[type='radio'] {
+    display: none;
+}
+.avatar-selected {
+    border: 1px solid #adadad;
+    padding: 2px;
+}

@@ -3,18 +3,29 @@
 {% load avatar_tags %}
 
 {% block content %}
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">
-                {% if user.first_name %}
-                    {{ user }} - <small>{{ user.username }}</small>
-                {% else %}
-                    {{ user }}
-                {% endif %}
-            </h3>
-        </div>
-        <div class="panel-body">
-            <div class="row">
+
+    {% block tabs %}
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" {% if tab == 'profile' or not tab %}class="active"{% endif %}>
+                <a href="{% url 'users:profile' %}" aria-controls="home" role="tab">
+                    <i class="fa fa-user"></i> {{ user.username|capfirst }}`s profile
+                </a>
+            </li>
+            <li role="presentation" {% if tab == 'security' %}class="active"{% endif %}>
+                <a href="{% url 'password_change' %}" aria-controls="security">
+                    <i class="fa fa-lock"></i> Security
+                </a>
+            </li>
+            <li role="presentation" {% if tab == 'avatars' %}class="active"{% endif %}>
+                <a href="{% url 'avatar_change' %}" aria-controls="avatars">
+                    <i class="fa fa-camera"></i> Avatars
+                </a>
+            </li>
+        </ul>
+    {% endblock %}
+
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active margin-top-md-lg">
                 <div class="col-sm-3">
                     <a href="{% url 'avatar_change' %}" data-toggle="tooltip" title="Change your avatar"
                        data-placement="bottom">
@@ -25,7 +36,6 @@
                     {% block profile_content %}{% endblock %}
                 </div>
             </div>
-        </div>
     </div>
 {% endblock %}
 
