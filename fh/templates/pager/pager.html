@@ -1,4 +1,5 @@
 {% load url_replace %}
+{% load humanize %}
 
 <nav class="text-center">
     <ul class="pagination">
@@ -34,6 +35,9 @@
                 </a>
             </li>
         {% endif %}
-
     </ul>
+
+    <div class="pull-right hidden-xs pagination">
+        <span class="label label-default">{{ page_obj.start_index|intcomma }} to {{ page_obj.end_index|intcomma }} of {{ paginator.count|intcomma }} entries</span>
+    </div>
 </nav>

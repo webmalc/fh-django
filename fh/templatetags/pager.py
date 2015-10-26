@@ -25,7 +25,7 @@ def pager(context, link):
     if end_page >= paginator.num_pages:
         end_page = paginator.num_pages + 1
 
-    page_numbers = [n for n in range(start_page, end_page) if n > 0 and n <= paginator.num_pages]
+    page_numbers = [n for n in range(start_page, end_page) if n <= paginator.num_pages]
 
     return {
         'page_obj': page_obj,
