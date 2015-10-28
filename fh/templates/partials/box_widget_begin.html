@@ -1,0 +1,12 @@
+<div class="box box-default box-solid">
+    <div class="box-header">
+        <h3 class="box-title">
+            {{ header }}{% if smallHeader %}<small>{{ smallHeader }}</small>{% endif %}
+        </h3>
+        <div class="box-tools pull-right">
+            <button class="btn btn-box-tool form-group-collapse" {% if id %}id="{{ id }}"{% endif %} data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="{{ class|default:'bg-gray-disabled color-palette' }} box-body">

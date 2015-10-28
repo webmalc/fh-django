@@ -105,4 +105,28 @@ $(document).ready(function () {
         end.change(periodSet);
         select();
     }());
+
+    //Box widget
+    (function () {
+        var links = $('.form-group-collapse');
+
+        links.each(function () {
+            if (localStorage.getItem($(this).prop('id'))) {
+                var box = $(this).closest('.box'),
+                    boxBody = box.find('.box-body'),
+                    icon = $(this).find('i');
+
+                box.addClass('collapsed-box');
+                boxBody.hide();
+                icon.removeClass('fa-minus').addClass('fa-plus');
+            }
+        });
+        links.click(function () {
+            if ($(this).closest('.box').find('.box-body').is(':visible')) {
+                localStorage.setItem($(this).prop('id'), 1);
+            } else {
+                localStorage.removeItem($(this).prop('id'));
+            }
+        });
+    }());
 });

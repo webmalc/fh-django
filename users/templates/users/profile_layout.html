@@ -4,38 +4,40 @@
 
 {% block content %}
 
-    {% block tabs %}
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" {% if tab == 'profile' or not tab %}class="active"{% endif %}>
-                <a href="{% url 'users:profile' %}" aria-controls="home" role="tab">
-                    <i class="fa fa-user"></i> {{ user.username|capfirst }}`s profile
-                </a>
-            </li>
-            <li role="presentation" {% if tab == 'security' %}class="active"{% endif %}>
-                <a href="{% url 'password_change' %}" aria-controls="security">
-                    <i class="fa fa-lock"></i> Security
-                </a>
-            </li>
-            <li role="presentation" {% if tab == 'avatars' %}class="active"{% endif %}>
-                <a href="{% url 'avatar_change' %}" aria-controls="avatars">
-                    <i class="fa fa-camera"></i> Avatars
-                </a>
-            </li>
-        </ul>
-    {% endblock %}
-
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active margin-top-md-lg">
-                <div class="col-sm-3">
-                    <a href="{% url 'avatar_change' %}" data-toggle="tooltip" title="Change your avatar"
-                       data-placement="bottom">
-                        <img src="{% avatar_url user 250 %}" class="img-responsive img-rounded hidden-xs">
+    <div class="nav-tabs-custom">
+        {% block tabs %}
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" {% if tab == 'profile' or not tab %}class="active"{% endif %}>
+                    <a href="{% url 'users:profile' %}" aria-controls="home" role="tab">
+                        <i class="fa fa-user"></i> {{ user.username|capfirst }}`s profile
                     </a>
-                </div>
-                <div class="col-sm-9">
-                    {% block profile_content %}{% endblock %}
-                </div>
+                </li>
+                <li role="presentation" {% if tab == 'security' %}class="active"{% endif %}>
+                    <a href="{% url 'password_change' %}" aria-controls="security">
+                        <i class="fa fa-lock"></i> Security
+                    </a>
+                </li>
+                <li role="presentation" {% if tab == 'avatars' %}class="active"{% endif %}>
+                    <a href="{% url 'avatar_change' %}" aria-controls="avatars">
+                        <i class="fa fa-camera"></i> Avatars
+                    </a>
+                </li>
+            </ul>
+        {% endblock %}
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active margin-top-md-lg">
+                    <div class="col-sm-3">
+                        <a href="{% url 'avatar_change' %}" data-toggle="tooltip" title="Change your avatar"
+                           data-placement="bottom">
+                            <img src="{% avatar_url user 250 %}" class="img-responsive img-rounded hidden-xs">
+                        </a>
+                    </div>
+                    <div class="col-sm-9">
+                        {% block profile_content %}{% endblock %}
+                    </div>
             </div>
+        </div>
     </div>
 {% endblock %}
 

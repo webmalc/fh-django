@@ -109,10 +109,10 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-STATICFILES_DIRS = (		
+STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'fh/static'),
     os.path.join(BASE_DIR, 'bower_components'),
-)
+    )
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -128,9 +128,10 @@ FIXTURE_DIRS = (
 SUIT_CONFIG = {
     'ADMIN_NAME': 'FamilyHelper',
     'MENU': (
-        {'app': 'auth', 'label': 'Authorization', 'icon': 'icon-user', 'models': ('auth.user', 'auth.group')},
+        {'app': 'auth', 'label': 'Users', 'icon': 'icon-user', 'models': ('auth.user', 'avatar.avatar', 'auth.group')},
         {'app': 'finances', 'icon': 'icon-briefcase'},
-        {'label': 'Navigation', 'icon': 'icon-list', 'models': ('fh.sitetreetree', 'taggit.tag')},
+        {'label': 'Navigation', 'icon': 'icon-list',
+         'models': ('fh.sitetreetree', 'taggit.tag', 'sites.site')},
     ),
     'LIST_PER_PAGE': 20
 }

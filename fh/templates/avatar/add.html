@@ -23,23 +23,21 @@
         <div class="alert alert-warning">You haven't uploaded an avatar yet. Please upload one now.</div>
     {% endif %}
 
-    <div class="panel panel-default">
-        <div class="panel-heading">Upload new avatar</div>
-        <div class="panel-body">
-            <form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}" class="form">
-                {% csrf_token %}
-                {% bootstrap_form upload_avatar_form %}
 
-                {% buttons %}
-                    <button type="submit" class="btn btn-success margin-right-sm">
-                        {% bootstrap_icon "ok-circle" %} Upload avatar
-                    </button>
-                    <a href="{% url 'users:profile' %}" class="btn btn-default">
-                        {% bootstrap_icon "ban-circle" %} Cancel
-                    </a>
-                {% endbuttons %}
-            </form>
-        </div>
-    </div>
+    {% include 'partials/box_widget_begin.html' with header='Upload new avatar' id='avatar-change-form-widget' %}
+    <form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}" class="form">
+        {% csrf_token %}
+        {% bootstrap_form upload_avatar_form %}
+
+        {% buttons %}
+            <button type="submit" class="btn btn-success margin-right-sm">
+                {% bootstrap_icon "ok-circle" %} Upload avatar
+            </button>
+            <a href="{% url 'avatar_change' %}" class="btn btn-default">
+                {% bootstrap_icon "ban-circle" %} Cancel
+            </a>
+        {% endbuttons %}
+    </form>
+    {% include 'partials/box_widget_end.html' %}
 
 {% endblock %}
