@@ -2,7 +2,7 @@
 {% load avatar_tags %}
 {% load humanize %}
 
-{% block content %}
+{% block finances_content %}
 
     {% include 'finances/payment_summary.html' with summary=summary link='finances:payments_list' filter=filter add=True %}
 

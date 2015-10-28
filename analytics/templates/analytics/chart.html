@@ -45,7 +45,7 @@
             }
             //set tags
             if (str) {
-                var values = excludeTags.selectpicker('val'),
+                var values = excludeTags.val(),
                     option = excludeTags.find('option:contains("' + str + '")')
                     ;
                 if (!option.length) {
@@ -53,7 +53,7 @@
                 }
                 values = values ? values : [];
                 values.push(option.val());
-                excludeTags.selectpicker('val', values);
+                excludeTags.select2('val', values);
             }
         });
         chart.draw(data, options);

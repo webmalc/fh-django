@@ -12,3 +12,11 @@
     <script src="{% static 'bootstrap-tagsinput/src/bootstrap-tagsinput.js' %}"></script>
     <script src="{% static 'finances/js/finances.js' %}"></script>
 {% endblock %}
+
+{% block content %}
+    <div class="box box-default">
+        <div class="box-body">
+            {% block finances_content %}{{ block.super }}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

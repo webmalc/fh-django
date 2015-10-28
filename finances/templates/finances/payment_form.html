@@ -3,34 +3,33 @@
 {% load avatar_tags %}
 {% load humanize %}
 
-{% block content %}
-    <div class="well">
+{% block finances_content %}
 
-        <form action="" method="post" class="form">
-            {% csrf_token %}
-            {% bootstrap_form form %}
+    <form action="" method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
 
-            {% if payment %}
-                <div class="alert alert-warning">
-                    <img src="{% avatar_url payment.created_by|default:'' 24 %}" class="img-circle margin-right-sm">
-                    Created at {{ payment.date|naturalday }} {{ payment.date|date:'H:i' }} by {{ payment.created_by|default:"anonym" }}
-                </div>
+        {% if payment %}
+            <div class="bg-gray color-palette alert">
+                <img src="{% avatar_url payment.created_by|default:'' 24 %}" class="img-circle margin-right-sm">
+                Created at {{ payment.date|naturalday }} {{ payment.date|date:'H:i' }}
+                by {{ payment.created_by|default:"anonym" }}
+            </div>
+        {% endif %}
+
+        {% buttons %}
+            <button type="submit" class="btn btn-success margin-right-sm">
+                {% bootstrap_icon "ok-circle" %} Save payment
+            </button>
+            <a href="{% url 'finances:payments_list' %}" class="btn btn-default">
+                {% bootstrap_icon "ban-circle" %}<span class="hidden-xs margin-left-sm">Cancel</span>
+            </a>
+            {% if payment  and perms.finances.delete_payment %}
+                <a href="{% url 'finances:payment_delete' payment.id %}" class="btn btn-danger pull-right">
+                    {% bootstrap_icon "trash" %}<span class="hidden-xs margin-left-sm">Delete payment</span>
+                </a>
             {% endif %}
-
-            {% buttons %}
-                    <button type="submit" class="btn btn-success margin-right-sm">
-                        {% bootstrap_icon "ok-circle" %} Save payment
-                    </button>
-                    <a href="{%  url 'finances:payments_list' %}" class="btn btn-default">
-                        {% bootstrap_icon "ban-circle" %}<span class="hidden-xs margin-left-sm">Cancel</span>
-                    </a>
-                    {% if payment  and perms.finances.delete_payment %}
-                        <a href="{% url 'finances:payment_delete' payment.id %}" class="btn btn-danger pull-right">
-                            {% bootstrap_icon "trash" %}<span class="hidden-xs margin-left-sm">Delete payment</span>
-                        </a>
-                    {% endif %}
-            {% endbuttons %}
-        </form>
-    </div>
+        {% endbuttons %}
+    </form>
 
 {% endblock %}

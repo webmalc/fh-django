@@ -1,36 +1,34 @@
 {% load humanize %}
 
-<div class="well well-sm">
-    <div class="row">
-        <div class="col-xs-9">
-            <div class="btn-group" role="group">
-                <a href="{% url link %}?is_incoming=0&filter=1&begin={{ filter.begin|date:'Y-m-d' }}&end={{ filter.end|date:'Y-m-d' }}"
-                   class="btn btn-sm btn-warning hidden-xs">
-                    <i class="fa fa-minus margin-right-sm"></i>
-                    <span class="hidden-xs margin-right-sm">Expense:</span>
-                    {{ summary.out|intcomma }}
-                </a>
-                <a href="{% url link %}?is_incoming=1&filter=1&begin={{ filter.begin|date:'Y-m-d' }}&end={{ filter.end|date:'Y-m-d' }}"
-                   class="btn btn-sm btn-info hidden-xs">
-                    <i class="fa fa-plus margin-right-sm"></i>
-                    <span class="hidden-xs margin-right-sm">Incoming:</span>
-                    {{ summary.in|intcomma }}
-                </a>
-                <a href="{% url link %}"
-                   class="btn btn-sm btn-{% if summary.total < 0 %}danger{% else %}success{% endif %}">
-                    <i class="fa fa-{% if summary.total < 0 %}exclamation{% else %}check{% endif %} margin-right-sm"></i>
-                    <span class="hidden-xs margin-right-sm">Total:</span>
-                    {{ summary.total|intcomma }}
-                </a>
-            </div>
+<div class="row margin-bottom-lg">
+    <div class="col-xs-9">
+        <div class="btn-group" role="group">
+            <a href="{% url link %}?is_incoming=0&filter=1&begin={{ filter.begin|date:'Y-m-d' }}&end={{ filter.end|date:'Y-m-d' }}"
+               class="btn btn-xs btn-warning hidden-xs btn-flat">
+                <i class="fa fa-minus margin-right-sm"></i>
+                <span class="hidden-xs margin-right-sm">Expense:</span>
+                {{ summary.out|intcomma }}
+            </a>
+            <a href="{% url link %}?is_incoming=1&filter=1&begin={{ filter.begin|date:'Y-m-d' }}&end={{ filter.end|date:'Y-m-d' }}"
+               class="btn btn-xs btn-info hidden-xs btn-flat">
+                <i class="fa fa-plus margin-right-sm"></i>
+                <span class="hidden-xs margin-right-sm">Incoming:</span>
+                {{ summary.in|intcomma }}
+            </a>
+            <a href="{% url link %}"
+               class="btn btn-xs btn-{% if summary.total < 0 %}danger{% else %}success{% endif %} btn-flat">
+                <i class="fa fa-{% if summary.total < 0 %}exclamation{% else %}check{% endif %} margin-right-sm"></i>
+                <span class="hidden-xs margin-right-sm">Total:</span>
+                {{ summary.total|intcomma }}
+            </a>
         </div>
-        {% if add %}
-            <div class="col-xs-3 text-right">
-                <a href="{% url 'finances:payment_add' %}" class="btn btn-success btn-sm">
-                    <i class="fa fa-plus-circle"></i>
-                    <span class="hidden-xs margin-left-sm">Add payment</span>
-                </a>
-            </div>
-        {% endif %}
     </div>
+    {% if add %}
+        <div class="col-xs-3 text-right">
+            <a href="{% url 'finances:payment_add' %}" class="btn btn-success btn-sm">
+                <i class="fa fa-plus-circle"></i>
+                <span class="hidden-xs margin-left-sm">Add payment</span>
+            </a>
+        </div>
+    {% endif %}
 </div>

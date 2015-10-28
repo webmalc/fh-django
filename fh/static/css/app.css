@@ -45,6 +45,12 @@ body {
 .margin-top-md-lg {
     margin-top: 15px;
 }
+.margin-bottom-md-lg {
+    margin-bottom: 15px;
+}
+.margin-bottom-lg {
+    margin-bottom: 25px;
+}
 .padding-bottom-md {
     padding-bottom: 10px !important;
 }
@@ -52,7 +58,10 @@ body {
 
 .bootstrap-tagsinput {
     display: block !important;
+    border-radius: 0px !important;
+    box-shadow: none !important;
 }
+
 .checkbox label {
     padding-left: 0px;
 }
