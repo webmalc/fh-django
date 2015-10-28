@@ -60,6 +60,22 @@ $(document).ready(function () {
     //Bootstrap select
     $('select.form-control').selectpicker();
 
+    //sidebar
+    (function () {
+        if ($(window).width() <= 1100) {
+            localStorage.setItem('sidebar-collapse', 1);
+            $('body').addClass('sidebar-collapse');
+        }
+
+        $('.sidebar-toggle').click(function () {
+            if ($('body').hasClass('sidebar-collapse')) {
+                localStorage.removeItem('sidebar-collapse');
+            } else {
+                localStorage.setItem('sidebar-collapse', 1);
+            }
+        });
+    }());
+
     //Datepickers & period select
     (function () {
         $('.datepicker').datepicker({

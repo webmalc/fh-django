@@ -1,9 +1,14 @@
 {% load sitetree %}
-<ul class="dropdown-menu" role="menu">
+
+<ul class="treeview-menu">
     {% for item in sitetree_items %}
         <li role="presentation" {% if item.is_current or item.in_current_branch %}class="active"{% endif %}>
             <a role="menuitem" href="{% sitetree_url for item %}" {% if item.hint %}title="{{ item.hint }}"{% endif %}>
-                {% if item.icon %}<i class="fa fa-{{ item.icon }}"></i>{% endif %}
+                {% if item.icon %}
+                    <i class="fa fa-{{ item.icon }}"></i>
+                {% else %}
+                    <i class="fa fa-circle-o"></i>
+                {% endif %}
                 {{ item.title_resolved }}
             </a>
         </li>

@@ -1,0 +1,63 @@
+{% load staticfiles %}
+{% load avatar_tags %}
+{% load humanize %}
+
+<header class="main-header">
+    <!-- Logo -->
+    <a href="{% url 'index' %}" class="logo">
+      <span class="logo-mini">
+          <img src="{% static 'img/favicon_24x24.png' %}" height="24" width="24">
+      </span>
+      <span class="logo-lg">
+          <img id="fh-navbar-logo" src="{% static 'img/favicon_24x24.png' %}" height="24" width="24">
+          <b>Family</b>Helper
+      </span>
+    </a>
+
+    <nav class="navbar navbar-static-top" role="navigation">
+
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+
+        <div class="navbar-custom-menu">
+            {% if user.is_authenticated %}
+                <ul class="nav navbar-nav">
+
+                    <!-- User Account -->
+                    <li class="dropdown user user-menu">
+                        <a href="{% url 'users:profile' %}" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{% avatar_url user 25 %}" class="user-image" alt="User avatar">
+                            <span class="hidden-xs">{{ user }}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="user-header">
+                                <img src="{% avatar_url user 160 %}" class="img-circle" alt="User avatar">
+                                <p>
+                                    {{ user }}
+                                    <small>Member since {{ user.date_joined|naturalday }}</small>
+                                </p>
+                            </li>
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="{% url 'users:profile' %}" class="btn btn-default btn-flat">
+                                        <i class="fa fa-user margin-right-sm"></i>Profile
+                                    </a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="{% url 'django.contrib.auth.views.logout' %}" class="btn btn-default btn-flat">
+                                        <i class="fa fa-sign-out margin-right-sm"></i>Sign out
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+    </nav>
+</header>

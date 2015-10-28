@@ -1,0 +1,7 @@
+{% load sitetree %}
+
+<aside class="main-sidebar">
+    <section class="sidebar">
+        {% sitetree_menu from 'navbar' include "trunk" template "sitetree/menu_bootstrap3.html" %}
+    </section>
+</aside>

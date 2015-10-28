@@ -1,34 +1,53 @@
-{% extends 'layout.html' %}
+{% extends 'meta.html' %}
 {% load bootstrap3 %}
 {% load widget_tweaks %}
+{% load staticfiles %}
 
-{% block content %}
+{% block body %}
+    {% with 'skin-blue login-page' as body_classes %}{{ block.super }}{% endwith %}
+{% endblock body %}
 
-    <div class="well">
+{% block body_content %}
 
-        {% if form.errors %}
-            <div class="alert alert-danger">Your username and password didn't match. Please try again.</div>
-        {% endif %}
+    <div class="login-box">
 
-        <form action="{% url 'django.contrib.auth.views.login' %}" method="post" class="form">
-            {% csrf_token %}
+        <div class="login-logo">
+            <a href="{% url 'index' %}">
+                <img id="fh-navbar-logo" src="{% static 'img/favicon_24x24.png' %}" height="24" width="24">
+                <b>Family</b>Helper
+            </a>
+        </div>
 
-            <div class="input-group form-group">
-                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                {{ form.username|add_class:"form-control" }}
-            </div>
-            <div class="input-group form-group">
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                {{ form.password|add_class:"form-control" }}
-            </div>
-            <input type="hidden" name="next" value="{{ next|default:"/" }}"/>
+        <div class="login-box-body">
+            <p class="login-box-msg">Sign in to start your session</p>
 
-            {% buttons %}
-                <button type="submit" class="btn btn-success">
-                    {% bootstrap_icon "log-in" %} Sign in
-                </button>
-            {% endbuttons %}
-        </form>
+            {% if form.errors %}
+                <div class="alert alert-danger">Your username and password didn't match. Please try again.</div>
+            {% endif %}
+
+            <form action="{% url 'django.contrib.auth.views.login' %}" method="post">
+                {% csrf_token %}
+
+                <div class="form-group has-feedback">
+                    {{ form.username|add_class:"form-control"|attr:"placeholder:Username" }}
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    {{ form.password|add_class:"form-control"|attr:"placeholder:Password" }}
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <input type="hidden" name="next" value="{{ next|default:"/" }}"/>
+                    </div>
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">
+                            Sign In
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
 {% endblock %}

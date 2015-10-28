@@ -1,19 +1,15 @@
-/******************* MAIN ***********************/
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic&subset=latin,cyrillic,cyrillic-ext);
 
+/******************* MAIN ***********************/
 body {
-    padding-top: 70px;
-    height: 100%
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
 }
 .container-fluid {
   max-width: 1600px;
 }
 #fh-navbar-logo {
     display: inline-block;
-    margin: 0px 0px 3px 0px;
-}
-#fh-navbar-avatar-link {
-    padding-top: 13px;
-    padding-bottom: 13px;
+    margin: 0px 8px 3px 0px;
 }
 .breadcrumb {
     margin-bottom: 20px;
