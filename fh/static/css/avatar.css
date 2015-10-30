@@ -1,30 +1,30 @@
-#avatar-choose-form ul {
+.avatar-list-form ul {
     list-style-type: none;
     padding: 0px;
     margin: 0px 0px 10px 0px;
 }
-ul#id_choice {
+ul#id_choice, ul#id_choices {
     padding: 0px;
     margin: 0px;
 }
-ul#id_choice li {
+ul#id_choice li, ul#id_choices li {
     display: inline-block;
     margin: 0px 10px 0px 0px;
 
 }
-ul#id_choice li img {
+ul#id_choice li img, ul#id_choices li img {
     cursor: pointer;
 }
-#avatar-choose-form label {
+#avatar-choose-form label, #avatar-delete-form ul label {
     display: none;
 }
-ul#id_choice label {
+ul#id_choice label, ul#id_choices label {
     display: inline-block;
 }
 label[for="id_avatar"] {
     display: none;
 }
-#avatar-choose-form input[type='radio'] {
+.avatar-list-form input[type='radio'], .avatar-list-form input[type='checkbox'], .bootstrap-switch {
     display: none;
 }
 .avatar-selected {

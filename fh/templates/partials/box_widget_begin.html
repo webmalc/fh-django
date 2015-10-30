@@ -1,4 +1,4 @@
-<div class="box box-default box-solid">
+<div class="box box-{{ type|default:'default' }} box-solid">
     <div class="box-header">
         <h3 class="box-title">
             {{ header }}{% if smallHeader %}<small>{{ smallHeader }}</small>{% endif %}

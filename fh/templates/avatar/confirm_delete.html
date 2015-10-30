@@ -1,0 +1,44 @@
+{% extends 'users/profile_layout.html' %}
+{% load bootstrap3 %}
+{% load avatar_tags %}
+{% load staticfiles %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/avatar.css' %}">
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static 'js/avatar.js' %}"></script>
+{% endblock %}
+
+{% block tabs %}
+    {% with 'avatars' as tab %}{{ block.super }}{% endwith %}
+{% endblock tabs %}
+
+{% block profile_content %}
+
+    {% if not avatars %}
+        <div class="alert alert-warning">You haven't uploaded an avatar yet. Please <a href="{% url 'avatar_change' %}">upload one</a> now.</div>
+    {% else %}
+
+        {% include 'partials/box_widget_begin.html' with header="Avatars to delete" id='avatar-delete-form-widget' type='danger' %}
+        <form method="POST" action="{% url 'avatar_delete' %}" id="avatar-delete-form" class="avatar-list-form">
+            {% csrf_token %}
+            <ul>
+                {{ delete_avatar_form.as_ul }}
+            </ul>
+            {% buttons %}
+                <button type="submit" class="btn btn-danger margin-right-sm">
+                    {% bootstrap_icon "trash" %} Delete avatars
+                </button>
+                <a href="{% url 'avatar_change' %}" class="btn btn-default">
+                    {% bootstrap_icon "ban-circle" %}<span class="hidden-xs margin-left-sm">Cancel</span>
+                </a>
+            {% endbuttons %}
+        </form>
+        {% include 'partials/box_widget_end.html' %}
+    {% endif %}
+
+{% endblock %}

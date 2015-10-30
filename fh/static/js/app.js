@@ -4,7 +4,7 @@ $(document).ready(function () {
     'use strict';
 
     //bootstrap switch
-    $('input[type="checkbox"]').bootstrapSwitch({
+    $('input[type="checkbox"]').not('#avatar-delete-form input').bootstrapSwitch({
         size: 'small',
         onText: 'yes',
         offText: 'no'

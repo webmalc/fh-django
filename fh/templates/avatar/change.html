@@ -24,7 +24,7 @@
     {% else %}
 
         {% include 'partials/box_widget_begin.html' with header='Choose default avatar' id='avatar-choose-form-widget' %}
-        <form method="POST" action="{% url 'avatar_change' %}" id="avatar-choose-form">
+        <form method="POST" action="{% url 'avatar_change' %}" id="avatar-choose-form" class="avatar-list-form">
             {% csrf_token %}
             <ul>
                 {{ primary_avatar_form.as_ul }}
@@ -33,6 +33,9 @@
                 <button type="submit" class="btn btn-default margin-right-sm">
                     {% bootstrap_icon "ok-circle" %} Set default
                 </button>
+                <a href="{% url 'avatar_delete' %}" class="btn btn-danger pull-right">
+                    {% bootstrap_icon "trash" %}<span class="hidden-xs margin-left-sm">Delete avatars</span>
+                </a>
             {% endbuttons %}
         </form>
         {% include 'partials/box_widget_end.html' %}
@@ -48,7 +51,7 @@
                 {% bootstrap_icon "ok-circle" %} Upload avatar
             </button>
             <a href="{% url 'avatar_change' %}" class="btn btn-default">
-                {% bootstrap_icon "ban-circle" %} Cancel
+                {% bootstrap_icon "ban-circle" %}<span class="hidden-xs margin-left-sm">Cancel</span>
             </a>
         {% endbuttons %}
     </form>
