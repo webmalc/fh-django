@@ -31,8 +31,8 @@ class Profile(TemplateView):
         context = super(Profile, self).get_context_data(**kwargs)
         context['payments_total'] = Payment.objects.filter(created_by=self.request.user).count()
         context['average_payment'] = round(
-            Payment.objects.filter(created_by=self.request.user).filter(is_incoming=False).aggregate(
-                Avg('amount')).values()[0], 2)
+            list(Payment.objects.filter(created_by=self.request.user).filter(is_incoming=False).aggregate(
+                Avg('amount')).values())[0], 2)
 
         return context
 

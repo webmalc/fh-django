@@ -156,6 +156,6 @@ AVATAR_GRAVATAR_DEFAULT = 'mm'
 
 # Local settings
 try:
-    from local_settings import *
+    from fh.local_settings import *
 except ImportError:
     pass

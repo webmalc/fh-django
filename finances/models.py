@@ -25,7 +25,7 @@ class PaymentManager(models.Manager):
         """
         filtered_tags = filtered_tags if filtered_tags else self.filtered_tags(**kwargs)
         data = []
-        for key, tag in filtered_tags.iteritems():
+        for key, tag in filtered_tags.items():
             amount = self.filtered(begin=kwargs['begin'], end=kwargs['end'], user=kwargs['user'],
                                    is_incoming=kwargs['is_incoming']).filter(tags__in=(tag,)) \
                 .aggregate(total=Sum('amount'))
@@ -48,7 +48,7 @@ class PaymentManager(models.Manager):
         filtered_tags = filtered_tags if filtered_tags else self.filtered_tags(**kwargs)
 
         return [(tag.name, tag.num_times) for tag in Payment.tags.most_common()[:limit] if
-                tag.id in filtered_tags.keys()]
+                tag.id in list(filtered_tags.keys())]
 
     def filtered_tags(self, **kwargs):
         """
@@ -198,7 +198,7 @@ class Payment(CommonInfo):
         return reverse('finances:payment_update', kwargs={'pk': self.pk})
 
     def __unicode__(self):
-        return u'#%s' % self.id
+        return '#%s' % self.id
 
     class Meta:
         ordering = ['-date']

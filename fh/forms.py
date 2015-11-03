@@ -7,4 +7,4 @@ class Form(forms.Form):
     """
 
     def get_initial_data(self, exclude=[]):
-        return {key: field.initial for (key, field) in self.fields.iteritems() if key not in exclude}
+        return {key: field.initial for (key, field) in self.fields.items() if key not in exclude}

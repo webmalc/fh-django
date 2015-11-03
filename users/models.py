@@ -8,6 +8,6 @@ class User(BaseUser):
     def __unicode__(self):
 
         if self.first_name:
-            return u'%s %s' % (self.last_name, self.first_name)
+            return '%s %s' % (self.last_name, self.first_name)
         else:
-            return u'%s' % self.username
+            return '%s' % self.username
