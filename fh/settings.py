@@ -33,7 +33,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    #'debug_toolbar',
+    'debug_toolbar',
     'django_extensions',
     'stronghold',
     'bootstrap3',
@@ -62,8 +62,6 @@ MIDDLEWARE_CLASSES = (
     'fh.middleware.WhodidMiddleware',
     'fh.middleware.UserMiddleware',
     'stronghold.middleware.LoginRequiredMiddleware',
-    'htmlmin.middleware.HtmlMinifyMiddleware',
-    'htmlmin.middleware.MarkRequestMiddleware'
 )
 
 ROOT_URLCONF = 'fh.urls'

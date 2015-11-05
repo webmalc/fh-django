@@ -15,11 +15,7 @@ class PaymentManager(models.Manager):
     def tags_by_amount(self, filtered_tags=None, **kwargs):
         """
         Payments tags sorted by payments amount
-        :param begin: datetime.date
-        :param end: datetime.date
-        :param tags: list
-        :param user: django.contrib.auth.models.User
-        :param is_incoming: boolean
+        :param kwargs: dict
         :param filtered_tags: dict
         :return: list [('tag_name', 'amount'), (tag_name', 'amount'), ...]
         """
@@ -36,11 +32,7 @@ class PaymentManager(models.Manager):
     def tags_by_count(self, limit=15, filtered_tags=None, **kwargs):
         """
         Payments tags sorted by count
-        :param begin: datetime.date
-        :param end: datetime.date
-        :param tags: list
-        :param user: django.contrib.auth.models.User
-        :param is_incoming: boolean
+        :param kwargs: dict
         :param limit: int
         :param filtered_tags: dict
         :return: list [('tag_name', 'count'), (tag_name', 'count'), ...]
@@ -53,12 +45,7 @@ class PaymentManager(models.Manager):
     def filtered_tags(self, **kwargs):
         """
         Get filtered tags
-        :param begin: datetime.date
-        :param end: datetime.date
-        :param include_tags: list
-        :param exclude_tags: list
-        :param user: django.contrib.auth.models.User
-        :param is_incoming: boolean
+        :param kwargs: dict
         :return: dict {'id': Tag, 'id': Tag}
         """
         filtered_tags = {}
@@ -197,7 +184,7 @@ class Payment(CommonInfo):
     def get_absolute_url(self):
         return reverse('finances:payment_update', kwargs={'pk': self.pk})
 
-    def __unicode__(self):
+    def __str__(self):
         return '#%s' % self.id
 
     class Meta:
