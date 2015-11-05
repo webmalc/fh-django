@@ -29,7 +29,7 @@ admin.site.site_header = 'FamilyHelper administration'
 urlpatterns = [
     url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^accounts/login/$', auth_views.login),
+    url(r'^accounts/login/$', auth_views.login, name='login'),
     url(r'^accounts/logout', auth_views.logout, {'next_page': '/'}),
     url(r'^finances/', include('finances.urls', namespace="finances")),
     url(r'^analytics/', include('analytics.urls', namespace="analytics")),
