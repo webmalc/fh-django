@@ -16,10 +16,6 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-AUTHENTICATION_BACKENDS = (
-    'ratelimitbackend.backends.RateLimitModelBackend',
-)
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -157,3 +153,8 @@ try:
     from fh.local_settings import *
 except ImportError:
     pass
+
+if not DEBUG:
+    AUTHENTICATION_BACKENDS = (
+        'ratelimitbackend.backends.RateLimitModelBackend',
+    )

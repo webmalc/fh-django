@@ -63,5 +63,8 @@ bower_components/*
 #media
 /media
 
+#coverage
+/htmlcov
+
 #Project
 /fh/local_settings.py

@@ -1,0 +1,74 @@
+[
+  {
+    "pk": 1,
+    "model": "taggit.tag",
+    "fields": {
+      "name": "test_one",
+      "slug": "test_one"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "taggit.tag",
+    "fields": {
+      "name": "test_two",
+      "slug": "test_two"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "taggit.tag",
+    "fields": {
+      "name": "test_three",
+      "slug": "test_three"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "taggit.taggeditem",
+    "fields": {
+      "content_type": [
+        "finances",
+        "payment"
+      ],
+      "tag": 1,
+      "object_id": 1
+    }
+  },
+  {
+    "pk": 2,
+    "model": "taggit.taggeditem",
+    "fields": {
+      "content_type": [
+        "finances",
+        "payment"
+      ],
+      "tag": 2,
+      "object_id": 1
+    }
+  },
+  {
+    "pk": 3,
+    "model": "taggit.taggeditem",
+    "fields": {
+      "content_type": [
+        "finances",
+        "payment"
+      ],
+      "tag": 3,
+      "object_id": 1
+    }
+  },
+  {
+    "pk": 4,
+    "model": "taggit.taggeditem",
+    "fields": {
+      "content_type": [
+        "finances",
+        "payment"
+      ],
+      "tag": 2,
+      "object_id": 3
+    }
+  }
+]
