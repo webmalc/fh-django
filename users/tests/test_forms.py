@@ -4,7 +4,7 @@ from users.models import User
 
 
 class UserFormTest(FormTestCase, ViewTestCase):
-    fixtures = ['tests/users.json', 'tests/finances.json', 'tests/taggit.json', 'fh.json']
+    fixtures = ['tests/users.json']
 
     def setUp(self):
         self.user = User.objects.get(pk=1)
