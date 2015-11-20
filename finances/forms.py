@@ -3,9 +3,10 @@ import autocomplete_light
 from django import forms
 from datetime import date
 from django.utils import timezone
-from users.models import User
 from taggit.models import Tag
-from fh.forms import Form
+from django.forms import Form
+from fh.forms import FormInitialDataMixin
+from users.models import User
 
 
 class PaymentForm(autocomplete_light.ModelForm):
@@ -15,7 +16,7 @@ class PaymentForm(autocomplete_light.ModelForm):
     tags = TaggitField(widget=TaggitWidget('TagAutocomplete'))
 
 
-class PaymentsFilterForm(Form):
+class PaymentsFilterForm(Form, FormInitialDataMixin):
     """
     Payments list filter form
     """

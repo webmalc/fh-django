@@ -1,9 +1,8 @@
-from django import forms
 
 
-class Form(forms.Form):
+class FormInitialDataMixin:
     """
-    Base form
+    Get initial data mixin
     """
 
     def get_initial_data(self, exclude=[]):
