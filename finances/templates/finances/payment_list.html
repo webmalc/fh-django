@@ -55,7 +55,7 @@
                                     </button>
                                     <ul class="dropdown-menu pull-right">
                                         {% if perms.finances.change_payment %}
-                                            <li class="text-success">
+                                            <li>
                                                 <a href="{% url 'finances:payment_update' payment.id %}">
                                                     <i class="fa fa fa-pencil-square-o margin-right-sm"></i>Edit entry
                                                 </a>

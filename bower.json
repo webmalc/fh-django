@@ -21,7 +21,8 @@
     "js-cookie": "~2.0.3",
     "adminlte": "~2.3.2",
     "font-awesome": "~4.4.0",
-    "ionicons": "~2.0.1"
+    "ionicons": "~2.0.1",
+    "eonasdan-bootstrap-datetimepicker": "~4.17.37"
   },
   "resolutions": {
     "jquery": "~2.1.1"

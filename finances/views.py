@@ -5,28 +5,35 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.http import JsonResponse
 from .models import Payment
-from .forms import PaymentForm, PaymentsFilterForm
+from .forms import PaymentsFilterForm
+from fh.forms import ModelFormWidgetMixin
 from taggit.models import Tag
+from django import forms
 
 
-class PaymentCreate(SuccessMessageMixin, CreateView):
+class PaymentFormViewMixin:
+    """
+    Payment form mixin
+    """
+    model = Payment
+    fields = ['tags', 'amount', 'date', 'is_incoming']
+    widgets = {
+        'date': forms.DateTimeInput(attrs={'placeholder': '2015-11-24 14:59:19', 'class': 'datetimepicker'})
+    }
+
+
+class PaymentCreate(SuccessMessageMixin, PaymentFormViewMixin, ModelFormWidgetMixin, CreateView):
     """
     Payment create view
     """
-    model = Payment
-    form = PaymentForm
-    fields = ['tags', 'amount', 'is_incoming']
     success_message = "Payment was created successfully"
     success_url = reverse_lazy('finances:payments_list')
 
 
-class PaymentUpdate(SuccessMessageMixin, UpdateView):
+class PaymentUpdate(SuccessMessageMixin, PaymentFormViewMixin, UpdateView):
     """
     Payment update view
     """
-    model = Payment
-    form = PaymentForm
-    fields = ['tags', 'amount', 'is_incoming']
     success_message = "Payment was updated successfully"
 
 
