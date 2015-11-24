@@ -1,13 +1,13 @@
 {% extends 'finances/layout.html' %}
-{% load bootstrap3 %}
 {% load avatar_tags %}
 {% load humanize %}
+{% load crispy_forms_tags %}
 
 {% block finances_content %}
 
     <form action="" method="post" class="form">
         {% csrf_token %}
-        {% bootstrap_form form %}
+        {{ form|crispy }}
 
         {% if payment %}
             <div class="bg-gray color-palette alert">
@@ -17,19 +17,17 @@
             </div>
         {% endif %}
 
-        {% buttons %}
-            <button type="submit" class="btn btn-success margin-right-sm">
-                {% bootstrap_icon "ok-circle" %} Save payment
-            </button>
-            <a href="{% url 'finances:payments_list' %}" class="btn btn-default">
-                {% bootstrap_icon "ban-circle" %}<span class="hidden-xs margin-left-sm">Cancel</span>
+        <button type="submit" class="btn btn-success margin-right-sm">
+            <i class="fa fa-check-circle-o"></i><span class="margin-left-sm">Save payment</span>
+        </button>
+        <a href="{% url 'finances:payments_list' %}" class="btn btn-default">
+            <i class="fa fa-ban"></i><span class="hidden-xs margin-left-sm">Cancel</span>
+        </a>
+        {% if payment  and perms.finances.delete_payment %}
+            <a href="{% url 'finances:payment_delete' payment.id %}" class="btn btn-danger pull-right">
+                <i class="fa fa-trash"></i><span class="hidden-xs margin-left-sm">Delete payment</span>
             </a>
-            {% if payment  and perms.finances.delete_payment %}
-                <a href="{% url 'finances:payment_delete' payment.id %}" class="btn btn-danger pull-right">
-                    {% bootstrap_icon "trash" %}<span class="hidden-xs margin-left-sm">Delete payment</span>
-                </a>
-            {% endif %}
-        {% endbuttons %}
+        {% endif %}
     </form>
 
 {% endblock %}

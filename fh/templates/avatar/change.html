@@ -1,5 +1,5 @@
 {% extends 'users/profile_layout.html' %}
-{% load bootstrap3 %}
+{% load crispy_forms_tags %}
 {% load avatar_tags %}
 {% load staticfiles %}
 
@@ -29,14 +29,13 @@
             <ul>
                 {{ primary_avatar_form.as_ul }}
             </ul>
-            {% buttons %}
-                <button type="submit" class="btn btn-default margin-right-sm">
-                    {% bootstrap_icon "ok-circle" %} Set default
-                </button>
-                <a href="{% url 'avatar_delete' %}" class="btn btn-danger pull-right">
-                    {% bootstrap_icon "trash" %}<span class="hidden-xs margin-left-sm">Delete avatars</span>
-                </a>
-            {% endbuttons %}
+
+            <button type="submit" class="btn btn-default margin-right-sm">
+                <i class="fa fa-check-circle-o"></i><span class="margin-left-sm">Set default</span>
+            </button>
+            <a href="{% url 'avatar_delete' %}" class="btn btn-danger pull-right">
+                <i class="fa fa-trash"></i><span class="hidden-xs margin-left-sm">Delete avatars</span>
+            </a>
         </form>
         {% include 'partials/box_widget_end.html' %}
     {% endif %}
@@ -44,16 +43,15 @@
     {% include 'partials/box_widget_begin.html' with header='Upload new avatar' id='avatar-change-form-widget' %}
     <form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}" class="form">
         {% csrf_token %}
-        {% bootstrap_form upload_avatar_form %}
+        {{ upload_avatar_form|crispy }}
 
-        {% buttons %}
-            <button type="submit" class="btn btn-success margin-right-sm">
-                {% bootstrap_icon "ok-circle" %} Upload avatar
-            </button>
-            <a href="{% url 'avatar_change' %}" class="btn btn-default">
-                {% bootstrap_icon "ban-circle" %}<span class="hidden-xs margin-left-sm">Cancel</span>
-            </a>
-        {% endbuttons %}
+        <button type="submit" class="btn btn-success margin-right-sm">
+            <i class="fa fa-check-circle-o"></i><span class="margin-left-sm">Upload avatar</span>
+        </button>
+        <a href="{% url 'avatar_change' %}" class="btn btn-default">
+            <i class="fa fa-ban"></i><span class="hidden-xs margin-left-sm">Cancel</span>
+        </a>
+
     </form>
     {% include 'partials/box_widget_end.html' %}
 

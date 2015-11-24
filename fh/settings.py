@@ -32,7 +32,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'django_extensions',
     'stronghold',
-    'bootstrap3',
+    'crispy_forms',
     'sitetree',
     'widget_tweaks',
     'taggit',
@@ -147,6 +147,9 @@ SITETREE_MODEL_TREE = 'fh.SiteTreeTree'
 
 # Django avatar
 AVATAR_GRAVATAR_DEFAULT = 'mm'
+
+# Django crispy forms
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Local settings
 try:

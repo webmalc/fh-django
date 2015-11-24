@@ -1,16 +1,15 @@
-{% load bootstrap3 %}
+{% load crispy_forms_tags %}
 
 {% include 'partials/box_widget_begin.html' with header='Filter' id='finances-filter-form-widget' %}
 <form action="{% url action %}" method="get">
-    {% bootstrap_form form %}
+    {{ form|crispy }}
 
-    {% buttons %}
-        <button type="submit" name="filter" value="1" class="btn btn-primary  margin-right-sm">
-            {% bootstrap_icon "filter" %} Filter
-        </button>
-        <a href="{% url cancel %}" class="btn btn-default">
-            {% bootstrap_icon "ban-circle" %} Cancel
-        </a>
-    {% endbuttons %}
+    <button type="submit" name="filter" value="1" class="btn btn-primary  margin-right-sm">
+        <i class="fa fa-filter"></i><span class="margin-left-sm">Filter</span>
+    </button>
+    <a href="{% url cancel %}" class="btn btn-default">
+        <i class="fa fa-ban"></i><span class="margin-left-sm">Cancel</span>
+    </a>
+
 </form>
 {% include 'partials/box_widget_end.html' %}
