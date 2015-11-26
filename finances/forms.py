@@ -79,6 +79,13 @@ class PaymentsFilterForm(Form, FormInitialDataMixin):
             empty_label="---------",
             queryset=User.objects.all()
         )
+        self.fields['is_debt'] = forms.ChoiceField(
+            label='Is debt',
+            required=False,
+            choices=(
+                ('', '---------'), (1, 'Yes'), (0, 'No')
+            )
+        )
         self.fields['is_incoming'] = forms.ChoiceField(
             label='Is incoming',
             required=False,
@@ -92,7 +99,9 @@ class PaymentsFilterForm(Form, FormInitialDataMixin):
         begin = data.get("begin")
         end = data.get("end")
         is_incoming = self.cleaned_data['is_incoming']
+        is_debt = self.cleaned_data['is_debt']
         self.cleaned_data['is_incoming'] = bool(int(data.get("is_incoming"))) if is_incoming else None
+        self.cleaned_data['is_debt'] = bool(int(data.get("is_debt"))) if is_debt else None
         self.cleaned_data['include_tags'] = data.get("include_tags") if data.get("include_tags") else None
         self.cleaned_data.pop("period", None)
 

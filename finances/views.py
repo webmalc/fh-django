@@ -16,9 +16,10 @@ class PaymentFormViewMixin:
     Payment form mixin
     """
     model = Payment
-    fields = ['tags', 'amount', 'date', 'is_incoming']
+    fields = ['tags', 'amount', 'date', 'comment', 'is_debt', 'is_incoming']
     widgets = {
-        'date': forms.DateTimeInput(attrs={'placeholder': '2015-11-24 14:59:19', 'class': 'datetimepicker'})
+        'date': forms.DateTimeInput(attrs={'placeholder': '2015-11-24 14:59:19', 'class': 'datetimepicker'}),
+        'comment': forms.Textarea(attrs={'rows': 3})
     }
 
 
@@ -30,7 +31,7 @@ class PaymentCreate(SuccessMessageMixin, PaymentFormViewMixin, ModelFormWidgetMi
     success_url = reverse_lazy('finances:payments_list')
 
 
-class PaymentUpdate(SuccessMessageMixin, PaymentFormViewMixin, UpdateView):
+class PaymentUpdate(SuccessMessageMixin, PaymentFormViewMixin, ModelFormWidgetMixin, UpdateView):
     """
     Payment update view
     """
@@ -43,9 +44,10 @@ class PaymentList(ListView):
     """
     THEAD = (
         {'title': 'tags'},
-        {'title': 'amount',  'class': 'td-sm text-right',  'sort': 'amount'},
+        {'title': 'amount',  'class': 'td-md text-right',  'sort': 'amount'},
         {'title': 'date', 'class': 'td-md hidden-xs', 'sort': 'date'},
         {'title': 'in', 'class': 'td-xs text-center hidden-xs', 'sort': 'is_incoming'},
+        {'title': 'debt', 'class': 'td-sm text-center hidden-xs', 'sort': 'is_debt'},
         {'title': 'user', 'class': 'td-sm text-center', 'sort': 'created_by'},
     )
     model = Payment

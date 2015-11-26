@@ -24,7 +24,7 @@
 
                     <tbody>
                     {% for payment in object_list %}
-                        <tr class="{{ payment.is_incoming|yesno:"success," }}">
+                        <tr class="{{ payment.is_debt|yesno:"danger," }} {{ payment.is_incoming|yesno:"success," }}">
                             <td>
                                 {% for tag in payment.tags.all %}
                                     <a href="{% url 'finances:payments_list' %}?include_tags={{ tag.id }}&filter=1&begin={{ filter.begin|date:'Y-m-d' }}&end={{ filter.end|date:'Y-m-d' }}"
@@ -32,11 +32,21 @@
                                 {% endfor %}
                             </td>
                             <td class="text-right {{ payment.is_incoming|yesno:"text-success," }}">
-                                {{ payment.amount|intcomma }}
+                                {% if payment.comment %}
+                                    <span class="bottom-dotted cursor-help" data-html="true" data-toggle="tooltip" data-placement="top" title="{{ payment.comment|safe }}">
+                                        {{ payment.amount|intcomma }}
+                                    </span>&nbsp;<small><i class="fa fa-info-circle"></i></small>
+                                {% else %}
+                                    {{ payment.amount|intcomma }}
+                                {% endif %}
+
                             </td>
                             <td class="hidden-xs">{{ payment.date|naturalday }} {{ payment.date|date:'H:i' }}</td>
                             <td class="text-center hidden-xs">
                                 {% if payment.is_incoming %}<i class="fa fa-check text-success"></i>{% endif %}
+                            </td>
+                            <td class="text-center hidden-xs">
+                                {% if payment.is_debt %}<i class="fa fa-check text-danger"></i>{% endif %}
                             </td>
                             <td class="text-center">
                                 <a href="{% url 'finances:payments_list' %}?user={{ payment.created_by.id }}&filter=1&begin={{ filter.begin|date:'Y-m-d' }}&end={{ filter.end|date:'Y-m-d' }}">
@@ -48,7 +58,7 @@
                             </td>
                             <td class="text-right">
                                 <div class="dropdown">
-                                    <button class="btn btn-default btn-sm dropdown-toggle" type="button"
+                                    <button class="btn btn-{{ payment.is_incoming|yesno:"success,default" }} btn-sm dropdown-toggle" type="button"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                         <i class="fa fa-cogs "></i>
                                         <span class="hidden-xs margin-left-sm">Actions <span class="caret"></span></span>

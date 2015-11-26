@@ -38,7 +38,7 @@ class PaymentAdmin(FhAdmin):
 
     form = forms.PaymentForm
     list_display = (
-        'get_tags_as_string', 'amount', 'date', 'is_incoming',
+        'get_tags_as_string', 'amount', 'date', 'is_debt', 'is_incoming',
         'created_at', 'created_by', 'modified_at', 'modified_by'
     )
     list_display_links = ('get_tags_as_string', 'amount',)
@@ -62,12 +62,16 @@ class PaymentAdmin(FhAdmin):
 
     @staticmethod
     def suit_row_attributes(obj, request):
+        if obj.is_debt:
+            return {'class': 'error'}
         if obj.is_incoming:
             return {'class': 'success'}
 
     @staticmethod
     def suit_cell_attributes(obj, column):
         if column == 'is_incoming':
+            return {'class': 'text-center'}
+        if column == 'is_debt':
             return {'class': 'text-center'}
         elif column == 'amount':
             return {'class': 'text-right'}

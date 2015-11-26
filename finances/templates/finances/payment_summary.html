@@ -4,16 +4,22 @@
     <div class="col-xs-9">
         <div class="btn-group" role="group">
             <a href="{% url link %}?is_incoming=0&filter=1&begin={{ filter.begin|date:'Y-m-d' }}&end={{ filter.end|date:'Y-m-d' }}"
-               class="btn btn-xs btn-warning hidden-xs btn-flat">
+               class="btn btn-xs btn-primary hidden-xs btn-flat">
                 <i class="fa fa-minus margin-right-sm"></i>
-                <span class="hidden-xs margin-right-sm">Expense:</span>
+                <span class="hidden-xs margin-right-sm">Out:</span>
                 {{ summary.out|intcomma }}
             </a>
             <a href="{% url link %}?is_incoming=1&filter=1&begin={{ filter.begin|date:'Y-m-d' }}&end={{ filter.end|date:'Y-m-d' }}"
                class="btn btn-xs btn-info hidden-xs btn-flat">
                 <i class="fa fa-plus margin-right-sm"></i>
-                <span class="hidden-xs margin-right-sm">Incoming:</span>
+                <span class="hidden-xs margin-right-sm">In:</span>
                 {{ summary.in|intcomma }}
+            </a>
+            <a href="{% url link %}?is_incoming=1&filter=1&begin={{ filter.begin|date:'Y-m-d' }}&end={{ filter.end|date:'Y-m-d' }}"
+                   class="btn btn-xs btn-warning hidden-xs btn-flat">
+                    <i class="fa fa-{% if summary.debt != 0 %}exclamation{% else %}check{% endif %} margin-right-sm"></i>
+                    <span class="hidden-xs margin-right-sm">Debts:</span>
+                    {{ summary.debt|intcomma }}
             </a>
             <a href="{% url link %}"
                class="btn btn-xs btn-{% if summary.total < 0 %}danger{% else %}success{% endif %} btn-flat">

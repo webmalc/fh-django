@@ -54,6 +54,15 @@ body {
 .padding-bottom-md {
     padding-bottom: 10px !important;
 }
+.bottom-dotted {
+    border-bottom: 1px dashed;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.cursor-help {
+    cursor: help;
+}
 /******************* FORMS ***********************/
 
 .bootstrap-tagsinput {
@@ -74,6 +83,10 @@ body {
 }
 .has-error .bootstrap-select button {
     border-color: #a94442;
+}
+.asteriskField {
+    color: #d9534f;
+    padding-left: 2px;
 }
 /******************* TABLES ***********************/
 

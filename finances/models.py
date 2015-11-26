@@ -56,43 +56,47 @@ class PaymentManager(models.Manager):
 
         return filtered_tags
 
-    def payments_by_days(self, begin=None, end=None, include_tags=None, exclude_tags=None, user=None, is_incoming=None):
+    def payments_by_days(self, begin=None, end=None, include_tags=None, exclude_tags=None, user=None,
+                         is_debt=None, is_incoming=None):
         """
         Payments amount by days
         :param begin: datetime.date
         :param end: datetime.date
         :param include_tags: list
         :param exclude_tags: list
+        :param is_debt: boolean
         :param user: django.contrib.auth.models.User
         :param is_incoming: boolean
         :return: list [('day', 'amount'), ('day', 'amount'), ...]
         """
         q = self.filtered(begin=begin, end=end, include_tags=include_tags, exclude_tags=exclude_tags, user=user,
-                          is_incoming=is_incoming)
+                          is_debt=is_debt, is_incoming=is_incoming)
         data = q.extra(select={'day': 'date(date)'}).values('day').annotate(total=Sum('amount')).order_by('day')
 
         return [(entry['day'], entry['total']) for entry in data]
 
     def payments_by_months(self, begin=None, end=None, include_tags=None, exclude_tags=None, user=None,
-                           is_incoming=None):
+                           is_debt=None, is_incoming=None):
         """
         Payments amount by months
         :param begin: datetime.date
         :param end: datetime.date
         :param include_tags: list
         :param exclude_tags: list
+        :param is_debt: boolean
         :param user: django.contrib.auth.models.User
         :param is_incoming: boolean
         :return: list [('day', 'amount'), ('day', 'amount'), ...]
         """
         q = self.filtered(begin=begin, end=end, include_tags=include_tags, exclude_tags=exclude_tags, user=user,
-                          is_incoming=is_incoming)
+                          is_debt=is_debt, is_incoming=is_incoming)
         truncate_date = connection.ops.date_trunc_sql('month', 'date')
         data = q.extra(select={'month': truncate_date}).values('month').annotate(total=Sum('amount')).order_by('month')
 
         return [(entry['month'], entry['total']) for entry in data]
 
-    def summary(self, begin=None, end=None, include_tags=None, exclude_tags=None, user=None, is_incoming=None):
+    def summary(self, begin=None, end=None, include_tags=None, exclude_tags=None, user=None,
+                is_debt=None, is_incoming=None):
         """
         Payments total in/out
         :param begin: datetime.date
@@ -101,10 +105,15 @@ class PaymentManager(models.Manager):
         :param exclude_tags: list
         :param user: django.contrib.auth.models.User
         :param is_incoming: boolean
+        :param is_debt: boolean
         :return: dict {'in': 1200.34, 'out': 500.45}
         """
-        q = self.filtered(begin=begin, end=end, include_tags=include_tags, exclude_tags=exclude_tags, user=user)
-        result = {'in': Decimal(0), 'out': Decimal(0)}
+        q = self.filtered(begin=begin, end=end, include_tags=include_tags, is_debt=is_debt,
+                          exclude_tags=exclude_tags, user=user)
+        result = {'in': Decimal(0), 'out': Decimal(0), 'debt': Decimal(0)}
+
+        debt_in = q.filter(is_debt=True, is_incoming=True).aggregate(total=Sum('amount'))['total']
+        debt_out = q.filter(is_debt=True, is_incoming=False).aggregate(total=Sum('amount'))['total']
 
         if is_incoming is None:
             result['out'] = q.filter(is_incoming=False).aggregate(total=Sum('amount'))['total']
@@ -116,12 +125,15 @@ class PaymentManager(models.Manager):
 
         result['in'] = result['in'] if result['in'] else Decimal(0)
         result['out'] = result['out'] if result['out'] else Decimal(0)
+        result['debt_in'] = debt_in if debt_in else Decimal(0)
+        result['debt_out'] = debt_out if debt_out else Decimal(0)
         result['total'] = result['in'] - result['out']
+        result['debt'] = result['debt_in'] - result['debt_out']
 
         return result
 
     def filtered(self, begin=None, end=None, include_tags=None, exclude_tags=None, user=None, is_incoming=None,
-                 sort='date', order='asc'):
+                 is_debt=None, sort='date', order='asc'):
         """
         Filtered payment query
         :param begin: datetime.date
@@ -130,6 +142,7 @@ class PaymentManager(models.Manager):
         :param exclude_tags: list
         :param user: django.contrib.auth.models.User
         :param is_incoming: boolean
+        :param is_debt: boolean
         :param sort: string
         :param order: string
         :return: QuerySet
@@ -151,10 +164,13 @@ class PaymentManager(models.Manager):
         if is_incoming is not None:
             q = q.filter(is_incoming=is_incoming)
 
+        if is_debt is not None:
+            q = q.filter(is_debt=is_debt)
+
         if user is not None:
             q = q.filter(created_by=user)
 
-        if sort in ('amount', 'created_by', 'is_incoming', 'date'):
+        if sort in ('amount', 'created_by', 'is_incoming', 'date', 'is_debt'):
             q = q.order_by(sort)
         if order == 'desc':
             q = q.reverse()
@@ -169,6 +185,8 @@ class Payment(CommonInfo):
     amount = models.DecimalField(max_digits=20, decimal_places=2,
                                  validators=[MinValueValidator(0.01)])
     is_incoming = models.BooleanField(default=False, verbose_name='Is incoming?')
+    is_debt = models.BooleanField(default=False, verbose_name='Is debt?')
+    comment = models.CharField(max_length=255, null=True, blank=True)
     date = models.DateTimeField(default=timezone.now)
     objects = PaymentManager()
 
