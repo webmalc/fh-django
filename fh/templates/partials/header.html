@@ -1,5 +1,5 @@
 {% load staticfiles %}
-{% load avatar_tags %}
+{% load avatar %}
 {% load humanize %}
 
 <header class="main-header">
@@ -31,12 +31,12 @@
                     <!-- User Account -->
                     <li class="dropdown user user-menu">
                         <a href="{% url 'users:profile' %}" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{% avatar_url user 25 %}" class="user-image" alt="User avatar">
+                            <img src="{% cached_avatar_url user 25 %}" class="user-image" alt="User avatar">
                             <span class="hidden-xs">{{ user }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="user-header">
-                                <img src="{% avatar_url user 160 %}" class="img-circle" alt="User avatar">
+                                <img src="{% cached_avatar_url user 160 %}" class="img-circle" alt="User avatar">
                                 <p>
                                     {{ user }}
                                     <small>Member since {{ user.date_joined|naturalday }}</small>

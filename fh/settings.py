@@ -118,6 +118,14 @@ FIXTURE_DIRS = (
     os.path.join(BASE_DIR, 'fixtures'),
 )
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+        'TIMEOUT': 600
+    }
+}
+
 # Django-suit
 SUIT_CONFIG = {
     'ADMIN_NAME': 'FamilyHelper',

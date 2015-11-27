@@ -26,7 +26,7 @@
                     <li>
                         <a id="fh-navbar-avatar-link" href="{% url 'users:profile' %}"
                            data-toggle="tooltip" title="Your profile page" data-placement="bottom">
-                            <img src="{% avatar_url user 24 %}" id="fh-navbar-avatar">
+                            <img src="{% cached_avatar_url user 24 %}" id="fh-navbar-avatar">
                             <span class="hidden-sm margin-left-md">{{ user|default:user }}</span>
                         </a>
                     </li>

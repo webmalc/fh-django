@@ -71,7 +71,7 @@ class PaymentList(ListView):
         data = form.cleaned_data if form.is_valid() else form.get_initial_data(exclude=('period',))
         data.pop("period", None)
 
-        return Payment.objects.filtered(sort=sort, order=order, **data)
+        return Payment.objects.filtered(sort=sort, order=order, **data).select_related('created_by')
 
 
 class PaymentDelete(DeleteView):

@@ -1,6 +1,6 @@
 {% extends 'finances/layout.html' %}
-{% load avatar_tags %}
 {% load humanize %}
+{% load avatar %}
 
 {% block finances_content %}
 
@@ -50,7 +50,7 @@
                             </td>
                             <td class="text-center">
                                 <a href="{% url 'finances:payments_list' %}?user={{ payment.created_by.id }}&filter=1&begin={{ filter.begin|date:'Y-m-d' }}&end={{ filter.end|date:'Y-m-d' }}">
-                                <img src="{% avatar_url payment.created_by|default:'' 24 %}"
+                                    <img src="{% cached_avatar_url payment.created_by|default:'' 24 %}"
                                      title="{{ payment.created_by|default:"anonym" }}" data-toggle="tooltip"
                                      data-placement="left"
                                      class="img-circle">
