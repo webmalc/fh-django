@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'fh',
     'users',
     'finances',
+    'tasks',
     'analytics'
 )
 
