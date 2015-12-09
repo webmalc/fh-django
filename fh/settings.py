@@ -133,8 +133,8 @@ SUIT_CONFIG = {
     'MENU': (
         {'app': 'auth', 'label': 'Users', 'icon': 'icon-user', 'models': ('auth.user', 'avatar.avatar', 'auth.group')},
         {'app': 'finances', 'icon': 'icon-briefcase'},
-        {'label': 'Navigation', 'icon': 'icon-list',
-         'models': ('fh.sitetreetree', 'taggit.tag', 'sites.site')},
+        {'app': 'tasks', 'icon': 'icon-tasks'},
+        {'label': 'Navigation', 'icon': 'icon-list', 'models': ('fh.sitetreetree', 'taggit.tag', 'sites.site')},
     ),
     'LIST_PER_PAGE': 20
 }

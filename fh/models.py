@@ -3,6 +3,19 @@ from users.models import User
 from sitetree.models import TreeItemBase, TreeBase
 
 
+class TagsMixin:
+    """ Tags model mixin """
+
+    def get_tags_as_string(self):
+        """
+        Return tags as formatted string
+        :return: formatted string
+        """
+        return ', '.join([tag.name for tag in self.tags.all()])
+
+    get_tags_as_string.short_description = 'Tags'
+
+
 class CommonInfo(models.Model):
     """ CommonInfo abstract model """
 

@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.db.models import Sum
 from decimal import Decimal
 from django.db import connection
+from fh.models import TagsMixin
 
 
 class PaymentManager(models.Manager):
@@ -178,7 +179,7 @@ class PaymentManager(models.Manager):
         return q
 
 
-class Payment(CommonInfo):
+class Payment(CommonInfo, TagsMixin):
     """ Payment model """
 
     tags = TaggableManager()
@@ -189,15 +190,6 @@ class Payment(CommonInfo):
     comment = models.CharField(max_length=255, null=True, blank=True)
     date = models.DateTimeField(default=timezone.now)
     objects = PaymentManager()
-
-    def get_tags_as_string(self):
-        """
-        Return tags as formatted string
-        :return: formatted string
-        """
-        return ', '.join([tag.name for tag in self.tags.all()])
-
-    get_tags_as_string.short_description = 'Tags'
 
     def get_absolute_url(self):
         return reverse('finances:payment_update', kwargs={'pk': self.pk})

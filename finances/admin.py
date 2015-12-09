@@ -48,7 +48,7 @@ class PaymentAdmin(FhAdmin):
             'classes': ('suit-tab', 'suit-tab-general'),
             'fields': ['tags', 'amount', 'is_incoming'],
         }),
-        ('Date & user', {
+        (None, {
             'classes': ('suit-tab', 'suit-tab-add'),
             'fields': ['date', 'created_by'],
         }),
