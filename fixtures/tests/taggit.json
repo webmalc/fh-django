@@ -70,5 +70,29 @@
       "tag": 2,
       "object_id": 3
     }
+  },
+  {
+    "pk": 5,
+    "model": "taggit.taggeditem",
+    "fields": {
+      "content_type": [
+        "tasks",
+        "task"
+      ],
+      "tag": 1,
+      "object_id": 1
+    }
+  },
+  {
+    "pk": 6,
+    "model": "taggit.taggeditem",
+    "fields": {
+      "content_type": [
+        "tasks",
+        "task"
+      ],
+      "tag": 2,
+      "object_id": 1
+    }
   }
 ]

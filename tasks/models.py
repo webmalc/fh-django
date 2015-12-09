@@ -7,6 +7,8 @@ from fh.models import TagsMixin
 
 
 class Task(CommonInfo, TagsMixin):
+    """ Task model """
+
     PRIORITIES = (
         (1, 'trivial'),
         (2, 'minor'),
@@ -29,13 +31,27 @@ class Task(CommonInfo, TagsMixin):
         (60 * 24 * 21, '3 weeks'),
     )
 
-    """ Task model """
-
     title = models.CharField(max_length=255)
     comment = models.TextField(null=True, blank=True)
     date = models.DateTimeField()
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
     # Minutes before date field
     remind = models.PositiveIntegerField(choices=REMIND_BEFORE, null=True, blank=True, verbose_name='Remind before?')
     priority = models.PositiveSmallIntegerField(choices=PRIORITIES, validators=[MaxValueValidator(5)])
     assigned_to = models.ManyToManyField(User, blank=True)
+    is_completed = models.BooleanField(default=False, verbose_name='Is completed?')
+
+    def get_assigned_to_as_string(self):
+        """
+        Return users as formatted string
+        :return: formatted string
+        """
+        if not self.assigned_to.count():
+            return 'All'
+
+        return ', '.join([str(user) for user in self.assigned_to.all()])
+
+    get_assigned_to_as_string.short_description = 'Assigned to'
+
+    class Meta:
+        ordering = ('is_completed', '-date', '-created_at')
