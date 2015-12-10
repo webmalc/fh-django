@@ -40,6 +40,7 @@ class Task(CommonInfo, TagsMixin):
     priority = models.PositiveSmallIntegerField(choices=PRIORITIES, validators=[MaxValueValidator(5)])
     assigned_to = models.ManyToManyField(User, blank=True)
     is_completed = models.BooleanField(default=False, verbose_name='Is completed?')
+    readonly_fields = ('created_by', 'created_at', 'modified')
 
     def get_assigned_to_as_string(self):
         """
