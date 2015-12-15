@@ -1,6 +1,8 @@
-try:
-    from django.conf.urls import *
-except ImportError:  # django < 1.4
-    from django.conf.urls.defaults import *
+from django.contrib.auth.decorators import permission_required
+from django.conf.urls import url
+import tasks.views as views
 
-# place app url patterns here
+urlpatterns = [
+    url(r'task/add/$', permission_required('tasks.add_task')(views.TaskCreate.as_view()),
+        name='task_add'),
+]

@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'bootstrap-tagsinput/src/bootstrap-tagsinput.css' %}">
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static 'bootstrap-tagsinput/src/bootstrap-tagsinput.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="box box-default">
+        <div class="box-body">
+            {% block tasks_content %}{{ block.super }}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

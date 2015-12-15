@@ -1,0 +1,33 @@
+{% extends 'tasks/layout.html' %}
+{% load avatar %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+{% block tasks_content %}
+
+    <form action="" method="post" class="form">
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        {% if payment %}
+            <div class="bg-gray color-palette alert">
+                <img src="{% cached_avatar_url payment.created_by|default:'' 24 %}" class="img-circle margin-right-sm">
+                Created at {{ payment.date|naturalday }} {{ payment.date|date:'H:i' }}
+                by {{ payment.created_by|default:"anonym" }}
+            </div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-success margin-right-sm">
+            <i class="fa fa-check-circle-o"></i><span class="margin-left-sm">Save payment</span>
+        </button>
+        <a href="{% url 'finances:payments_list' %}" class="btn btn-default">
+            <i class="fa fa-ban"></i><span class="hidden-xs margin-left-sm">Cancel</span>
+        </a>
+        {% if payment  and perms.finances.delete_payment %}
+            <a href="{% url 'finances:payment_delete' payment.id %}" class="btn btn-danger pull-right">
+                <i class="fa fa-trash"></i><span class="hidden-xs margin-left-sm">Delete payment</span>
+            </a>
+        {% endif %}
+    </form>
+
+{% endblock %}
