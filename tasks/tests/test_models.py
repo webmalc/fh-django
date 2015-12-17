@@ -11,7 +11,7 @@ class TaskModelTest(TestCase):
         """
         t1 = Task.objects.get(pk=1)
         t2 = Task.objects.get(pk=2)
-        self.assertEqual(t1.get_tags_as_string(), 'test_one, test_two')
+        self.assertEqual(t1.get_tags_as_string(), 'test_two, test_one')
         self.assertEqual(t2.get_tags_as_string(), '')
 
     def test_task_assigned_to_as_string(self):

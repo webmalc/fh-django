@@ -1,12 +1,4 @@
-import autocomplete_light
 from taggit.models import Tag
+import autocomplete_light.shortcuts as al
 
-
-class TagAutocomplete(autocomplete_light.AutocompleteModelBase):
-    model = Tag
-    attrs = {
-        'data-autocomplete-minimum-characters': 2,
-        'placeholder': 'Comma separated tags',
-    }
-
-autocomplete_light.register(TagAutocomplete)
+al.register(Tag)
