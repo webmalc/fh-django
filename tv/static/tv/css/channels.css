@@ -1,0 +1,8 @@
+.channels-category ul li {
+    display: inline-block;
+    margin-left: 10px;
+}
+.channels-category ul {
+    margin: 0px;
+    padding: 0px;
+}

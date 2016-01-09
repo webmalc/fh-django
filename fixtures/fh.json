@@ -52,7 +52,7 @@
         "access_restricted": false,
         "access_perm_type": 2,
         "parent": null,
-        "sort_order": 20,
+        "sort_order": 25,
         "icon": "cogs",
         "access_permissions": []
     }
@@ -177,7 +177,7 @@
         "access_restricted": false,
         "access_perm_type": 1,
         "parent": null,
-        "sort_order": 13,
+        "sort_order": 20,
         "icon": null,
         "access_permissions": []
     }
@@ -277,7 +277,7 @@
         "access_restricted": false,
         "access_perm_type": 1,
         "parent": null,
-        "sort_order": 11,
+        "sort_order": 13,
         "icon": " fa-user",
         "access_permissions": []
     }
@@ -554,6 +554,56 @@
         "parent": 20,
         "sort_order": 24,
         "icon": "none",
+        "access_permissions": []
+    }
+},
+{
+    "model": "fh.sitetreeitem",
+    "pk": 25,
+    "fields": {
+        "title": "TV",
+        "hint": "",
+        "url": "tv:channels_list",
+        "urlaspattern": true,
+        "tree": 1,
+        "hidden": false,
+        "alias": null,
+        "description": "",
+        "inmenu": true,
+        "inbreadcrumbs": true,
+        "insitetree": true,
+        "access_loggedin": true,
+        "access_guest": false,
+        "access_restricted": false,
+        "access_perm_type": 1,
+        "parent": null,
+        "sort_order": 11,
+        "icon": "tv",
+        "access_permissions": []
+    }
+},
+{
+    "model": "fh.sitetreeitem",
+    "pk": 26,
+    "fields": {
+        "title": "Channel \"{{channel}}\"",
+        "hint": "",
+        "url": "tv:channel_show channel.id",
+        "urlaspattern": true,
+        "tree": 1,
+        "hidden": false,
+        "alias": null,
+        "description": "",
+        "inmenu": false,
+        "inbreadcrumbs": true,
+        "insitetree": true,
+        "access_loggedin": true,
+        "access_guest": false,
+        "access_restricted": false,
+        "access_perm_type": 1,
+        "parent": 25,
+        "sort_order": 26,
+        "icon": "fa-tv",
         "access_permissions": []
     }
 }

@@ -12,7 +12,7 @@ django-debug-toolbar==1.4
 django-extensions==1.6.1
 django-htmlmin==0.8.0
 django-ratelimit-backend==1.0
-django-sitetree==1.5.0
+django-sitetree==1.5.1
 django-stronghold==0.2.7
 django-suit==0.2.15
 django-taggit==0.17.6

@@ -15,7 +15,7 @@ class Channel(CommonInfo):
         return reverse('tv:channel_show', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return '#%s' % self.title
+        return '%s' % self.title
 
     class Meta:
-        ordering = ['title']
+        ordering = ['-category', 'title']

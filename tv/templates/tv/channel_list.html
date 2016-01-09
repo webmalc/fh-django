@@ -1,0 +1,23 @@
+{% extends 'tv/layout.html' %}
+{% load main %}
+{% block tv_content %}
+
+    {% if object_list|length %}
+        {% for category in channels %}
+            <div class="channels-category">
+                <h4>{{ category }}</h4>
+                <ul>
+                    {% for channel in channels|get_item:category %}
+                        <li><a href="{% url 'tv:channel_show' channel.id %}">{{ channel }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+
+    {% else %}
+        <div class="alert alert-warning">
+            <i class="fa fa-exclamation-circle"></i> Channels not found.
+        </div>
+    {% endif %}
+
+{% endblock %}

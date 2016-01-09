@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'tv/css/channels.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="box box-default">
+        <div class="box-body">
+            {% block tv_content %}{{ block.super }}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
