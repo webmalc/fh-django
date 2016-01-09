@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^accounts/logout', auth_views.logout, {'next_page': '/'}),
     url(r'^finances/', include('finances.urls', namespace="finances")),
     url(r'^tasks/', include('tasks.urls', namespace="tasks")),
+    url(r'^tv/', include('tv.urls', namespace="tv")),
     url(r'^analytics/', include('analytics.urls', namespace="analytics")),
     url(r'users/profile/password$', auth_views.password_change, {
         'template_name': 'users/password_change_form.html', 'password_change_form': ValidatingPasswordChangeForm},

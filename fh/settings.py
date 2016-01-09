@@ -44,7 +44,8 @@ INSTALLED_APPS = (
     'users',
     'finances',
     'tasks',
-    'analytics'
+    'analytics',
+    'tv'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -134,6 +135,7 @@ SUIT_CONFIG = {
         {'app': 'auth', 'label': 'Users', 'icon': 'icon-user', 'models': ('auth.user', 'avatar.avatar', 'auth.group')},
         {'app': 'finances', 'icon': 'icon-briefcase'},
         {'app': 'tasks', 'icon': 'icon-tasks'},
+        {'app': 'tv', 'label': 'TV', 'icon': 'icon-film'},
         {'label': 'Navigation', 'icon': 'icon-list', 'models': ('fh.sitetreetree', 'taggit.tag', 'sites.site')},
     ),
     'LIST_PER_PAGE': 20
