@@ -156,6 +156,7 @@ SITETREE_MODEL_TREE = 'fh.SiteTreeTree'
 
 # Django avatar
 AVATAR_GRAVATAR_DEFAULT = 'mm'
+AVATAR_AUTO_GENERATE_SIZES = (24, 25, 160)
 
 # Django crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
