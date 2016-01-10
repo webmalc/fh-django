@@ -37,4 +37,4 @@ def pager(context, link):
         'show_last': paginator.num_pages not in page_numbers,
     }
 
-register.inclusion_tag('fh_pager/pager.html', takes_context=True)(pager)
+register.inclusion_tag('pager/pager.html', takes_context=True)(pager)
