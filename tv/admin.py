@@ -7,7 +7,7 @@ from tv import models
 class ChannelAdmin(FhAdmin):
     """ Task admin class """
 
-    list_display = ('title', 'category', 'is_enabled', 'created_at')
+    list_display = ('title', 'category', 'is_enabled', 'is_favorite', 'created_at')
     list_display_links = ('title',)
     list_filter = ('category', 'is_enabled', 'created_at')
     fieldsets = (
@@ -17,7 +17,7 @@ class ChannelAdmin(FhAdmin):
         }),
         (None, {
             'classes': ('suit-tab', 'suit-tab-add'),
-            'fields': ['is_enabled', 'created_by'],
+            'fields': ['is_favorite', 'is_enabled', 'created_by'],
         }),
     )
     suit_form_tabs = (('general', 'General'), ('add', 'Settings'))
@@ -31,7 +31,7 @@ class ChannelAdmin(FhAdmin):
 
     @staticmethod
     def suit_cell_attributes(obj, column):
-        if column == 'is_enabled':
+        if column in ('is_enabled', 'is_favorite'):
             return {'class': 'text-center'}
 
 
