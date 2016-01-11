@@ -18,16 +18,15 @@ class TaskAdmin(FhAdmin):
 
     )
     fieldsets = (
-        (None, {
-            'classes': ('suit-tab', 'suit-tab-general'),
+        ('General', {
             'fields': ('title', 'comment', 'tags', 'priority', 'remind'),
         }),
-        (None, {
-            'classes': ('suit-tab', 'suit-tab-add'),
+        ('Date & user', {
+            'classes': ('collapse',),
             'fields': ['date', 'assigned_to', 'created_by', 'is_completed'],
         }),
     )
-    suit_form_tabs = (('general', 'General'), ('add', 'Date & user'))
+
     ordering = ('is_completed', '-priority', '-date')
     search_fields = ('id', 'title', 'comment')
 
@@ -54,20 +53,6 @@ class TaskAdmin(FhAdmin):
     make_uncompleted.short_description = "Open selected tasks"
 
     actions = (make_completed, make_uncompleted)
-
-    @staticmethod
-    def suit_row_attributes(obj):
-        if obj.is_completed:
-            return {'class': 'success'}
-
-    @staticmethod
-    def suit_cell_attributes(obj, column):
-        classes = ('muted', '', 'text-info', 'text-warning', 'text-error')
-
-        if column == 'is_completed':
-            return {'class': 'text-center'}
-        if column == 'priority':
-            return {'class': classes[obj.priority - 1]}
 
     class Media:
         css = {

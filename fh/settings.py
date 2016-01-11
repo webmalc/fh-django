@@ -20,7 +20,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 INSTALLED_APPS = (
     'autocomplete_light',
-    'suit',
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -126,19 +125,6 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
         'TIMEOUT': 600
     }
-}
-
-# Django-suit
-SUIT_CONFIG = {
-    'ADMIN_NAME': 'FamilyHelper',
-    'MENU': (
-        {'app': 'auth', 'label': 'Users', 'icon': 'icon-user', 'models': ('auth.user', 'avatar.avatar', 'auth.group')},
-        {'app': 'finances', 'icon': 'icon-briefcase'},
-        {'app': 'tasks', 'icon': 'icon-tasks'},
-        {'app': 'tv', 'label': 'TV', 'icon': 'icon-film'},
-        {'label': 'Navigation', 'icon': 'icon-list', 'models': ('fh.sitetreetree', 'taggit.tag', 'sites.site')},
-    ),
-    'LIST_PER_PAGE': 20
 }
 
 # Django stronghold

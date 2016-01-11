@@ -11,28 +11,20 @@ class ChannelAdmin(FhAdmin):
     list_display_links = ('title',)
     list_filter = ('category', 'is_enabled', 'created_at')
     fieldsets = (
-        (None, {
-            'classes': ('suit-tab', 'suit-tab-general'),
+        ('General', {
             'fields': ('title', 'category', 'code'),
         }),
-        (None, {
-            'classes': ('suit-tab', 'suit-tab-add'),
+        ('Settings', {
+            'classes': ('collapse',),
             'fields': ['is_favorite', 'is_enabled', 'created_by'],
         }),
     )
-    suit_form_tabs = (('general', 'General'), ('add', 'Settings'))
     ordering = ('title',)
     search_fields = ('id', 'title', 'category')
 
-    @staticmethod
-    def suit_row_attributes(obj):
-        if not obj.is_enabled:
-            return {'class': 'error'}
-
-    @staticmethod
-    def suit_cell_attributes(obj, column):
-        if column in ('is_enabled', 'is_favorite'):
-            return {'class': 'text-center'}
-
+    class Media:
+        css = {
+            'all': ('admin/css/tv.css',),
+        }
 
 admin.site.register(models.Channel, ChannelAdmin)

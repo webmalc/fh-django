@@ -1,6 +1,4 @@
 from django.contrib import admin
-from django.db import models as models
-from suit.widgets import SuitSplitDateTimeWidget
 from sitetree.admin import TreeItemAdmin, override_item_admin
 from django.utils.translation import ugettext_lazy as _
 
@@ -9,9 +7,8 @@ class FhAdmin(admin.ModelAdmin):
     """
     Base Admin class
     """
-    formfield_overrides = {
-        models.DateTimeField: {'widget': SuitSplitDateTimeWidget},
-    }
+    actions_on_top = False
+    actions_on_bottom = True
 
 
 class CustomTreeItemAdmin(TreeItemAdmin):
