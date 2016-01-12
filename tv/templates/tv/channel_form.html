@@ -2,7 +2,14 @@
 {% load crispy_forms_tags %}
 
 {% block tv_content %}
+    {% if channel.alternative_code %}
+    <h3>Main player</h3>
+    {% endif %}
     {{ channel.code|safe }}
+    {% if channel.alternative_code %}
+        <h3>Alternative player</h3>
+        {{ channel.alternative_code|safe }}
+    {% endif %}
 
     <form action="" method="post" class="form">
         {% csrf_token %}

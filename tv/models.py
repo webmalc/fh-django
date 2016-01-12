@@ -26,6 +26,7 @@ class Channel(CommonInfo):
     category = models.CharField(max_length=255, choices=[(i, i) for i in sorted(CATEGORIES.keys())])
     is_enabled = models.BooleanField(default=True, verbose_name='Is enabled?')
     code = models.TextField()
+    alternative_code = models.TextField(null=True, blank=True)
     is_favorite = models.BooleanField(default=False, verbose_name='Is favorite?')
 
     def get_absolute_url(self):

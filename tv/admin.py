@@ -16,7 +16,7 @@ class ChannelAdmin(FhAdmin):
         }),
         ('Settings', {
             'classes': ('collapse',),
-            'fields': ['is_favorite', 'is_enabled', 'created_by'],
+            'fields': ['alternative_code', 'is_favorite', 'is_enabled', 'created_by'],
         }),
     )
     ordering = ('title',)
