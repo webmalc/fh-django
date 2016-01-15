@@ -15,7 +15,7 @@
                 <span class="hidden-xs margin-right-sm">In:</span>
                 {{ summary.in|intcomma }}
             </a>
-            <a href="{% url link %}?is_incoming=1&filter=1&begin={{ filter.begin|date:'Y-m-d' }}&end={{ filter.end|date:'Y-m-d' }}"
+            <a href="{% url link %}?is_debt=1&filter=1&begin={{ filter.begin|date:'Y-m-d' }}&end={{ filter.end|date:'Y-m-d' }}"
                    class="btn btn-xs btn-warning hidden-xs btn-flat">
                     <i class="fa fa-{% if summary.debt != 0 %}exclamation{% else %}check{% endif %} margin-right-sm"></i>
                     <span class="hidden-xs margin-right-sm">Debts:</span>
