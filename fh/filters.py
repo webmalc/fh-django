@@ -1,6 +1,11 @@
-from django.contrib.admin import SimpleListFilter
+from django.contrib.admin import SimpleListFilter, AllValuesFieldListFilter
 from django.utils.translation import ugettext_lazy as _
 from taggit.models import TaggedItem
+
+
+class DropdownFilter(AllValuesFieldListFilter):
+    template = 'admin/dropdown_filter.html'
+
 
 class TaggitListFilter(SimpleListFilter):
     """
@@ -20,11 +25,11 @@ class TaggitListFilter(SimpleListFilter):
         for the option that will appear in the URL query. The second element is the
         human-readable name for the option that will appear in the right sidebar.
         """
-        list = []
+        result = []
         tags = TaggedItem.tags_for(model_admin.model)
         for tag in tags:
-            list.append((tag.name, _(tag.name)))
-        return list
+            result.append((tag.name, _(tag.name)))
+        return result
 
     def queryset(self, request, queryset):
         """

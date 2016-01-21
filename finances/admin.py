@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from django.contrib.admin.views.main import ChangeList
 from fh.admin import FhAdmin
 from fh.filters import TaggitListFilter
 from finances import models
