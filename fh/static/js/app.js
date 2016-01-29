@@ -3,12 +3,41 @@
 $(document).ready(function () {
     'use strict';
 
+    //bootstrap-wysihtml5
+    $('textarea').wysihtml5({toolbar: {
+        "fa": true
+    }});
+
     //bootstrap switch
     $('input[type="checkbox"]').not('#avatar-delete-form input').bootstrapSwitch({
         size: 'small',
         onText: 'yes',
         offText: 'no'
     });
+
+    //tagsinput
+    (function () {
+
+        $('input#id_tags').tagsinput({
+            maxTags: 5,
+            maxChars: 20,
+            trimValue: true,
+            freeInput: true,
+            confirmKeys: [13, 188, 32],
+            typeahead: {
+                minLength: 1,
+                afterSelect: function () {
+                    this.$element.val(null);
+                },
+                source: function (query) {
+                    return $.get('/tags/' + query);
+                }
+            }
+        });
+        $('div.bootstrap-tagsinput > input').keyup(function () {
+            $(this).val($(this).val().toLowerCase());
+        });
+    }());
 
     //tabs remember
     $(function () {
@@ -24,8 +53,8 @@ $(document).ready(function () {
     //tooltip
     $('[data-toggle="tooltip"]').tooltip();
 
-    //Bootstrap select
-    $('select.form-control').select2();
+    //select2
+    $('select.form-control').not('.not-select2').select2();
 
     //sidebar
     (function () {

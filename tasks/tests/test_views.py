@@ -8,11 +8,11 @@ class TaskViewTest(ViewTestCase):
     def setUp(self):
         self.user = User.objects.get(pk=1)
 
-    def test_task_list_unauthorized_view(self):
+    def test_tasks_list_unauthorized_view(self):
         """
         Test tasks list unauthorized view
         """
-        self._test_unauthorized_view('tasks:task_list')
+        self._test_unauthorized_view('tasks:tasks_list')
 
     def test_task_add_unauthorized_view(self):
         """

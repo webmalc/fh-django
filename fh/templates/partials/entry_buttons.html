@@ -1,0 +1,14 @@
+{% load avatar %}
+{% load humanize %}
+
+<button type="submit" class="btn btn-success margin-right-sm">
+    <i class="fa fa-check-circle-o"></i><span class="margin-left-sm">Save {{ title }}</span>
+</button>
+<a href="{% url list_url %}" class="btn btn-default">
+    <i class="fa fa-ban"></i><span class="hidden-xs margin-left-sm">Cancel</span>
+</a>
+{% if entry and delete_permission %}
+    <a href="{% url delete_url entry.id %}" class="btn btn-danger pull-right">
+        <i class="fa fa-trash"></i><span class="hidden-xs margin-left-sm">Delete {{ title }}</span>
+    </a>
+{% endif %}

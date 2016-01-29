@@ -36,8 +36,8 @@ class Task(CommonInfo, TagsMixin):
     date = models.DateTimeField()
     tags = TaggableManager(blank=True)
     # Minutes before date field
-    remind = models.PositiveIntegerField(choices=REMIND_BEFORE, null=True, blank=True, verbose_name='Remind before?')
-    priority = models.PositiveSmallIntegerField(choices=PRIORITIES, validators=[MaxValueValidator(5)])
+    remind = models.PositiveIntegerField(choices=REMIND_BEFORE, default=30, verbose_name='Remind before?')
+    priority = models.PositiveSmallIntegerField(choices=PRIORITIES, default=3, validators=[MaxValueValidator(5)])
     assigned_to = models.ManyToManyField(User, blank=True)
     is_completed = models.BooleanField(default=False, verbose_name='Is completed?')
     readonly_fields = ('created_by', 'created_at', 'modified')

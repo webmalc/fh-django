@@ -3,11 +3,9 @@ from django.views.generic import ListView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from django.http import JsonResponse
 from .models import Payment
 from .forms import PaymentsFilterForm
 from fh.forms import ModelFormWidgetMixin
-from taggit.models import Tag
 from django import forms
 
 
@@ -36,6 +34,7 @@ class PaymentUpdate(SuccessMessageMixin, PaymentFormViewMixin, ModelFormWidgetMi
     Payment update view
     """
     success_message = "Payment was updated successfully"
+    success_url = reverse_lazy('finances:payments_list')
 
 
 class PaymentList(ListView):
@@ -86,17 +85,3 @@ class PaymentDelete(DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
         return super(PaymentDelete, self).delete(request, *args, **kwargs)
-
-
-def tags(request, query=None):
-    """
-    JSON tags list
-    :param request:
-    :param query:
-    :return: JsonResponse
-    """
-    items = Tag.objects
-    if query:
-        items = items.filter(name__contains=query.strip())
-    data = [tag.name for tag in items.order_by('name').all()]
-    return JsonResponse(data, safe=False)

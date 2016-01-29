@@ -4,8 +4,6 @@ from django.conf.urls import url
 import finances.views as views
 
 urlpatterns = [
-    url(r'tags/$', views.tags, name='tags_all'),
-    url(r'tags/(?P<query>.+)/$', views.tags, name='tags_query'),
     url(r'payment/add/$', permission_required('finances.add_payment')(views.PaymentCreate.as_view()),
         name='payment_add'),
     url(r'payment/$', permission_required('finances.add_payment')(views.PaymentList.as_view()), name='payments_list'),

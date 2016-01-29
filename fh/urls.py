@@ -21,6 +21,7 @@ from ratelimitbackend import admin
 from django.views.generic.base import RedirectView
 from users.views import PasswordChangeRedirectView
 from users.forms import ValidatingPasswordChangeForm
+from fh.views import tags
 
 admin.autodiscover()
 
@@ -31,6 +32,8 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login/$', auth_views.login, name='login'),
     url(r'^accounts/logout', auth_views.logout, {'next_page': '/'}),
+    url(r'tags/$', tags, name='tags_all'),
+    url(r'tags/(?P<query>.+)/$', tags, name='tags_query'),
     url(r'^finances/', include('finances.urls', namespace="finances")),
     url(r'^tasks/', include('tasks.urls', namespace="tasks")),
     url(r'^tv/', include('tv.urls', namespace="tv")),

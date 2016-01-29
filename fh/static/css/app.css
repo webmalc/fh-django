@@ -124,3 +124,6 @@ overflow-y: hidden; /* no-overflow                */
 height: auto;       /* let the content decide it  */
 } /* bootstrap hack end */
 
+input, select, textarea, .bootstrap-tagsinput {
+    max-width: 700px !important;
+}

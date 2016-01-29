@@ -1,0 +1,3 @@
+.select2-selection__rendered[title='trivial'], .select2-results__option[='trivial'] {
+    color: #00a65a !important;
+}

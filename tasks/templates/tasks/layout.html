@@ -4,11 +4,13 @@
 {% block css %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'bootstrap-tagsinput/src/bootstrap-tagsinput.css' %}">
+    <link rel="stylesheet" href="{% static 'tasks/css/tasks.css' %}">
 {% endblock %}
 
 {% block scripts %}
     {{ block.super }}
     <script src="{% static 'bootstrap-tagsinput/src/bootstrap-tagsinput.js' %}"></script>
+    <script src="{% static 'tasks/js/tasks.js' %}"></script>
 {% endblock %}
 
 {% block content %}

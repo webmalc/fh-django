@@ -1,0 +1,10 @@
+{% load avatar %}
+{% load humanize %}
+
+{% if entry %}
+    <div class="bg-gray color-palette alert">
+        <img src="{% cached_avatar_url entry.created_by|default:'' 24 %}" class="img-circle margin-right-sm">
+        Created at {{ entry.date|naturalday }} {{ entry.date|date:'H:i' }}
+        by {{ entry.created_by|default:"anonym" }}
+    </div>
+{% endif %}
